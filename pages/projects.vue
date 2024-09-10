@@ -47,12 +47,18 @@ import AppInput from '@/components/AppInput/index.vue';
 import debounce from 'lodash.debounce';
 import type {Project} from "~/types/project";
 
-useHead({
-  title: "Home page",
-  meta: [
-    { name: 'Home page', content: 'This is a dynamic page description.' }
-  ]
-});
+definePageMeta({
+  breadCrumbs: [
+    {
+      to: '/', // hyperlink
+      text: 'Home', // crumb text
+    },
+    {
+      to: '/projects', // hyperlink
+      text: 'Projects', // crumb text
+    },
+  ],
+})
 
 
 const searchValue = ref<string>('');

@@ -2,7 +2,7 @@
   <section v-if="breadcrumbs" class="app-breadcrumbs">
     <div class="container">
       <span v-for="crumb in breadcrumbs" :key="crumb.text" class="crumb">
-        <nuxt-link :to="{ path: crumb.to }">{{ crumb.text }}</nuxt-link>
+        <router-link :to="{ path: crumb.to }">{{ crumb.text }}</router-link>
         <span class="separator">/</span>
       </span>
     </div>
@@ -16,14 +16,15 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { computed } from 'vue';
-import type { Breadcrumb } from '~/types/breadcrumbs';
+import type {Breadcrumb} from "~/types/breadcrumbs";
 
-const route = useRoute();
+const router = useRouter();
 
 const breadcrumbs = computed(() => {
-  const metaCrumbs = route.meta?.breadCrumbs as Array<Breadcrumb>;
+  const metaCrumbs = router.currentRoute.value.meta
+    ?.breadCrumbs as Array<Breadcrumb>;
   return metaCrumbs?.map((el) => {
     const tempEl = { ...el };
     if (typeof tempEl.text === 'function') {
