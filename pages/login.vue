@@ -1,28 +1,26 @@
 <template>
-  <section>
-    <div class="container">
-      <div>
-        <AppButton text="Log in" @click="login" />
-      </div>
-    </div>
-  </section>
+  <div id="app">
+    <form @submit.prevent="login(username, password)">
+      <input v-model="username" placeholder="Username" />
+      <input v-model="password" placeholder="Password" type="password" />
+      <button type="submit">Log In</button>
+    </form>
+    <div>{{user}}</div>
+  </div>
 </template>
 
 <script setup>
-import AppButton from '@/components/AppButton/index.vue';
-import { useRouter } from 'vue-router';
-import { authLogin } from '@/api/auth';
 
-const router = useRouter();
+import {useAuthStore} from "~/stores/auth.store";
+const username = ref('')
+const password = ref('')
 
-const login = async () => {
-  try {
-    await authLogin('IG', '123');
-    await router.push('/');
-  } catch {
-    alert('smth went wrong');
-  }
-};
+const authStore = useAuthStore();
+const {login} = authStore
+const {user} = storeToRefs(authStore);
+
 </script>
 
-<style scoped></style>
+<style scoped>
+/* Add your styles here */
+</style>

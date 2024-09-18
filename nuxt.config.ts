@@ -1,7 +1,14 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { resolve } from "node:path"
+
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+
+  alias: {
+    cookie: resolve(__dirname, "node_modules/cookie")
+  },
 
   vite: {
     css: {
@@ -19,5 +26,14 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ['@vesp/nuxt-fontawesome'],
+  devServer: {
+    port: 8080
+  },
+
+  modules: ['@vesp/nuxt-fontawesome', '@pinia/nuxt'],
+
+  pinia: {
+    storesDirs: ['./stores/**'],
+  },
+
 })
