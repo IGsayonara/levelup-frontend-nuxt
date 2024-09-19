@@ -2,7 +2,12 @@ import Cookies from 'js-cookie';
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const authUtil = new AuthUtil();
+    if (import.meta.env.SSR) {
+        return
+    }
 
+
+        console.log(process.server)
     try {
         const accessToken = Cookies.get('accessToken');
         if (!accessToken) {

@@ -41,11 +41,12 @@
 <script setup lang="ts">
 import InfiniteLoading from 'v3-infinite-loading';
 import SectionTitle from '@/components/SectionTitle/index.vue';
-import { computed, ref, watch } from 'vue';
+import { ref, watch } from 'vue';
 import AppCard from '@/components/AppCard/index.vue';
 import AppInput from '@/components/AppInput/index.vue';
 import debounce from 'lodash.debounce';
-import type {Project} from "~/types/project";
+import {useProjectStore} from "~/stores/project.store";
+
 
 definePageMeta({
   breadCrumbs: [
@@ -62,15 +63,13 @@ definePageMeta({
 
 
 const searchValue = ref<string>('');
-
-const projects = computed(() => {
-  return [] as Project[]
-});
-
+const projectsStore = useProjectStore()
+const {loadProjects} = projectsStore
+const {projects} = storeToRefs(projectsStore)
 watch(
   searchValue,
   debounce(() => {
-   console.log("implement search");
+   loadProjects()
   }, 300)
 );
 

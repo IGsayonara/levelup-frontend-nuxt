@@ -1,5 +1,12 @@
-import axios, {CreateAxiosDefaults} from "axios";
+import axios, {AxiosInstance, CreateAxiosDefaults} from "axios";
+import Cookies from "js-cookie";
+import {defaultAxiosConfig} from "~/config/defaultAxiosConfig";
 
-export const axiosFactory = (createAxiosDefaults: CreateAxiosDefaults) => {
-    return axios.create(createAxiosDefaults)
+export class AxiosUtil {
+    public static axiosFactory(createAxiosDefaults?: CreateAxiosDefaults) {
+        return axios.create({
+            ...defaultAxiosConfig,
+            createAxiosDefaults,
+        })
+    }
 }

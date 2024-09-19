@@ -1,8 +1,7 @@
 import type {User} from "~/types/user";
 import {defineStore} from "pinia";
 import {AuthUtil} from "~/utils/auth.util";
-import {AxiosUtil} from "~/utils/axios.util";
-import {onNuxtReady} from "#app";
+
 
 export const useAuthStore = defineStore('AuthStore', () => {
     const user = ref<User | null>()
@@ -25,6 +24,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
 
     const login = async (username: string, password: string) => {
         await authUtil.login(username, password);
+        await getSession();
     }
 
     const logout = () => {

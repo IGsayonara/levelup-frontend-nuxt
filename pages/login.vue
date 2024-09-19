@@ -6,18 +6,26 @@
       <button type="submit">Log In</button>
     </form>
     <div>{{user}}</div>
-  </div>
+ </div>
 </template>
 
 <script setup>
 
 import {useAuthStore} from "~/stores/auth.store";
-const username = ref('')
-const password = ref('')
 
+const router = useRouter();
 const authStore = useAuthStore();
 const {login} = authStore
 const {user} = storeToRefs(authStore);
+
+const username = ref('')
+const password = ref('')
+watch(() => user.value, () => {
+  if(!!user.value){
+    router.push('/')
+  }
+})
+
 
 </script>
 

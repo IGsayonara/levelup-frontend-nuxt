@@ -1,7 +1,7 @@
 import type {User} from "~/types/user";
 import Cookies from "js-cookie";
 import type {AxiosInstance} from "axios";
-import {axiosFactory} from "~/utils/axios.util";
+import {AxiosUtil} from "~/utils/axios.util";
 
 export class AuthUtil {
     private refreshToken: string;
@@ -11,27 +11,26 @@ export class AuthUtil {
     constructor() {
         this.accessToken = this.getAccessToken()
         this.refreshToken = this.getRefreshToken()
-        this.axiosInstance = axiosFactory({baseURL: "http://localhost:3000"})
+        this.axiosInstance = AxiosUtil.axiosFactory()
     }
 
-    private setAccessToken(accessToken: string): void {
+    public setAccessToken(accessToken: string): void {
         this.accessToken = accessToken;
         Cookies.set("accessToken", accessToken);
         console.log("accessTokenUpdated", this.accessToken);
     }
 
-    private setRefreshToken(refreshToken: string): void {
+    public setRefreshToken(refreshToken: string): void {
         this.refreshToken = refreshToken;
         Cookies.set("refreshToken", refreshToken);
         console.log("refreshTokenUpdated", this.refreshToken);
-
     }
 
-    private getAccessToken(): string {
+    public getAccessToken(): string {
         return Cookies.get("accessToken");
     }
 
-    private getRefreshToken(): string {
+    public getRefreshToken(): string {
         return Cookies.get("refreshToken");
     }
 

@@ -19,11 +19,21 @@ export const useViewpoint = () => {
     }
   };
 
-  const currentBreakpoint = ref(getBreakpoint(window.innerWidth));
+  const currentBreakpoint = ref();
 
-  window.addEventListener('resize', () => {
+  const onResize = () => {
     currentBreakpoint.value = getBreakpoint(window.innerWidth);
-  });
+  }
+
+  onMounted(()=> {
+    currentBreakpoint.value = getBreakpoint(window.innerWidth)
+    window.addEventListener('resize', onResize);
+  })
+
+  onUnmounted(()=> {
+    window.removeEventListener('resize', onResize);
+  })
+
 
   return {
     currentBreakpoint,

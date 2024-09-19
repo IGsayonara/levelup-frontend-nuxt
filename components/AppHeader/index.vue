@@ -5,8 +5,10 @@
         <div class="logo" @click="$router.push('/')">
           <img src="/img/logo.png" alt="Level UP" />
         </div>
-        <DesktopNavigation v-if="!isMobileNavigation" />
-        <MobileNavigation v-else />
+        <ClientOnly>
+          <DesktopNavigation v-if="!isMobileNavigation" />
+          <MobileNavigation v-if="isMobileNavigation" />
+        </ClientOnly>
       </div>
     </div>
   </header>

@@ -1,8 +1,6 @@
 <template>
-  <ClientOnly>
     <AppHeader></AppHeader>
     <AppBreadcrumbs></AppBreadcrumbs>
-  </ClientOnly>
   <slot></slot>
 </template>
 
