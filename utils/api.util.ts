@@ -1,6 +1,5 @@
-import type {AxiosInstance} from "axios";
+import type {AxiosInstance, AxiosResponse} from "axios";
 import type {AuthUtil} from "~/utils/auth.util";
-import axios from "axios";
 import {AxiosUtil} from "~/utils/axios.util";
 
 export class ApiUtil {
@@ -14,5 +13,9 @@ export class ApiUtil {
 
     private authorizeAxiosInstance() {
         this.axiosInstance.defaults.headers['Authorization'] = `Bearer ${this.authUtil.getAccessToken()}`;
+    }
+
+    public async get(url: string) {
+        return await this.axiosInstance.get(url).then(r => r.data)
     }
 }

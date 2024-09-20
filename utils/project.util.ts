@@ -1,11 +1,13 @@
 import type {Project} from "~/types/project";
-import type {AxiosInstance} from "axios";
-import {AxiosUtil} from "~/utils/axios.util";
 import {ApiUtil} from "~/utils/api.util";
 
 export class ProjectUtil extends ApiUtil {
-    public async loadProjects(): Promise<Project[]> {
+    public async loadProjects(title: string): Promise<Project[]> {
         this.authorizeAxiosInstance()
-        return await this.axiosInstance.get('/projects').then(r => r.data).then(data => data.data)
+        return await this.axiosInstance.get('/projects', {
+            params: {
+                'filter.title': `$ilike:${title}`,
+            },
+        }).then(r => r.data)
     }
 }
