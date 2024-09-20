@@ -50,10 +50,10 @@ useHead({
   ]
 });
 
-import SectionTitle from '@/components/SectionTitle/index.vue';
-import AppCard from '@/components/AppCard/index.vue';
-import AppBanner from '@/components/AppBanner/index.vue';
-import SkillCard from '@/components/SkillCard/index.vue';
+import SectionTitle from '~/components/common/SectionTitle/index.vue';
+import AppCard from '~/components/common/AppCard/index.vue';
+import AppBanner from '~/components/common/AppBanner/index.vue';
+import SkillCard from '~/components/common/SkillCard/index.vue';
 import { computed } from 'vue';
 import type {Project} from "~/types/project";
 import type {Skill} from "~/types/skill";

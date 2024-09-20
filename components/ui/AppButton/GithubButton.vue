@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import AppButton from '@/components/AppButton/index.vue';
+import AppButton from '~/components/ui/AppButton/index.vue';
 
 declare type Props = {
   repositoryLink: string;

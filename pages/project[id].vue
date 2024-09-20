@@ -14,8 +14,8 @@
 import { computed } from 'vue';
 import { onBeforeRouteUpdate } from 'vue-router';
 
-import AppCard from '@/components/AppCard/index.vue';
-import SectionTitle from '@/components/SectionTitle/index.vue';
+import AppCard from '~/components/common/AppCard/index.vue';
+import SectionTitle from '~/components/common/SectionTitle/index.vue';
 import type {Project} from "~/types/project";
 
 interface Props {

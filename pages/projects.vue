@@ -40,10 +40,10 @@
 
 <script setup lang="ts">
 import InfiniteLoading from 'v3-infinite-loading';
-import SectionTitle from '@/components/SectionTitle/index.vue';
+import SectionTitle from '~/components/common/SectionTitle/index.vue';
 import {ref, watch} from 'vue';
-import AppCard from '@/components/AppCard/index.vue';
-import AppInput from '@/components/AppInput/index.vue';
+import AppCard from '~/components/common/AppCard/index.vue';
+import AppInput from '~/components/ui/AppInput/index.vue';
 import debounce from 'lodash.debounce';
 import {useProjectStore} from "~/stores/projects.store";
 

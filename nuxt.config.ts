@@ -30,6 +30,13 @@ export default defineNuxtConfig({
     port: 8080
   },
 
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
+
   modules: ['@vesp/nuxt-fontawesome', '@pinia/nuxt'],
 
   pinia: {

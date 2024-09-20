@@ -15,10 +15,10 @@
 </template>
 
 <script setup>
-import { useViewpoint } from '@/composables/viewpoint-composable/index';
+import { useViewpoint } from '~/composables/viewpoint-composable/index.ts';
 import { computed } from 'vue';
-import DesktopNavigation from '@/components/AppHeader/DesktopNavigation.vue';
-import MobileNavigation from '@/components/AppHeader/MobileNavigation.vue';
+import DesktopNavigation from '~/components/layout/AppHeader/DesktopNavigation.vue';
+import MobileNavigation from '~/components/layout/AppHeader/MobileNavigation.vue';
 const { currentBreakpoint } = useViewpoint();
 
 const isMobileNavigation = computed(() => {

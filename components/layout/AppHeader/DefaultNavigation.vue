@@ -1,12 +1,13 @@
 <template>
   <nav class="navigation">
-    <router-link to="/">Home</router-link>
+    <nuxt-link :to="{ path: '/' }">Home</nuxt-link>
     <nuxt-link :to="{ path: '/projects' }">Projects</nuxt-link>
     <nuxt-link :to="{ path: '/skills' }">Skills</nuxt-link>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style scoped lang="scss">
 .navigation {

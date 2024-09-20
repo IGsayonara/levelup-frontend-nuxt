@@ -4,8 +4,8 @@
 </template>
 
 <script setup>
-import DefaultNavigation from '@/components/AppHeader/DefaultNavigation.vue';
-import GithubButton from '@/components/AppButton/GithubButton.vue';
+import DefaultNavigation from '~/components/layout/AppHeader/DefaultNavigation.vue';
+import GithubButton from '~/components/ui/AppButton/GithubButton.vue';
 </script>
 
 <style scoped lang="scss">
