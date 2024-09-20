@@ -1,6 +1,6 @@
-import type {AxiosInstance, AxiosResponse} from "axios";
-import type {AuthUtil} from "~/utils/auth.util";
-import {AxiosUtil} from "~/utils/axios.util";
+import type {AxiosInstance} from "axios";
+import {AuthUtil} from "~/utils/api/auth.util";
+import {AxiosUtil} from "~/utils/api/axios.util";
 
 export class ApiUtil {
     private axiosInstance: AxiosInstance;

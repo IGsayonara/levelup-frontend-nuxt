@@ -1,4 +1,5 @@
 import Cookies from 'js-cookie';
+import {AuthUtil} from "~/utils/api/auth.util";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
     const authUtil = new AuthUtil();
@@ -6,8 +7,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         return
     }
 
-
-        console.log(process.server)
     try {
         const accessToken = Cookies.get('accessToken');
         if (!accessToken) {

@@ -1,6 +1,6 @@
 import type {Project} from "~/types/project";
 import {defineStore} from "pinia";
-import {ProjectUtil} from "~/utils/project.util";
+import {ProjectUtil} from "~/utils/api/project.util";
 import {ref} from "vue"
 
 const projectUtil = new ProjectUtil();

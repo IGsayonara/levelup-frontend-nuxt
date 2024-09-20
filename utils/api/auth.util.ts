@@ -1,7 +1,7 @@
 import type {User} from "~/types/user";
 import Cookies from "js-cookie";
 import type {AxiosInstance} from "axios";
-import {AxiosUtil} from "~/utils/axios.util";
+import {AxiosUtil} from "~/utils/api/axios.util";
 
 export class AuthUtil {
     private refreshToken: string;
