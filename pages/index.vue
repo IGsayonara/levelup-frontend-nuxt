@@ -10,18 +10,20 @@
       <div class="section-title-wrapper">
         <SectionTitle title="Mini apps" link-text="See more" @link-click="$router.push('/projects')" />
       </div>
-      <div class="row">
-        <div
-          v-for="project in projects"
-          :key="project.id"
-          class="col-12 col-xl-6 app-card-col"
-        >
-          <AppCard
-            :project="project"
-            @click="$router.push('/project/' + project.id)"
-          />
+      <ClientOnly>
+        <div class="row">
+          <div
+              v-for="project in projects"
+              :key="project.id"
+              class="col-12 col-xl-6 app-card-col"
+          >
+            <AppCard
+                :project="project"
+                @click="$router.push('/project/' + project.id)"
+            />
+          </div>
         </div>
-      </div>
+      </ClientOnly>
     </div>
   </section>
   <section>
@@ -29,15 +31,18 @@
       <div class="section-title-wrapper">
         <SectionTitle title="Learned skills" link-text="See more" />
       </div>
-      <div class="row">
-        <div
-          v-for="skill in skills"
-          :key="skill.id"
-          class="col-12 col-sm-6 col-md-3 skill-card-col"
-        >
-          <SkillCard :title="skill.title" />
+      <ClientOnly>
+        <div class="row">
+          <div
+            v-for="skill in skills"
+            :key="skill.id"
+            class="col-12 col-sm-6 col-md-3 skill-card-col"
+          >
+            <SkillCard :skill="skill" />
+          </div>
         </div>
-      </div>
+
+      </ClientOnly>
     </div>
   </section>
 </template>

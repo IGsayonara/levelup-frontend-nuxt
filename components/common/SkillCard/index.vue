@@ -1,19 +1,19 @@
 <template>
   <div class="skill-card">
-    <h4 class="skill-card__title">{{ title }}</h4>
-    <img class="skill-card__image" :src="imageUrl" />
+    <h4 class="skill-card__title">{{ skill.title }}</h4>
+    <img class="skill-card__image" :src="skill.imageUrl || '/img/404.jpg'" />
   </div>
 </template>
 
 <script setup lang="ts">
+import type {Skill} from "~/types/skill";
+
 interface Props {
-  title: string;
-  imageUrl?: string;
+  skill: Skill
 }
 
-withDefaults(defineProps<Props>(), {
-  imageUrl: '/img/404.jpg',
-});
+defineProps<Props>()
+
 </script>
 
 <style scoped lang="scss">

@@ -4,7 +4,6 @@ import type {ProjectResponseDto} from "~/utils/api/types/project";
 
 export class ProjectUtil extends ApiUtil {
     public async loadProjects(title: string): Promise<Paginated<ProjectResponseDto>> {
-        this.authorizeAxiosInstance()
         return await this.axiosInstance.get('/projects', {
             params: {
                 'filter.title': `$ilike:${title}`,
