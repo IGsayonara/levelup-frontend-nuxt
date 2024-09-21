@@ -9,9 +9,9 @@ export const useAuthStore = defineStore('AuthStore', () => {
 
     const authUtil = new AuthUtil()
 
-    const getSession = async (): User | null => {
+    const getSession = async (): User => {
         try{
-            user.value = await authUtil.getSession()
+            user.value = await authUtil.fetchSession()
         }
         catch(error){
             user.value = null

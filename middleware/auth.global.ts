@@ -2,24 +2,19 @@ import Cookies from 'js-cookie';
 import {AuthUtil} from "~/utils/api/auth.util";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-    const authUtil = new AuthUtil();
+
     if (import.meta.env.SSR) {
         return
     }
+    const authStore = useAuthStore();
+    const {user} = storeToRefs(authStore);
+    const {getSession, refreshTokens} = authStore;
 
     try {
-        const accessToken = Cookies.get('accessToken');
-        if (!accessToken) {
-            if (to.name !== 'login') {
-                return '/login';
-            }
-            return;
-        }
+        await refreshTokens()
+        await getSession()
 
-        // Verify the token by making a request
-        await authUtil.refreshTokens()
-        const user = await authUtil.getSession();
-        if (!user) {
+        if (!user.value) {
             if (to.name !== 'login') {
                 return '/login';
             }

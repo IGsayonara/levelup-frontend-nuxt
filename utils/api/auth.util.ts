@@ -2,6 +2,7 @@ import type {User} from "~/types/user";
 import Cookies from "js-cookie";
 import type {AxiosInstance} from "axios";
 import {AxiosUtil} from "~/utils/api/axios.util";
+import type {UserResponseDto} from "~/utils/api/types/user";
 
 export class AuthUtil {
     private refreshToken: string;
@@ -52,7 +53,7 @@ export class AuthUtil {
         this.setRefreshToken(refreshToken);
     }
 
-    public async getSession(): Promise<User | null> {
+    public async fetchSession(): Promise<UserResponseDto> {
         return await this.axiosInstance.get('/users/me', {
             headers: {
                 Authorization: `Bearer ${this.accessToken}`

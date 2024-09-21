@@ -1,13 +1,21 @@
-export type PaginationLinks = {
-    current: string,
-    first: string,
-    last: string,
-    previous?: string,
-    next?: string,
-}
-
-export type WithPagination<T> = {
-    links: PaginationLinks,
-    data: T,
-    meta: any,
+export type Paginated<T> = {
+    meta: {
+        itemsPerPage: number;
+        totalItems: number;
+        currentPage: number;
+        totalPages: number;
+        // sortBy: SortBy<T>;
+        // searchBy: Column<T>[];
+        search: string;
+        filter?: {
+            [column: string]: string | string[];
+        };
+    };
+    links: {
+        first?: string;
+        previous?: string;
+        current: string;
+        next?: string;
+        last?: string;
+    };
 }

@@ -1,9 +1,9 @@
 import {ApiUtil} from "~/utils/api/api.util";
-import type {WithPagination} from "~/utils/api/types/api";
+import type {Paginated} from "~/utils/api/types/api";
 import type {ProjectResponseDto} from "~/utils/api/types/project";
 
 export class ProjectUtil extends ApiUtil {
-    public async loadProjects(title: string): Promise<WithPagination<ProjectResponseDto>> {
+    public async loadProjects(title: string): Promise<Paginated<ProjectResponseDto>> {
         this.authorizeAxiosInstance()
         return await this.axiosInstance.get('/projects', {
             params: {

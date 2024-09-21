@@ -8,7 +8,7 @@
   <section>
     <div class="container">
       <div class="section-title-wrapper">
-        <SectionTitle title="Mini apps" link-text="See more" />
+        <SectionTitle title="Mini apps" link-text="See more" @link-click="$router.push('/projects')" />
       </div>
       <div class="row">
         <div
@@ -43,6 +43,8 @@
 </template>
 
 <script setup lang="ts">
+import {useAuthStore} from "~/stores/auth.store";
+
 useHead({
   title: "Home page",
   meta: [
@@ -55,16 +57,16 @@ import AppCard from '~/components/common/AppCard/index.vue';
 import AppBanner from '~/components/common/AppBanner/index.vue';
 import SkillCard from '~/components/common/SkillCard/index.vue';
 import { computed } from 'vue';
-import type {Project} from "~/types/project";
-import type {Skill} from "~/types/skill";
 
+const authStore = useAuthStore()
+const {user} = storeToRefs(authStore);
 
 const projects = computed(() => {
-  return [] as Project[]
+  return user.value?.projects
 });
 
 const skills = computed(() => {
-  return [] as Skill[]
+  return user.value?.skills
 });
 
 </script>

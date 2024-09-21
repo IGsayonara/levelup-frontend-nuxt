@@ -12,7 +12,6 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { onBeforeRouteUpdate } from 'vue-router';
 
 import AppCard from '~/components/common/AppCard/index.vue';
 import SectionTitle from '~/components/common/SectionTitle/index.vue';
@@ -22,7 +21,7 @@ interface Props {
   id: number;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const isError = computed(() => {
   return false
@@ -32,5 +31,4 @@ const project = computed(() => {
   return {} as any as Project
 });
 
-onBeforeRouteUpdate(idGuard);
 </script>
