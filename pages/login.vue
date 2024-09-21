@@ -20,10 +20,13 @@ const {user} = storeToRefs(authStore);
 
 const username = ref('')
 const password = ref('')
-watch(() => user.value, () => {
+const unwatch = watch(() => !!user.value, () => {
   if(!!user.value){
     router.push('/')
   }
+})
+onUnmounted(()=> {
+  unwatch()
 })
 
 
