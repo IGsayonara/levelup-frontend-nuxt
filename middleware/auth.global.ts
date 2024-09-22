@@ -33,8 +33,4 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             return '/login';
         }
     }
-
-    if (to.name === 'login') {
-        return '/';
-    }
 });
