@@ -67,11 +67,11 @@ const authStore = useAuthStore()
 const {user} = storeToRefs(authStore);
 
 const projects = computed(() => {
-  return user.value?.projects
+  return user.value?.userProjects.map(({project})=> project)
 });
 
 const skills = computed(() => {
-  return user.value?.skills
+  return user.value?.userSkills.map(({skill})=> skill)
 });
 
 </script>
