@@ -1,6 +1,6 @@
 <template>
   <AppModal v-if="isOpen" @close="close">
-    <template #header></template>
+    <template #header/>
     <template #default>
       <div class="mobile__navigation-wrapper">
         <DefaultNavigation class="mobile__navigation" />
@@ -18,9 +18,12 @@
 <script setup>
 import {faBars} from "@fortawesome/free-solid-svg-icons"
 
-import { useRoute } from 'vue-router';
 import GithubButton from "~/components/ui/AppButton/GithubButton.vue";
 import DefaultNavigation from "~/components/layout/AppHeader/DefaultNavigation.vue";
+
+defineOptions({
+  name: 'MobileNavigation',
+})
 
 const route = useRoute();
 

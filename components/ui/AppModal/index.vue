@@ -1,11 +1,11 @@
 <template>
   <transition mode="out-in" @after-leave="close">
     <div v-if="isOpen" class="app-modal__wrapper">
-      <div class="modal-close-overlay" @click="runCloseAnimation"></div>
+      <div class="modal-close-overlay" @click="runCloseAnimation"/>
       <div class="app-modal__wrapper-content">
         <div class="modal-content">
           <header v-if="$slots.header">
-            <slot name="header"></slot>
+            <slot name="header"/>
             <FontAwesome
               class="close-button"
               :icon="faClose"
@@ -13,7 +13,7 @@
             />
           </header>
           <div class="app-modal_content">
-            <slot></slot>
+            <slot/>
           </div>
           <footer v-if="$slots.footer">
             <slot name="footer">Footer slot</slot>
@@ -26,6 +26,10 @@
 
 <script setup>
 import {faClose} from "@fortawesome/free-solid-svg-icons";
+
+defineOptions({
+  name: 'AppModal'
+})
 
 const isOpen = ref(false);
 const emit = defineEmits(['close']);

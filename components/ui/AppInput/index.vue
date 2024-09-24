@@ -6,18 +6,16 @@
       :value="reactiveModelValue"
       v-bind="$attrs"
       @input="$emit('update:modelValue', $event.target.value)"
-    />
+    >
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'AppInput',
-};
-</script>
-
 <script setup lang="ts">
 import { toRef } from 'vue';
+
+defineOptions({
+  name: 'AppInput'
+})
 
 interface Props {
   id: string;

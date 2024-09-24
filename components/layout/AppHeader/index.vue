@@ -3,7 +3,7 @@
     <div class="container">
       <div class="app-header__wrapper">
         <div class="logo" @click="$router.push('/')">
-          <img src="/img/logo.png" alt="Level UP" />
+          <img src="/img/logo.png" alt="Level UP" >
         </div>
         <ClientOnly>
           <DesktopNavigation v-if="!isMobileNavigation" />
@@ -20,6 +20,10 @@ import { computed } from 'vue';
 import DesktopNavigation from '~/components/layout/AppHeader/DesktopNavigation.vue';
 import MobileNavigation from '~/components/layout/AppHeader/MobileNavigation.vue';
 const { currentBreakpoint } = useViewpoint();
+
+defineOptions({
+  name: 'AppHeader'
+})
 
 const isMobileNavigation = computed(() => {
   return ['xs', 'sm'].includes(currentBreakpoint.value);

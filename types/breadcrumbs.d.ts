@@ -1,4 +1,4 @@
-import { ComputedRef } from 'vue';
+import type { ComputedRef } from 'vue';
 
 export type Breadcrumb = {
   text: string | (() => ComputedRef<string>);

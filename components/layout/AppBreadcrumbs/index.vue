@@ -9,16 +9,14 @@
   </section>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'AppBreadcrumbs',
-};
-</script>
-
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
 import { computed } from 'vue';
 import type {Breadcrumb} from "~/types/breadcrumbs";
+
+defineOptions({
+  name: 'AppBreadcrumbs'
+})
 
 const router = useRouter();
 

@@ -7,6 +7,9 @@
 </template>
 
 <script setup>
+defineOptions({
+  name: 'DefaultNavigation',
+})
 </script>
 
 <style scoped lang="scss">

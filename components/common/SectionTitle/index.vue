@@ -10,13 +10,10 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'SectionTitle',
-};
-</script>
-
 <script setup lang="ts">
+defineOptions({
+  name: 'SectionTitle',
+})
 interface Props {
   title: string;
   linkText: string;

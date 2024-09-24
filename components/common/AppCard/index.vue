@@ -1,7 +1,7 @@
 <template>
   <div v-if="project" class="app-card">
     <div class="app-card__image-wrapper">
-      <img :src="imageUrl" class="image" />
+      <img :src="imageUrl" class="image" >
     </div>
     <div class="app-card__text-wrapper">
       <h3 class="title">{{ project.title }}</h3>
@@ -10,15 +10,12 @@
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'AppCard',
-};
-</script>
-
 <script setup lang="ts">
-import { computed, toRef } from 'vue';
 import type {Project} from "~/types/project";
+
+defineOptions({
+  name: 'AppCard'
+})
 
 interface Props {
   project: Project;

@@ -13,6 +13,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@nuxt/eslint": "^0.5.7",
     "@pinia/nuxt": "^0.5.4",
     "@vesp/nuxt-fontawesome": "^1.1.0",
     "axios": "^1.7.7",

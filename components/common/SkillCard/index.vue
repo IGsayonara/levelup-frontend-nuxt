@@ -1,12 +1,16 @@
 <template>
   <div class="skill-card">
     <h4 class="skill-card__title">{{ skill.title }}</h4>
-    <img class="skill-card__image" :src="skill.imageUrl || '/img/404.jpg'" />
+    <img class="skill-card__image" :src="skill.imageUrl || '/img/404.jpg'" >
   </div>
 </template>
 
 <script setup lang="ts">
 import type {Skill} from "~/types/skill";
+
+defineOptions({
+  name: 'SkillCard'
+})
 
 interface Props {
   skill: Skill
