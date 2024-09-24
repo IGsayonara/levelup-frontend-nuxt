@@ -1,13 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { resolve } from "node:path"
-
+import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
   alias: {
-    cookie: resolve(__dirname, "node_modules/cookie")
+    cookie: resolve(__dirname, 'node_modules/cookie'),
   },
 
   vite: {
@@ -27,7 +26,7 @@ export default defineNuxtConfig({
   },
 
   devServer: {
-    port: 8080
+    port: 8080,
   },
 
   components: [
@@ -41,6 +40,12 @@ export default defineNuxtConfig({
 
   pinia: {
     storesDirs: ['./stores/**'],
+  },
+
+  eslint: {
+    config: {
+      stylistic: true,
+    },
   },
 
 })

@@ -1,8 +1,14 @@
 <template>
   <nav class="navigation">
-    <nuxt-link :to="{ path: '/' }">Home</nuxt-link>
-    <nuxt-link :to="{ path: '/projects' }">Projects</nuxt-link>
-    <nuxt-link :to="{ path: '/skills' }">Skills</nuxt-link>
+    <nuxt-link :to="{ path: '/' }">
+      Home
+    </nuxt-link>
+    <nuxt-link :to="{ path: '/projects' }">
+      Projects
+    </nuxt-link>
+    <nuxt-link :to="{ path: '/skills' }">
+      Skills
+    </nuxt-link>
   </nav>
 </template>
 

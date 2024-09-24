@@ -4,25 +4,26 @@
     class="github-button"
     secondary-color="white"
     @click="redirectToGithub"
-    >View on Github</AppButton
   >
+    View on Github
+  </AppButton>
 </template>
 
 <script setup lang="ts">
-import AppButton from '~/components/ui/AppButton/index.vue';
+import AppButton from '~/components/ui/AppButton/index.vue'
 
 declare type Props = {
-  repositoryLink: string;
-};
+  repositoryLink: string
+}
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const redirectToGithub = () => {
   window.open(
     props.repositoryLink || 'https://github.com/IGsayonara/levelup-frontend',
-    '_blank'
-  );
-};
+    '_blank',
+  )
+}
 </script>
 
 <style scoped></style>

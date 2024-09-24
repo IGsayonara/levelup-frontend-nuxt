@@ -1,32 +1,42 @@
 <template>
-  <div v-if="project" class="app-card">
+  <div
+    v-if="project"
+    class="app-card"
+  >
     <div class="app-card__image-wrapper">
-      <img :src="imageUrl" class="image" >
+      <img
+        :src="imageUrl"
+        class="image"
+      >
     </div>
     <div class="app-card__text-wrapper">
-      <h3 class="title">{{ project.title }}</h3>
-      <div class="description">{{ project.description }}</div>
+      <h3 class="title">
+        {{ project.title }}
+      </h3>
+      <div class="description">
+        {{ project.description }}
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type {Project} from "~/types/project";
+import type { Project } from '~/types/project'
 
 defineOptions({
-  name: 'AppCard'
+  name: 'AppCard',
 })
 
 interface Props {
-  project: Project;
+  project: Project
 }
 
-const props = defineProps<Props>();
-const project = toRef(props, 'project');
+const props = defineProps<Props>()
+const project = toRef(props, 'project')
 
 const imageUrl = computed(() => {
-  return project.value.imageUrl || '/img/404.jpg';
-});
+  return project.value.imageUrl || '/img/404.jpg'
+})
 </script>
 
 <style lang="scss" scoped>

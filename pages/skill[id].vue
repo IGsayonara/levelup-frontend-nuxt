@@ -5,10 +5,8 @@
 </template>
 
 <script setup lang="ts">
-
 interface Props {
-  id: number;
+  id: number
 }
-defineProps<Props>();
-
+defineProps<Props>()
 </script>

@@ -11,21 +11,21 @@
 </template>
 
 <script setup lang="ts">
-import { toRef } from 'vue';
+import { toRef } from 'vue'
 
 defineOptions({
-  name: 'AppInput'
+  name: 'AppInput',
 })
 
 interface Props {
-  id: string;
-  label: string;
-  modelValue: string;
+  id: string
+  label: string
+  modelValue: string
 }
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
-defineEmits(['update:modelValue']);
-const reactiveModelValue = toRef(props, 'modelValue');
+defineEmits(['update:modelValue'])
+const reactiveModelValue = toRef(props, 'modelValue')
 </script>
 
 <style scoped lang="scss">

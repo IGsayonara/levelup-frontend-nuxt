@@ -1,8 +1,8 @@
-import type {ProjectResponseDto} from "~/utils/api/types/project";
+import type { ProjectResponseDto } from '~/utils/api/types/project'
 
 export type UserResponseDto = {
-    id: number;
-    username: string;
-    projects?: ProjectResponseDto[];
-    skills?: ISkill[];
+  id: number
+  username: string
+  projects?: ProjectResponseDto[]
+  skills?: ISkill[]
 }

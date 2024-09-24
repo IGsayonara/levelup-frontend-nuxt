@@ -1,7 +1,14 @@
 <template>
-  <section v-if="breadcrumbs" class="app-breadcrumbs">
+  <section
+    v-if="breadcrumbs"
+    class="app-breadcrumbs"
+  >
     <div class="container">
-      <span v-for="crumb in breadcrumbs" :key="crumb.text" class="crumb">
+      <span
+        v-for="crumb in breadcrumbs"
+        :key="crumb.text"
+        class="crumb"
+      >
         <router-link :to="{ path: crumb.to }">{{ crumb.text }}</router-link>
         <span class="separator">/</span>
       </span>
@@ -10,30 +17,30 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router';
-import { computed } from 'vue';
-import type {Breadcrumb} from "~/types/breadcrumbs";
+import { useRouter } from 'vue-router'
+import { computed } from 'vue'
+import type { Breadcrumb } from '~/types/breadcrumbs'
 
 defineOptions({
-  name: 'AppBreadcrumbs'
+  name: 'AppBreadcrumbs',
 })
 
-const router = useRouter();
+const router = useRouter()
 
 const breadcrumbs = computed(() => {
   const metaCrumbs = router.currentRoute.value.meta
-    ?.breadCrumbs as Array<Breadcrumb>;
+    ?.breadCrumbs as Array<Breadcrumb>
   return metaCrumbs?.map((el) => {
-    const tempEl = { ...el };
+    const tempEl = { ...el }
     if (typeof tempEl.text === 'function') {
-      tempEl.text = tempEl.text().value;
+      tempEl.text = tempEl.text().value
     }
     if (typeof tempEl.to === 'function') {
-      tempEl.to = tempEl.to().value;
+      tempEl.to = tempEl.to().value
     }
-    return tempEl;
-  });
-});
+    return tempEl
+  })
+})
 </script>
 
 <style scoped lang="scss">

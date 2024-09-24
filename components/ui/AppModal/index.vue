@@ -1,11 +1,20 @@
 <template>
-  <transition mode="out-in" @after-leave="close">
-    <div v-if="isOpen" class="app-modal__wrapper">
-      <div class="modal-close-overlay" @click="runCloseAnimation"/>
+  <transition
+    mode="out-in"
+    @after-leave="close"
+  >
+    <div
+      v-if="isOpen"
+      class="app-modal__wrapper"
+    >
+      <div
+        class="modal-close-overlay"
+        @click="runCloseAnimation"
+      />
       <div class="app-modal__wrapper-content">
         <div class="modal-content">
           <header v-if="$slots.header">
-            <slot name="header"/>
+            <slot name="header" />
             <FontAwesome
               class="close-button"
               :icon="faClose"
@@ -13,10 +22,12 @@
             />
           </header>
           <div class="app-modal_content">
-            <slot/>
+            <slot />
           </div>
           <footer v-if="$slots.footer">
-            <slot name="footer">Footer slot</slot>
+            <slot name="footer">
+              Footer slot
+            </slot>
           </footer>
         </div>
       </div>
@@ -25,32 +36,32 @@
 </template>
 
 <script setup>
-import {faClose} from "@fortawesome/free-solid-svg-icons";
+import { faClose } from '@fortawesome/free-solid-svg-icons'
 
 defineOptions({
-  name: 'AppModal'
+  name: 'AppModal',
 })
 
-const isOpen = ref(false);
-const emit = defineEmits(['close']);
+const isOpen = ref(false)
+const emit = defineEmits(['close'])
 
 const runCloseAnimation = async () => {
-  isOpen.value = false;
-  document.body.style.overflowY = 'auto';
-};
+  isOpen.value = false
+  document.body.style.overflowY = 'auto'
+}
 
 const close = () => {
-  emit('close');
-};
+  emit('close')
+}
 
 onMounted(() => {
-  document.body.style.overflowY = 'hidden';
-  isOpen.value = true;
-});
+  document.body.style.overflowY = 'hidden'
+  isOpen.value = true
+})
 
 onBeforeUnmount(() => {
-  document.body.style.overflowY = 'auto';
-});
+  document.body.style.overflowY = 'auto'
+})
 </script>
 
 <style scoped lang="scss">

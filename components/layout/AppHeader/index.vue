@@ -2,8 +2,14 @@
   <header class="app-header">
     <div class="container">
       <div class="app-header__wrapper">
-        <div class="logo" @click="$router.push('/')">
-          <img src="/img/logo.png" alt="Level UP" >
+        <div
+          class="logo"
+          @click="$router.push('/')"
+        >
+          <img
+            src="/img/logo.png"
+            alt="Level UP"
+          >
         </div>
         <ClientOnly>
           <DesktopNavigation v-if="!isMobileNavigation" />
@@ -15,19 +21,20 @@
 </template>
 
 <script setup>
-import { useViewpoint } from '~/composables/viewpoint-composable/index.ts';
-import { computed } from 'vue';
-import DesktopNavigation from '~/components/layout/AppHeader/DesktopNavigation.vue';
-import MobileNavigation from '~/components/layout/AppHeader/MobileNavigation.vue';
-const { currentBreakpoint } = useViewpoint();
+import { computed } from 'vue'
+import { useViewpoint } from '~/composables/viewpoint-composable/index.ts'
+import DesktopNavigation from '~/components/layout/AppHeader/DesktopNavigation.vue'
+import MobileNavigation from '~/components/layout/AppHeader/MobileNavigation.vue'
+
+const { currentBreakpoint } = useViewpoint()
 
 defineOptions({
-  name: 'AppHeader'
+  name: 'AppHeader',
 })
 
 const isMobileNavigation = computed(() => {
-  return ['xs', 'sm'].includes(currentBreakpoint.value);
-});
+  return ['xs', 'sm'].includes(currentBreakpoint.value)
+})
 </script>
 
 <style scoped lang="scss">

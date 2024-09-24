@@ -1,5 +1,5 @@
-import type {CreateAxiosDefaults} from "axios";
+import type { CreateAxiosDefaults } from 'axios'
 
 export const defaultAxiosConfig: CreateAxiosDefaults = {
-    baseURL: 'http://localhost:3000/',
+  baseURL: 'http://localhost:3000/',
 }

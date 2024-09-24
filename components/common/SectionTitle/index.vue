@@ -1,12 +1,13 @@
 <template>
   <div class="section-title">
-    <h2 class="section-title__heading">{{ title }}</h2>
+    <h2 class="section-title__heading">
+      {{ title }}
+    </h2>
     <a
       v-if="linkText"
       class="section-title__link"
       @click="$emit('linkClick')"
-      >{{ linkText }}</a
-    >
+    >{{ linkText }}</a>
   </div>
 </template>
 
@@ -15,13 +16,13 @@ defineOptions({
   name: 'SectionTitle',
 })
 interface Props {
-  title: string;
-  linkText: string;
+  title: string
+  linkText: string
 }
 
-withDefaults(defineProps<Props>(), {});
+withDefaults(defineProps<Props>(), {})
 
-defineEmits(['linkClick']);
+defineEmits(['linkClick'])
 </script>
 
 <style scoped lang="scss">

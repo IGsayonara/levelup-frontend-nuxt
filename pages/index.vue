@@ -8,18 +8,22 @@
   <section>
     <div class="container">
       <div class="section-title-wrapper">
-        <SectionTitle title="Mini apps" link-text="See more" @link-click="$router.push('/projects')" />
+        <SectionTitle
+          title="Mini apps"
+          link-text="See more"
+          @link-click="$router.push('/projects')"
+        />
       </div>
       <ClientOnly>
         <div class="row">
           <div
-              v-for="project in projects"
-              :key="project.id"
-              class="col-12 col-xl-6 app-card-col"
+            v-for="project in projects"
+            :key="project.id"
+            class="col-12 col-xl-6 app-card-col"
           >
             <AppCard
-                :project="project"
-                @click="$router.push('/project/' + project.id)"
+              :project="project"
+              @click="$router.push('/project/' + project.id)"
             />
           </div>
         </div>
@@ -29,7 +33,10 @@
   <section>
     <div class="container">
       <div class="section-title-wrapper">
-        <SectionTitle title="Learned skills" link-text="See more" />
+        <SectionTitle
+          title="Learned skills"
+          link-text="See more"
+        />
       </div>
       <ClientOnly>
         <div class="row">
@@ -41,39 +48,37 @@
             <SkillCard :skill="skill" />
           </div>
         </div>
-
       </ClientOnly>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
-import {useAuthStore} from "~/stores/auth.store";
+import { computed } from 'vue'
+import { useAuthStore } from '~/stores/auth.store'
+
+import SectionTitle from '~/components/common/SectionTitle/index.vue'
+import AppCard from '~/components/common/AppCard/index.vue'
+import AppBanner from '~/components/common/AppBanner/index.vue'
+import SkillCard from '~/components/common/SkillCard/index.vue'
 
 useHead({
-  title: "Home page",
+  title: 'Home page',
   meta: [
-    { name: 'Home page', content: 'This is a dynamic page description.' }
-  ]
-});
-
-import SectionTitle from '~/components/common/SectionTitle/index.vue';
-import AppCard from '~/components/common/AppCard/index.vue';
-import AppBanner from '~/components/common/AppBanner/index.vue';
-import SkillCard from '~/components/common/SkillCard/index.vue';
-import { computed } from 'vue';
+    { name: 'Home page', content: 'This is a dynamic page description.' },
+  ],
+})
 
 const authStore = useAuthStore()
-const {user} = storeToRefs(authStore);
+const { user } = storeToRefs(authStore)
 
 const projects = computed(() => {
-  return user.value?.userProjects.map(({project})=> project)
-});
+  return user.value?.userProjects.map(({ project }) => project)
+})
 
 const skills = computed(() => {
-  return user.value?.userSkills.map(({skill})=> skill)
-});
-
+  return user.value?.userSkills.map(({ skill }) => skill)
+})
 </script>
 
 <style lang="scss" scoped>

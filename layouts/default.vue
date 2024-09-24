@@ -1,7 +1,9 @@
 <template>
-    <AppHeader></AppHeader>
-    <AppBreadcrumbs></AppBreadcrumbs>
-  <slot></slot>
+  <div>
+    <AppHeader />
+    <AppBreadcrumbs />
+    <slot />
+  </div>
 </template>
 
 <script setup lang="ts">

@@ -6,19 +6,19 @@
 
 <script setup lang="ts">
 defineOptions({
-  name: 'AppButton'
+  name: 'AppButton',
 })
 
 interface Props {
-  text: string;
-  primaryColor?: string;
-  secondaryColor?: string;
+  text: string
+  primaryColor?: string
+  secondaryColor?: string
 }
 
 withDefaults(defineProps<Props>(), {
   primaryColor: '#ff8c00',
   secondaryColor: 'white',
-});
+})
 </script>
 
 <style scoped lang="scss">

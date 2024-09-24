@@ -1,27 +1,36 @@
 <template>
   <div class="app-banner">
     <div class="app-banner__text-wrapper container">
-      <h1 class="title">{{ title }}</h1>
-      <div class="description" v-html="description"/>
+      <h1 class="title">
+        {{ title }}
+      </h1>
+      <div
+        class="description"
+        v-html="description"
+      />
     </div>
-    <img class="app-banner__image" :src="bannerImage" alt="" >
+    <img
+      class="app-banner__image"
+      :src="bannerImage"
+      alt=""
+    >
   </div>
 </template>
 
 <script setup lang="ts">
 defineOptions({
-  name: 'AppBanner'
+  name: 'AppBanner',
 })
 
 interface Props {
-  title: string;
-  description: string;
-  bannerImage?: string;
+  title: string
+  description: string
+  bannerImage?: string
 }
 
 withDefaults(defineProps<Props>(), {
   bannerImage: '/img/banner.png',
-});
+})
 </script>
 
 <style scoped lang="scss">
