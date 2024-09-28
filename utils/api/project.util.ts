@@ -10,4 +10,8 @@ export class ProjectUtil extends ApiUtil {
       },
     }).then(r => r.data)
   }
+
+  public async loadProject(id: number): Promise<ProjectResponseDto> {
+    return await this.axiosInstance.get(`/projects/${id}`).then(r => r.data)
+  }
 }

@@ -3,19 +3,24 @@
     v-if="project"
     class="app-card"
   >
-    <div class="app-card__image-wrapper">
-      <img
-        :src="imageUrl"
-        class="image"
-      >
-    </div>
-    <div class="app-card__text-wrapper">
-      <h3 class="title">
-        {{ project.title }}
-      </h3>
-      <div class="description">
-        {{ project.description }}
+    <div class="app-card__header">
+      <div class="app-card__image-wrapper">
+        <img
+          :src="imageUrl"
+          class="image"
+        >
       </div>
+      <div class="app-card__text-wrapper">
+        <h3 class="title">
+          {{ project.title }}
+        </h3>
+        <div class="authors">
+          Done by @NoFfIrl
+        </div>
+      </div>
+    </div>
+    <div class="description">
+      {{ project.description }}
     </div>
   </div>
 </template>
@@ -24,7 +29,7 @@
 import type { Project } from '~/types/project'
 
 defineOptions({
-  name: 'AppCard',
+  name: 'FullAppCard',
 })
 
 interface Props {
@@ -43,16 +48,17 @@ const imageUrl = computed(() => {
 <style lang="scss" scoped>
 .app-card {
   display: flex;
+  flex-direction: column;
   padding: 3rem;
   border: 1px solid #e5e5e5;
   border-radius: 4rem;
   background-color: white;
   cursor: pointer;
   transition: all 0.3s ease-in;
-  height: 170px;
 
-  @include media-breakpoint-down(md){
-    height: 130px;
+  &__header {
+    display: flex;
+    margin-bottom: 3rem;
   }
 
   &__image-wrapper {
@@ -83,15 +89,14 @@ const imageUrl = computed(() => {
       transition: all 0.3s ease-in;
     }
 
-    .description {
-      color: #808080;
-      margin-bottom: auto;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .authors {
+      color: black;
+      margin-top: auto;
     }
+
+  }
+  .description {
+    color: #808080;
   }
 
   &:hover {

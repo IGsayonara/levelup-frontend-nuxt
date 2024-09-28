@@ -1,10 +1,24 @@
 <template>
   <button class="app-button">
-    <slot>{{ text }}</slot>
+    <span
+      v-if="loading"
+      class="app-button__loader"
+    >
+      <FontAwesome
+        class="burger-button"
+        :icon="faSpinner"
+        @click="open"
+      />
+    </span>
+    <slot v-else>
+      {{ text }}
+    </slot>
   </button>
 </template>
 
 <script setup lang="ts">
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+
 defineOptions({
   name: 'AppButton',
 })
@@ -13,6 +27,7 @@ interface Props {
   text: string
   primaryColor?: string
   secondaryColor?: string
+  loading?: boolean
 }
 
 withDefaults(defineProps<Props>(), {
@@ -22,6 +37,15 @@ withDefaults(defineProps<Props>(), {
 </script>
 
 <style scoped lang="scss">
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .app-button {
   padding: 1em;
   font-weight: 500;
@@ -33,12 +57,20 @@ withDefaults(defineProps<Props>(), {
   background-color: white;
   background-color: v-bind(secondaryColor);
   transition: all 0.3s ease-in;
+  display: flex;
+  justify-content: center;
 
   &:hover {
     color: white;
     color: v-bind(secondaryColor);
     background-color: $orange;
     background-color: v-bind(primaryColor);
+  }
+
+  &__loader {
+    animation: rotate 1s infinite linear;
+    width: 17px;
+    display: block;
   }
 }
 </style>

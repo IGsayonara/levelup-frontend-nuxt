@@ -1,66 +1,97 @@
 <template>
-  <section class="banner-wrapper">
-    <AppBanner
-      description="Done by <span style='color: #ff8c00;'>Ihor Didunik</span> during fulfilment of personal development plan"
-      title="Funny Self Development"
-    />
-  </section>
-  <section>
-    <div class="container">
-      <div class="section-title-wrapper">
-        <SectionTitle
-          title="Mini apps"
-          link-text="See more"
-          @link-click="$router.push('/projects')"
-        />
-      </div>
-      <ClientOnly>
-        <div class="row">
+  <div>
+    <section v-if="user">
+      <div class="container">
+        <div class="user-info row row-reverse">
           <div
-            v-for="project in projects"
-            :key="project.id"
-            class="col-12 col-xl-6 app-card-col"
+            class="user-info__bio col-12 col-sm-9"
           >
-            <AppCard
-              :project="project"
-              @click="$router.push('/project/' + project.id)"
-            />
+            <div class="user-info__headline">
+              <h2 class="user-info__headline-title">
+                {{ user.firstName + ' ' + user.lastName }}
+              </h2>
+              <span
+                class="user-info__headline-username"
+              >
+                @{{ user.username }}
+              </span>
+            </div>
+            <div class="user-info__bio">
+              {{ user.bio }}
+            </div>
+          </div>
+          <div class="user-info__sidebar col-12 col-sm-3">
+            <div class="user-info__sidebar-image">
+              <img
+                :src="user.profileImage"
+                :alt="user.firstName + ' ' + user.lastName"
+              >
+            </div>
+            <div class="user-info__sidebar-points">
+              <p>{{ user.phoneNumber }}</p>
+              <p>{{ user.email }}</p>
+              <p>5 years of experience</p>
+              <p>3 years of Vue FE experience</p>
+              <p>2 years of WordPress experience</p>
+            </div>
           </div>
         </div>
-      </ClientOnly>
-    </div>
-  </section>
-  <section>
-    <div class="container">
-      <div class="section-title-wrapper">
-        <SectionTitle
-          title="Learned skills"
-          link-text="See more"
-        />
       </div>
-      <ClientOnly>
-        <div class="row">
-          <div
-            v-for="skill in skills"
-            :key="skill.id"
-            class="col-12 col-sm-6 col-md-3 skill-card-col"
-          >
-            <SkillCard :skill="skill" />
-          </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="section-title-wrapper">
+          <SectionTitle
+            title="Skills"
+            link-text="See more"
+          />
         </div>
-      </ClientOnly>
-    </div>
-  </section>
+        <ClientOnly>
+          <div class="row">
+            <div
+              v-for="skill in skills"
+              :key="skill.id"
+              class="col-12 col-sm-6 col-md-3 skill-card-col"
+            >
+              <SkillCard :skill="skill" />
+            </div>
+          </div>
+        </ClientOnly>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="section-title-wrapper">
+          <SectionTitle
+            title="Portfolio"
+            link-text="See more"
+            @link-click="$router.push('/projects')"
+          />
+        </div>
+        <ClientOnly>
+          <div class="row">
+            <div
+              v-for="project in projects"
+              :key="project.id"
+              class="col-12 col-xl-6 app-card-col"
+            >
+              <AppCard
+                :project="project"
+                @click="onProjectClick(project)"
+              />
+            </div>
+          </div>
+        </ClientOnly>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
-import { useAuthStore } from '~/stores/auth.store'
+import type { Project } from '~/types/project'
 
-import SectionTitle from '~/components/common/SectionTitle/index.vue'
-import AppCard from '~/components/common/AppCard/index.vue'
-import AppBanner from '~/components/common/AppBanner/index.vue'
-import SkillCard from '~/components/common/SkillCard/index.vue'
+const { setProject } = useProjectStore()
+const router = useRouter()
 
 useHead({
   title: 'Home page',
@@ -79,11 +110,34 @@ const projects = computed(() => {
 const skills = computed(() => {
   return user.value?.userSkills.map(({ skill }) => skill)
 })
+
+const onProjectClick = async (project: Project) => {
+  setProject(project)
+  await nextTick()
+  await router.push('/project/' + project.id)
+}
 </script>
 
 <style lang="scss" scoped>
 .skill-card-col,
 .app-card-col {
   margin-bottom: 3rem;
+}
+
+.user-info {
+
+  @include media-breakpoint-down(sm){
+    flex-direction: column-reverse;
+  }
+
+  &__headline {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 1rem;
+
+    &-username {
+      margin-left: 1rem;
+    }
+  }
 }
 </style>

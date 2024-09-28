@@ -44,7 +44,7 @@ const close = () => {
   isOpen.value = false
 }
 
-watch(route, () => {
+watch(() => route.name, () => {
   isOpen.value = false
 })
 </script>

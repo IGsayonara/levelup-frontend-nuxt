@@ -2,7 +2,6 @@
 import { resolve } from 'node:path'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
 
   alias: {
@@ -39,7 +38,7 @@ export default defineNuxtConfig({
   modules: ['@vesp/nuxt-fontawesome', '@pinia/nuxt', '@nuxt/eslint'],
 
   pinia: {
-    storesDirs: ['./stores/**'],
+    storesDirs: ['./stores/**/*.ts'],
   },
 
   eslint: {

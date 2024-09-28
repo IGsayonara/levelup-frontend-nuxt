@@ -1,11 +1,10 @@
-import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Project } from '~/types/project'
 import { ProjectUtil } from '~/utils/api/project.util'
 
 const projectUtil = new ProjectUtil()
 
-export const useProjectStore = defineStore('projectStore', () => {
+export const useProjectsStore = defineStore('projectsStore', () => {
   const projects = ref<Project[]>([])
   const isLoading = ref<boolean>(false)
   const isError = ref<boolean>(false)

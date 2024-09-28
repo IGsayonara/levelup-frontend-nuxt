@@ -1,57 +1,57 @@
 <template>
-  <div class="container">
-    <div class="section-title-wrapper">
-      <SectionTitle title="Search for projects" />
-    </div>
-  </div>
-  <div class="projects_search">
+  <div>
     <div class="container">
-      <AppInput
-        id="searchProjectInput"
-        v-model="searchValue"
-        placeholder="Search"
-        label="kek"
-      />
+      <div class="section-title-wrapper">
+        <SectionTitle title="Search for projects" />
+      </div>
     </div>
-  </div>
-  <section>
-    <div class="container">
-      <div
-        v-if="projects.length"
-        class="row"
-      >
+    <div class="projects_search">
+      <div class="container">
+        <AppInput
+          id="searchProjectInput"
+          v-model="searchValue"
+          placeholder="Search"
+          label="kek"
+        />
+      </div>
+    </div>
+    <section>
+      <div class="container">
         <div
-          v-for="project in projects"
-          :key="project.id"
-          class="col-12 col-xl-6 app-card-col"
+          v-if="searchedProjects.length"
+          class="row"
         >
-          <AppCard
-            :project="project"
-            @click="$router.push('/project/' + project.id)"
-          />
-        </div>
-        <InfiniteLoading @infinite="loadMore" />
-      </div>
-      <div v-else>
-        <div class="not_found_image">
-          <img
-            src="/img/404.jpg"
-            alt="Not found any project"
+          <div
+            v-for="project in searchedProjects"
+            :key="project.id"
+            class="col-12 col-xl-6 app-card-col"
           >
+            <AppCard
+              :project="project"
+              @click="onProjectClick(project)"
+            />
+          </div>
+        </div>
+        <div v-else>
+          <div class="not_found_image">
+            <img
+              src="/img/404.jpg"
+              alt="Not found any project"
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-import InfiniteLoading from 'v3-infinite-loading'
 import { ref, watch } from 'vue'
 import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppCard from '~/components/common/AppCard/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
-import { useProjectStore } from '~/stores/projects.store'
+import type { Project } from '~/types/project'
 
 definePageMeta({
   breadCrumbs: [
@@ -66,21 +66,41 @@ definePageMeta({
   ],
 })
 
-const searchValue = ref<string>('')
-const projectsStore = useProjectStore()
-const { loadBySearch, loadMore } = projectsStore
-const { projects } = storeToRefs(projectsStore)
+const { setProject } = useProjectStore()
+const { user } = storeToRefs(useAuthStore())
+const router = useRouter()
+
+const searchValue = ref('')
+const updatedSearchValue = ref('')
+
+const projects = computed<Project>(() => {
+  return user.value?.userProjects.map(({ project }) => project) || []
+})
+
+const searchedProjects = computed(() => {
+  if (!updatedSearchValue.value) {
+    return projects.value
+  }
+
+  return projects.value.filter(({ title }) => title.includes(updatedSearchValue.value.trim()))
+})
 
 watch(
   searchValue,
   debounce(async () => {
-    await loadBySearch(searchValue.value)
+    updatedSearchValue.value = searchValue.value
   }, 300),
 )
 
 onMounted(() => {
-  loadBySearch(searchValue.value)
+  console.log(user.value)
 })
+
+const onProjectClick = async (project: Project) => {
+  setProject(project)
+  await nextTick()
+  await router.push('/project/' + project.id)
+}
 </script>
 
 <style scoped lang="scss">

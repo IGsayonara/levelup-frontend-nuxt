@@ -9,6 +9,9 @@
     <nuxt-link :to="{ path: '/skills' }">
       Skills
     </nuxt-link>
+    <nuxt-link :to="{ path: '/logout' }">
+      Logout
+    </nuxt-link>
   </nav>
 </template>
 

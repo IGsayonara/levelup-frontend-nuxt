@@ -32,7 +32,7 @@ const reactiveModelValue = toRef(props, 'modelValue')
 input {
   width: 100%;
   height: 14px;
-  padding: 4rem 3rem;
+  padding: 3rem 3rem;
   border: 1px solid #e5e5e5;
   border-radius: 2rem;
   color: #808080;

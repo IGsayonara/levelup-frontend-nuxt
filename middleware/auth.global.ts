@@ -11,8 +11,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
   const { getSession, refreshTokens } = authStore
 
   try {
-    console.log(from.name, to.name)
-
     if (!authUtil.getAccessToken()) {
       console.log('No access token')
       if (to.name !== 'login') {
@@ -23,6 +21,10 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     await refreshTokens()
     await getSession()
+
+    if (to.name === 'login') {
+      return '/'
+    }
   }
   catch (error) {
     console.error('Authentication check failed', error)

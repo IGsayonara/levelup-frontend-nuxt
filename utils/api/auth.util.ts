@@ -18,13 +18,11 @@ export class AuthUtil {
   public setAccessToken(accessToken: string): void {
     this.accessToken = accessToken
     Cookies.set('accessToken', accessToken)
-    console.log('accessTokenUpdated', this.accessToken)
   }
 
   public setRefreshToken(refreshToken: string): void {
     this.refreshToken = refreshToken
     Cookies.set('refreshToken', refreshToken)
-    console.log('refreshTokenUpdated', this.refreshToken)
   }
 
   public getAccessToken(): string {
@@ -61,5 +59,10 @@ export class AuthUtil {
     }).then(r => r.data).catch((_error) => {
       console.error('cannot get session', this.accessToken)
     })
+  }
+
+  public async logout(): Promise<void> {
+    this.setAccessToken(undefined)
+    this.setRefreshToken(undefined)
   }
 }

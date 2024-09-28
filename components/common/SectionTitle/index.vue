@@ -17,7 +17,7 @@ defineOptions({
 })
 interface Props {
   title: string
-  linkText: string
+  linkText?: string
 }
 
 withDefaults(defineProps<Props>(), {})
