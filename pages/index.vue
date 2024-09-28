@@ -72,11 +72,11 @@
           <div class="row">
             <div
               v-for="project in projects"
-              :key="project.id"
+              :key="project.project.id"
               class="col-12 col-xl-6 app-card-col"
             >
               <AppCard
-                :project="project"
+                :project="project.project"
                 @click="onProjectClick(project)"
               />
             </div>
@@ -104,7 +104,7 @@ const authStore = useAuthStore()
 const { user } = storeToRefs(authStore)
 
 const projects = computed(() => {
-  return user.value?.userProjects.map(({ project }) => project)
+  return user.value?.userProjects
 })
 
 const skills = computed(() => {
@@ -114,7 +114,7 @@ const skills = computed(() => {
 const onProjectClick = async (project: Project) => {
   setProject(project)
   await nextTick()
-  await router.push('/project/' + project.id)
+  await router.push('/project/' + project.project.id)
 }
 </script>
 

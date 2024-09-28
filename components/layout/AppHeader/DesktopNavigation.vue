@@ -1,6 +1,5 @@
 <template>
   <DefaultNavigation class="desktop__navigation" />
-  <GithubButton class="desktop__github-button" />
 </template>
 
 <script setup>

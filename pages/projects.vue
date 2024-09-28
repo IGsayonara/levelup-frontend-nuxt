@@ -82,7 +82,7 @@ const searchedProjects = computed(() => {
     return projects.value
   }
 
-  return projects.value.filter(({ title }) => title.includes(updatedSearchValue.value.trim()))
+  return projects.value.filter(({ title }) => title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
 })
 
 watch(

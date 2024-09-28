@@ -2,13 +2,14 @@
   <div>
     <section>
       <div
-        v-if="!isError && project"
+        v-if="!isError && userProject"
         class="container"
       >
         <div class="section-title-wrapper">
-          <SectionTitle :title="project.title" />
+          <SectionTitle :title="userProject.project?.title" />
         </div>
-        <FullAppCard :project="project" />
+        <div>{{ project }}</div>
+        <FullAppCard :project="userProject.project" />
       </div>
       <div
         v-else
@@ -19,7 +20,7 @@
     </section>
     <section>
       <div
-        v-if="!isError && project && project.projectSkills && project.projectSkills.length"
+        v-if="!isError && userProject && userProject.skills && userProject.skills.length"
         class="container"
       >
         <div class="section-title-wrapper">
@@ -27,14 +28,14 @@
         </div>
         <div class="row">
           <div
-            v-for="projectSkill in project.projectSkills"
-            :key="projectSkill.id"
+            v-for="skill in userProject.skills"
+            :key="skill.id"
             class="col-12 col-sm-6 col-md-3 skill-card-col mb-5"
           >
             <SkillCard
-              v-if="projectSkill"
-              :skill="projectSkill.skill"
-              @click="selectedSkillId = projectSkill.id"
+              v-if="skill"
+              :skill="skill.skill"
+              @click="selectedSkillId = skill.id"
             />
           </div>
         </div>
@@ -58,27 +59,30 @@
 </template>
 
 <script setup lang="ts">
-import type { ProjectSkill } from '~/types/project'
+import type { UserProject } from '~/types/user'
 
 const route = useRoute()
 
 const projectStore = useProjectStore()
-const { isLoading, isError, project } = storeToRefs(projectStore)
-const { loadProject } = projectStore
+const { isError, project } = storeToRefs(projectStore)
+const authStore = useAuthStore()
+const { user } = storeToRefs(authStore)
+
+const userProject = computed<UserProject>(() => {
+  return user.value?.userProjects?.find(project => project.id == route.params.id)
+})
 
 const selectedSkillId = ref<number | null>(null)
 
-const selectedSkill = computed<ProjectSkill | null>(() => {
+const selectedSkill = computed<Skill | null>(() => {
   if (!selectedSkillId.value) {
     return null
   }
-  return project.value.projectSkills.find(projectSkill => projectSkill.id === selectedSkillId.value)
+  return userProject.value.skills.find(skill => skill.id === selectedSkillId.value)
 })
 
 onMounted(() => {
-  if (!project.value) {
-    loadProject(route.params.id)
-  }
+
 })
 
 definePageMeta({

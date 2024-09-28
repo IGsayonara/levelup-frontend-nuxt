@@ -7,11 +7,6 @@
     <template #default>
       <div class="mobile__navigation-wrapper">
         <DefaultNavigation class="mobile__navigation" />
-        <GithubButton
-          class="mobile__github-button"
-          repository-link="https://github.com/noffi/github"
-          text="GitHub"
-        />
       </div>
     </template>
   </AppModal>
