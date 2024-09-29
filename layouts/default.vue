@@ -1,7 +1,6 @@
 <template>
   <div>
     <AppHeader />
-    <AppBreadcrumbs />
     <slot />
   </div>
 </template>

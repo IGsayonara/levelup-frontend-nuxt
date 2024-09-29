@@ -1,6 +1,6 @@
 <template>
   <section
-    v-if="breadcrumbs"
+    v-if="breadcrumbs && breadcrumbs.length"
     class="app-breadcrumbs"
   >
     <div class="container">
@@ -9,7 +9,7 @@
         :key="crumb.text"
         class="crumb"
       >
-        <router-link :to="{ path: crumb.to }">{{ crumb.text }}</router-link>
+        <NuxtLink :to="{ path: crumb.to }">{{ crumb.text }}</NuxtLink>
         <span class="separator">/</span>
       </span>
     </div>
@@ -17,30 +17,13 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { computed } from 'vue'
 import type { Breadcrumb } from '~/types/breadcrumbs'
 
 defineOptions({
   name: 'AppBreadcrumbs',
 })
 
-const router = useRouter()
-
-const breadcrumbs = computed(() => {
-  const metaCrumbs = router.currentRoute.value.meta
-    ?.breadCrumbs as Array<Breadcrumb>
-  return metaCrumbs?.map((el) => {
-    const tempEl = { ...el }
-    if (typeof tempEl.text === 'function') {
-      tempEl.text = tempEl.text().value
-    }
-    if (typeof tempEl.to === 'function') {
-      tempEl.to = tempEl.to().value
-    }
-    return tempEl
-  })
-})
+withDefaults(defineProps<{ breadcrumbs: Breadcrumb[] }>(), { breadcrumbs: [] as Breadcrumb[] })
 </script>
 
 <style scoped lang="scss">

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <section>
       <div
         v-if="userProject"
@@ -64,20 +65,6 @@ import type { Skill } from '~/types/skill'
 
 definePageMeta({
   middleware: 'fetch-user',
-  breadCrumbs: [
-    {
-      to: '/', // hyperlink
-      text: 'Home', // crumb text
-    },
-    {
-      to: '/projects', // hyperlink
-      text: 'Projects', // crumb text
-    },
-    {
-      to: '/project',
-      test: 'project',
-    },
-  ],
 })
 
 const route = useRoute()
@@ -88,6 +75,21 @@ const { user } = storeToRefs(userStore)
 const userProject = computed<UserProject>(() => {
   return user.value?.userProjects?.find(project => project.id == route.params.id)
 })
+
+const breadcrumbs = ref([
+  {
+    to: '/', // hyperlink
+    text: 'Home', // crumb text
+  },
+  {
+    to: '/projects', // hyperlink
+    text: 'Projects', // crumb text
+  },
+  {
+    to: '/project',
+    text: userProject.value.project.title,
+  },
+])
 
 const selectedSkillId = ref<number | null>(null)
 

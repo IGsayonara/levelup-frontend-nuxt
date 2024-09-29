@@ -1,8 +1,4 @@
-import { UserUtil } from '~/utils/api/user.util'
-
-const userUtil = new UserUtil()
-
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async () => {
   if (!import.meta.env.SSR) {
     return
   }

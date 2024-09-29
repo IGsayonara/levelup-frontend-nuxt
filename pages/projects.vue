@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="container">
       <div class="section-title-wrapper">
         <SectionTitle title="Search for projects" />
@@ -55,20 +56,16 @@ import type { Project } from '~/types/project'
 
 definePageMeta({
   middleware: 'fetch-user',
-  breadCrumbs: [
-    {
-      to: '/', // hyperlink
-      text: 'Home', // crumb text
-    },
-    {
-      to: '/projects', // hyperlink
-      text: 'Projects', // crumb text
-    },
-  ],
 })
+
+const breadcrumbs = ref([
+  { to: '/', text: 'Home' },
+  { to: '/projects', text: 'Projects' },
+])
 
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
+
 const router = useRouter()
 
 const searchValue = ref('')
@@ -92,10 +89,6 @@ watch(
     updatedSearchValue.value = searchValue.value
   }, 300),
 )
-
-onMounted(() => {
-  console.log(user.value)
-})
 
 const onProjectClick = async (project: Project) => {
   await router.push('/project/' + project.id)
