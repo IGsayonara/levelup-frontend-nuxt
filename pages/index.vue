@@ -22,10 +22,10 @@
           </div>
           <div class="user-info__sidebar col-12 col-sm-3">
             <div class="user-info__sidebar-image">
-              <img
+              <NuxtImg
                 :src="user.profileImage"
                 :alt="user.firstName + ' ' + user.lastName"
-              >
+              />
             </div>
             <div class="user-info__sidebar-points">
               <p>{{ user.phoneNumber }}</p>
@@ -46,17 +46,15 @@
             link-text="See more"
           />
         </div>
-        <ClientOnly>
-          <div class="row">
-            <div
-              v-for="skill in skills"
-              :key="skill.id"
-              class="col-12 col-sm-6 col-md-3 skill-card-col"
-            >
-              <SkillCard :skill="skill" />
-            </div>
+        <div class="row">
+          <div
+            v-for="skill in skills"
+            :key="skill.id"
+            class="col-12 col-sm-6 col-md-3 skill-card-col"
+          >
+            <SkillCard :skill="skill" />
           </div>
-        </ClientOnly>
+        </div>
       </div>
     </section>
     <section>
@@ -68,20 +66,18 @@
             @link-click="$router.push('/projects')"
           />
         </div>
-        <ClientOnly>
-          <div class="row">
-            <div
-              v-for="project in projects"
-              :key="project.project.id"
-              class="col-12 col-xl-6 app-card-col"
-            >
-              <AppCard
-                :project="project.project"
-                @click="onProjectClick(project)"
-              />
-            </div>
+        <div class="row">
+          <div
+            v-for="project in projects"
+            :key="project.project.id"
+            class="col-12 col-xl-6 app-card-col"
+          >
+            <AppCard
+              :project="project.project"
+              @click="onProjectClick(project)"
+            />
           </div>
-        </ClientOnly>
+        </div>
       </div>
     </section>
   </div>
@@ -89,9 +85,12 @@
 
 <script setup lang="ts">
 import type { Project } from '~/types/project'
+import { UserUtil } from '~/utils/api/user.util'
+import { definePageMeta } from '#imports'
 
 const { setProject } = useProjectStore()
 const router = useRouter()
+const userUtil = new UserUtil()
 
 useHead({
   title: 'Home page',
@@ -100,8 +99,12 @@ useHead({
   ],
 })
 
-const authStore = useAuthStore()
-const { user } = storeToRefs(authStore)
+definePageMeta({
+  middleware: 'fetch-user',
+})
+
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 
 const projects = computed(() => {
   return user.value?.userProjects
@@ -137,6 +140,14 @@ const onProjectClick = async (project: Project) => {
 
     &-username {
       margin-left: 1rem;
+    }
+  }
+
+  &__sidebar {
+    &-image {
+      & > img {
+        width: 100%;
+      }
     }
   }
 }

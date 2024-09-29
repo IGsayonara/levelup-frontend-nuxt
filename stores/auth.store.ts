@@ -3,7 +3,7 @@ import type { User } from '~/types/user'
 import { AuthUtil } from '~/utils/api/auth.util'
 
 export const useAuthStore = defineStore('AuthStore', () => {
-  const user = ref<User | null>()
+  const user = ref<User | null>(null)
   const isLoading = ref(false)
   const isAuthenticated = computed(() => !!user.value)
 
@@ -56,7 +56,11 @@ export const useAuthStore = defineStore('AuthStore', () => {
     await authUtil.logout()
   }
 
+  const setUser = (newValue: User | null) => {
+    user.value = newValue
+  }
+
   return {
-    isAuthenticated, user, getSession, refreshTokens, login, logout, isLoading,
+    isAuthenticated, user, getSession, refreshTokens, login, logout, isLoading, setUser,
   }
 })

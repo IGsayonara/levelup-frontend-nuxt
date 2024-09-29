@@ -24,7 +24,7 @@ defineOptions({
 })
 
 interface Props {
-  text: string
+  text?: string
   primaryColor?: string
   secondaryColor?: string
   loading?: boolean

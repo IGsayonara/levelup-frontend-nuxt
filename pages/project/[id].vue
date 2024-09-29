@@ -2,13 +2,12 @@
   <div>
     <section>
       <div
-        v-if="!isError && userProject"
+        v-if="userProject"
         class="container"
       >
         <div class="section-title-wrapper">
           <SectionTitle :title="userProject.project?.title" />
         </div>
-        <div>{{ project }}</div>
         <FullAppCard :project="userProject.project" />
       </div>
       <div
@@ -59,14 +58,32 @@
 </template>
 
 <script setup lang="ts">
+import { definePageMeta } from '#imports'
 import type { UserProject } from '~/types/user'
+import type { Skill } from '~/types/skill'
+
+definePageMeta({
+  middleware: 'fetch-user',
+  breadCrumbs: [
+    {
+      to: '/', // hyperlink
+      text: 'Home', // crumb text
+    },
+    {
+      to: '/projects', // hyperlink
+      text: 'Projects', // crumb text
+    },
+    {
+      to: '/project',
+      test: 'project',
+    },
+  ],
+})
 
 const route = useRoute()
 
-const projectStore = useProjectStore()
-const { isError, project } = storeToRefs(projectStore)
-const authStore = useAuthStore()
-const { user } = storeToRefs(authStore)
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 
 const userProject = computed<UserProject>(() => {
   return user.value?.userProjects?.find(project => project.id == route.params.id)
@@ -83,35 +100,5 @@ const selectedSkill = computed<Skill | null>(() => {
 
 onMounted(() => {
 
-})
-
-definePageMeta({
-  breadCrumbs: [
-    {
-      to: '/', // hyperlink
-      text: 'Home', // crumb text
-    },
-    {
-      to: '/projects', // hyperlink
-      text: 'Projects', // crumb text
-    },
-    {
-      text: definePageMeta({
-        breadCrumbs: [
-          {
-            to: '/', // hyperlink
-            text: 'Home', // crumb text
-          },
-          {
-            to: '/projects', // hyperlink
-            text: 'Projects', // crumb text
-          },
-          {
-            text: '/:id',
-          },
-        ],
-      }),
-    },
-  ],
 })
 </script>

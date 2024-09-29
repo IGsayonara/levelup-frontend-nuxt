@@ -6,10 +6,10 @@
           class="logo"
           @click="$router.push('/')"
         >
-          <img
+          <NuxtImg
             src="/img/logo.png"
             alt="Level UP"
-          >
+          />
         </div>
         <ClientOnly>
           <DesktopNavigation v-if="!isMobileNavigation" />

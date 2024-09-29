@@ -6,11 +6,15 @@
         <div class="col-12 col-md-6">
           <form @submit.prevent="login(username, password)">
             <AppInput
+              id="loginUsernameInput"
               v-model="username"
+              label="Username"
               placeholder="Username"
             />
             <AppInput
+              id="loginPasswordInput"
               v-model="password"
+              label="Password"
               placeholder="Password"
               type="password"
             />

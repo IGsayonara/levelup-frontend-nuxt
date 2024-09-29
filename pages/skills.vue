@@ -23,11 +23,11 @@
         >
           <div
             v-for="skill in searchedSkills"
-            :key="skill.id"
+            :key="skill.skill.id"
             class="col-12 col-sm-6 col-xl-3 app-card-col"
           >
             <SkillCard
-              :skill="skill"
+              :skill="skill.skill"
               @click="$router.push('/skill/' + skill.id)"
             />
           </div>
@@ -50,9 +50,9 @@ import { watch } from 'vue'
 import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
-import { useSkillsStore } from '~/stores/skills.store'
 
 definePageMeta({
+  middleware: 'fetch-user',
   breadCrumbs: [
     {
       to: '/', // hyperlink
@@ -65,9 +65,12 @@ definePageMeta({
   ],
 })
 
-const skillsStore = useSkillsStore()
-const { loadSkills } = skillsStore
-const { skills } = storeToRefs(skillsStore)
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
+
+const skills = computed(() => {
+  return user.value?.userSkills || []
+})
 
 const searchValue = ref('')
 const updatedSearchValue = ref('')
@@ -86,10 +89,6 @@ watch(
     updatedSearchValue.value = searchValue.value
   }, 300),
 )
-
-onMounted(() => {
-  loadSkills()
-})
 </script>
 
 <style scoped lang="scss">

@@ -54,6 +54,7 @@ import AppInput from '~/components/ui/AppInput/index.vue'
 import type { Project } from '~/types/project'
 
 definePageMeta({
+  middleware: 'fetch-user',
   breadCrumbs: [
     {
       to: '/', // hyperlink
@@ -66,8 +67,9 @@ definePageMeta({
   ],
 })
 
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
 const { setProject } = useProjectStore()
-const { user } = storeToRefs(useAuthStore())
 const router = useRouter()
 
 const searchValue = ref('')
