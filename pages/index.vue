@@ -69,7 +69,7 @@
         <div class="row">
           <div
             v-for="project in projects"
-            :key="project.project.id"
+            :key="project.id"
             class="col-12 col-xl-6 app-card-col"
           >
             <AppCard
@@ -85,12 +85,10 @@
 
 <script setup lang="ts">
 import type { Project } from '~/types/project'
-import { UserUtil } from '~/utils/api/user.util'
-import { definePageMeta } from '#imports'
+import type { User, UserProject } from '~/types/user'
+import type { Skill } from '~/types/skill'
 
-const { setProject } = useProjectStore()
 const router = useRouter()
-const userUtil = new UserUtil()
 
 useHead({
   title: 'Home page',
@@ -104,20 +102,18 @@ definePageMeta({
 })
 
 const userStore = useUserStore()
-const { user } = storeToRefs(userStore)
+const { user } = storeToRefs<{ user: User }>(userStore)
 
-const projects = computed(() => {
-  return user.value?.userProjects
+const projects = computed<UserProject[]>(() => {
+  return user.value?.userProjects || []
 })
 
-const skills = computed(() => {
-  return user.value?.userSkills.map(({ skill }) => skill)
+const skills = computed<Skill[]>(() => {
+  return user.value?.userSkills.map(({ skill }) => skill) || []
 })
 
 const onProjectClick = async (project: Project) => {
-  setProject(project)
-  await nextTick()
-  await router.push('/project/' + project.project.id)
+  await router.push('/project/' + project.id)
 }
 </script>
 

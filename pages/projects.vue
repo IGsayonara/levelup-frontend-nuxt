@@ -69,13 +69,12 @@ definePageMeta({
 
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
-const { setProject } = useProjectStore()
 const router = useRouter()
 
 const searchValue = ref('')
 const updatedSearchValue = ref('')
 
-const projects = computed<Project>(() => {
+const projects = computed<Project[]>(() => {
   return user.value?.userProjects.map(({ project }) => project) || []
 })
 
@@ -99,8 +98,6 @@ onMounted(() => {
 })
 
 const onProjectClick = async (project: Project) => {
-  setProject(project)
-  await nextTick()
   await router.push('/project/' + project.id)
 }
 </script>
