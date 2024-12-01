@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="container">
       <div class="section-title-wrapper">
         <SectionTitle title="Search for skills" />
@@ -46,24 +47,18 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
 import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
 
 definePageMeta({
   middleware: 'fetch-user',
-  breadCrumbs: [
-    {
-      to: '/', // hyperlink
-      text: 'Home', // crumb text
-    },
-    {
-      to: '/skills', // hyperlink
-      text: 'Skills', // crumb text
-    },
-  ],
 })
+
+const breadcrumbs = ref([
+  { to: '/', text: 'Home' },
+  { to: '/skills', text: 'Skills' },
+])
 
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)

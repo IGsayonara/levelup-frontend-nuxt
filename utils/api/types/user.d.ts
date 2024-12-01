@@ -6,3 +6,9 @@ export type UserResponseDto = {
   projects?: ProjectResponseDto[]
   skills?: ISkill[]
 }
+
+export type UpdateUserGeneralInfoDto = {
+  username: string
+  address: string
+  bio: string
+}

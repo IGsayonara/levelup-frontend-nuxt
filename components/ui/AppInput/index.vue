@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label :for="$props.id">{{ $props.label }}</label>
     <input
       :id="$props.id"
       type="text"
