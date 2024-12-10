@@ -9,6 +9,11 @@ export default defineNuxtConfig({
     cookie: resolve(__dirname, 'node_modules/cookie'),
   },
 
+  css: [
+    'froala-editor/css/froala_editor.pkgd.min.css',
+    'froala-editor/css/froala_style.min.css',
+  ],
+
   vite: {
     css: {
       preprocessorOptions: {

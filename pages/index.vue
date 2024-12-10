@@ -17,7 +17,7 @@
               </span>
             </div>
             <div class="user-info__bio">
-              {{ user.bio }}
+              <div v-html="user.bio" />
             </div>
           </div>
           <div class="user-info__sidebar col-12 col-sm-3">

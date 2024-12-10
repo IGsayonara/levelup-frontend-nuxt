@@ -14,4 +14,14 @@ export class ProjectUtil extends ApiUtil {
   public async loadProject(id: number): Promise<ProjectResponseDto> {
     return await this.axiosInstance.get(`/projects/${id}`).then(r => r.data)
   }
+
+  public async addProject(project: CreateProjectDto): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.post(`/projects/my/add`, project)
+  }
+
+  public async updateProject(project: UpdateProjectDto): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.put(`/projects/edit/${project.id}`, project)
+  }
 }

@@ -1,16 +1,18 @@
 <template>
-  <div class="mt-3">
+  <div>
     <div class="row">
       <div class="col-md-9">
         <div class="row">
           <div class="col-6">
             <AppInput
+              id="firstName"
               v-model="user.firstName"
               label="First name"
             />
           </div>
           <div class="col-6">
             <AppInput
+              id="lastName"
               v-model="user.lastName"
               label="Last name"
             />
@@ -18,15 +20,21 @@
         </div>
         <div class="row">
           <div class="col">
-            <AppInput
-              v-model="user.bio"
-              label="Bio"
-            />
+            <ClientOnly>
+              <Froala
+                id="edit"
+                v-model:value="user.bio"
+                :config="config"
+                label="Bio"
+                :tag="'textarea'"
+              />
+            </ClientOnly>
           </div>
         </div>
         <div class="row">
           <div class="col">
             <AppInput
+              id="address"
               v-model="user.address"
               label="Address"
             />
@@ -35,6 +43,7 @@
         <div class="row">
           <div class="col">
             <AppInput
+              id="email"
               v-model="user.email"
               label="Email"
             />
@@ -43,6 +52,7 @@
         <div class="row">
           <div class="col">
             <AppInput
+              id="phone"
               v-model="user.phoneNumber"
               label="Phone number"
             />
@@ -51,6 +61,7 @@
         <div class="row">
           <div class="col">
             <AppInput
+              id="birthday"
               v-model="user.dateOfBirth"
               label="Date of birth"
               type="date"
@@ -109,6 +120,48 @@ const handleFileChange = (event: Event) => {
     updateProfileImage(file)
     console.log(profileImage.value)
   }
+}
+
+const config = {
+
+  toolbarButtons: {
+
+    moreText: {
+
+      buttons: ['italic', 'underline', 'bold', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
+
+    },
+
+    moreParagraph: {
+
+      buttons: ['alignLeft', 'alignCenter', 'formatOLSimple'],
+
+    },
+
+    moreRich: {
+
+      buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
+
+    },
+
+    moreMisc: {
+
+      buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
+
+      align: 'right',
+
+      buttonsVisible: 2,
+    },
+
+  },
+
+  events: {
+
+    initialized: function () {
+      console.log('initialized')
+    },
+
+  },
 }
 </script>
 

@@ -9,7 +9,7 @@ export class UserUtil extends ApiUtil {
 
   public async updateUser(user: UpdateUserGeneralInfoDto): Promise<void> {
     this.authorizeAxiosInstance()
-    return await this.axiosInstance.put(`/users/me/general`, { ...user })
+    return await this.axiosInstance.put(`/users/me/general`, user)
   }
 
   public async updateProfileImage(file): Promise<void> {

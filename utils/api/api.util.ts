@@ -11,7 +11,7 @@ export class ApiUtil {
     this.axiosInstance = AxiosUtil.axiosFactory()
   }
 
-  private authorizeAxiosInstance() {
+  protected authorizeAxiosInstance() {
     this.axiosInstance.defaults.headers['Authorization'] = `Bearer ${this.authUtil.getAccessToken()}`
   }
 
