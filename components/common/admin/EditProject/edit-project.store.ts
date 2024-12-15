@@ -12,10 +12,25 @@ export const useEditProjectStore = defineStore('editProject', () => {
   const projectSkills = ref<ProjectSkill[]>([])
 
   const update = async () => {
-    await projectUtil.updateProject({ id: id.value, title: title.value, description: description.value })
+    if (!id.value) {
+      return await projectUtil.addProject({
+        title: title.value, description: description.value,
+      })
+    }
+
+    return await projectUtil.updateProject({ id: id.value, title: title.value, description: description.value })
   }
 
-  const init = (projectId: string) => {
+  const init = (projectId?: string) => {
+    if (!projectId) {
+      id.value = null
+      title.value = ''
+      description.value = ''
+      projectSkills.value = []
+
+      return
+    }
+
     id.value = projectId
 
     const userProject = user.value.userProjects.find(userProject => userProject.project.id === projectId)
@@ -27,6 +42,7 @@ export const useEditProjectStore = defineStore('editProject', () => {
   }
 
   return {
+    id,
     title,
     description,
     projectSkills,

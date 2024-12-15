@@ -28,7 +28,7 @@
       >
         <template #header />
         <template #default>
-          <AddProject />
+          <EditProject />
         </template>
       </AppModal>
       <AppModal

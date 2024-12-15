@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-12">
         <AppButton @click="update">
-          Update
+          {{ buttonText }}
         </AppButton>
       </div>
     </div>
@@ -76,6 +76,10 @@ const { update, init } = editProjectStore
 
 const editUserProjectSkillTitle = computed(() => {
   return projectSkills.value.find(projectSkill => projectSkill.id === editProjectSkillId.value).skill.title
+})
+
+const buttonText = computed(() => {
+  return props.id ? 'Update' : 'Add Project'
 })
 
 init(props.id)
