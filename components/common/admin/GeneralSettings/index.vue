@@ -24,7 +24,6 @@
               <Froala
                 id="edit"
                 v-model:value="user.bio"
-                :config="config"
                 label="Bio"
                 :tag="'textarea'"
               />
@@ -121,52 +120,10 @@ const handleFileChange = (event: Event) => {
     console.log(profileImage.value)
   }
 }
-
-const config = {
-
-  toolbarButtons: {
-
-    moreText: {
-
-      buttons: ['italic', 'underline', 'bold', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'inlineClass', 'inlineStyle', 'clearFormatting'],
-
-    },
-
-    moreParagraph: {
-
-      buttons: ['alignLeft', 'alignCenter', 'formatOLSimple'],
-
-    },
-
-    moreRich: {
-
-      buttons: ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR'],
-
-    },
-
-    moreMisc: {
-
-      buttons: ['undo', 'redo', 'fullscreen', 'print', 'getPDF', 'spellChecker', 'selectAll', 'html', 'help'],
-
-      align: 'right',
-
-      buttonsVisible: 2,
-    },
-
-  },
-
-  events: {
-
-    initialized: function () {
-      console.log('initialized')
-    },
-
-  },
-}
 </script>
 
 <style scoped lang="scss">
   .row {
-    margin-top: 3rem;
+    margin: 3rem 0;
   }
 </style>

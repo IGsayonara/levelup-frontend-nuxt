@@ -4,7 +4,7 @@
       <div class="container">
         <div class="user-info row row-reverse">
           <div
-            class="user-info__bio col-12 col-sm-9"
+            class="col-12 col-sm-9"
           >
             <div class="user-info__headline">
               <h2 class="user-info__headline-title">
@@ -68,7 +68,7 @@
         </div>
         <div class="row">
           <div
-            v-for="project in projects"
+            v-for="project in projects.slice(0, 4)"
             :key="project.id"
             class="col-12 col-xl-6 app-card-col"
           >
@@ -147,4 +147,10 @@ const onProjectClick = async (project: Project) => {
     }
   }
 }
+</style>
+
+<style lang="scss">
+  .user-info__bio {
+
+  }
 </style>

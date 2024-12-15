@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-md-9">
+      <AppButton @click="isProjectModalOpen = true">
+        Add project
+      </AppButton>
+    </div>
+    <div class="row">
+      <div class="col">
         <div
           class="row"
         >
@@ -17,23 +22,28 @@
           </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <AppButton @click="isProjectModalOpen = true">
-          Add project
-        </AppButton>
-        <AppModal
-          v-if="isProjectModalOpen"
-          @close="isProjectModalOpen = false"
-        >
+      <AppModal
+        v-if="isProjectModalOpen"
+        @close="isProjectModalOpen = false"
+      >
+        <template #header />
+        <template #default>
           <AddProject />
-        </AppModal>
-        <AppModal
-          v-if="selectedProjectId"
-          @close="selectedProjectId = null"
-        >
+        </template>
+      </AppModal>
+      <AppModal
+        v-if="selectedProjectId"
+        @close="selectedProjectId = null"
+      >
+        <template #header>
+          <h2>
+            {{ selectedProjectTitle }}
+          </h2>
+        </template>
+        <template #default>
           <EditProject :id="selectedProjectId" />
-        </AppModal>
-      </div>
+        </template>
+      </AppModal>
     </div>
   </div>
 </template>
@@ -47,8 +57,14 @@ const { user } = storeToRefs<{ user: User }>(userStore)
 const selectedProjectId = ref(null)
 
 const isProjectModalOpen = ref(false)
+
+const selectedProjectTitle = computed(() => {
+  return user.value.userProjects.find(userProject => userProject.project.id === selectedProjectId.value).project.title
+})
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.row {
+  margin: 3rem 0;
+}
 </style>

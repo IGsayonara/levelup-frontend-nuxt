@@ -1,18 +1,20 @@
 <template>
-  <div class="container">
+  <div>
     <section>
-      <nav>
-        <NuxtLink to="/admin/general">
-          General Settings
-        </NuxtLink>
-        <NuxtLink to="/admin/portfolio">
-          Portfolio
-        </NuxtLink>
-      </nav>
       <div class="container">
-        <!-- Render child pages -->
-        <slot />
+        <nav>
+          <NuxtLink to="/admin/general">
+            General Settings
+          </NuxtLink>
+          <NuxtLink to="/admin/portfolio">
+            Portfolio
+          </NuxtLink>
+        </nav>
+        <div class="container">
+          <!-- Render child pages -->
+        </div>
       </div>
     </section>
+    <slot />
   </div>
 </template>

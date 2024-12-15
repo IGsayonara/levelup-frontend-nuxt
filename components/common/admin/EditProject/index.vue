@@ -8,13 +8,49 @@
           label="Project name"
         />
       </div>
+    </div>
+    <div class="row">
       <div class="col-12">
-        <AppInput
-          id="project_description"
-          v-model="description"
-          label="Project description"
+        <ClientOnly>
+          <Froala
+            id="project_description"
+            v-model:value="description"
+            tag="textarea"
+            label="Project description"
+            :config="config"
+          />
+        </ClientOnly>
+      </div>
+    </div>
+    <div class="row">
+      <div
+        v-for="skill in projectSkills"
+        :key="skill.id"
+        class="col-6 col-md-3"
+      >
+        <SkillCard
+          :skill="skill.skill"
+          @click="editProjectSkillId = skill.id"
         />
       </div>
+      <AppModal
+        v-if="editProjectSkillId"
+        @close="editProjectSkillId = null"
+      >
+        <template #header>
+          <h2>
+            {{ editUserProjectSkillTitle }}
+          </h2>
+        </template>
+        <template #default>
+          <EditUserProjectSkill
+            :project-id="id"
+            :project-skill-id="+editProjectSkillId"
+          />
+        </template>
+      </AppModal>
+    </div>
+    <div class="row">
       <div class="col-12">
         <AppButton @click="update">
           Update
@@ -26,16 +62,27 @@
 
 <script setup lang="ts">
 import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
+import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
 
-const props = defineProps<{ id: string }>()
+const { config } = useDefaultFroalaConfig()
+
+const editProjectSkillId = ref<null | number>(null)
+
+const props = defineProps<{ id: number }>()
 
 const editProjectStore = useEditProjectStore()
-const { title, description } = storeToRefs(editProjectStore)
+const { title, description, projectSkills } = storeToRefs(editProjectStore)
 const { update, init } = editProjectStore
+
+const editUserProjectSkillTitle = computed(() => {
+  return projectSkills.value.find(projectSkill => projectSkill.id === editProjectSkillId.value).skill.title
+})
 
 init(props.id)
 </script>
 
 <style scoped lang="scss">
-
+.row {
+  margin: 3rem 0;
+}
 </style>

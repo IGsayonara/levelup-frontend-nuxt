@@ -8,6 +8,8 @@
           label="Project name"
         />
       </div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <AppInput
           id="project_description"
@@ -15,6 +17,8 @@
           label="Project description"
         />
       </div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <AppButton @click="add">
           Add
@@ -33,5 +37,7 @@ const { add } = addProjectStore
 </script>
 
 <style scoped lang="scss">
-
+.row {
+  margin: 3rem 0;
+}
 </style>

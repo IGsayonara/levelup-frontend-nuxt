@@ -1,5 +1,5 @@
 <template>
-  <GeneralSettings class="mt-3" />
+  <GeneralSettings class="container" />
 </template>
 
 <script setup lang="ts">

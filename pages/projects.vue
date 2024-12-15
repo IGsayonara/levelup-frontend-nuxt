@@ -12,7 +12,6 @@
           id="searchProjectInput"
           v-model="searchValue"
           placeholder="Search"
-          label="kek"
         />
       </div>
     </div>
