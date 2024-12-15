@@ -11,8 +11,8 @@
         <AppInput
           id="searchProjectInput"
           v-model="searchValue"
+          label="Search for skills"
           placeholder="Search"
-          label="kek"
         />
       </div>
     </div>

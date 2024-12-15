@@ -20,7 +20,7 @@ defineOptions({
 
 interface Props {
   id: string
-  label: string
+  label?: string
   modelValue: string
 }
 const props = defineProps<Props>()
