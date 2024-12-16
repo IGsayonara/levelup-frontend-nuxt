@@ -23,6 +23,20 @@
       </div>
     </div>
     <div class="row">
+      <AppButton @click="isAddSkillModalOpen = true">
+        Add Skill
+      </AppButton>
+      <AppModal
+        v-if="isAddSkillModalOpen"
+        @close="isAddSkillModalOpen = false"
+      >
+        <template #header />
+        <template #default>
+          <AddUserProjectSkill :user-project-id="userProject.id" />
+        </template>
+      </AppModal>
+    </div>
+    <div class="row">
       <div
         v-for="skill in projectSkills"
         :key="skill.id"
@@ -44,7 +58,7 @@
         </template>
         <template #default>
           <EditUserProjectSkill
-            :project-id="id"
+            :project-id="userProject.id"
             :project-skill-id="+editProjectSkillId"
           />
         </template>
@@ -63,26 +77,29 @@
 <script setup lang="ts">
 import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
+import type { UserProject } from '~/types/user'
 
 const { config } = useDefaultFroalaConfig()
 
 const editProjectSkillId = ref<null | number>(null)
 
-const props = defineProps<{ id: number }>()
+const props = defineProps<{ userProject: UserProject }>()
 
 const editProjectStore = useEditProjectStore()
 const { title, description, projectSkills } = storeToRefs(editProjectStore)
 const { update, init } = editProjectStore
+
+const isAddSkillModalOpen = ref(false)
 
 const editUserProjectSkillTitle = computed(() => {
   return projectSkills.value.find(projectSkill => projectSkill.id === editProjectSkillId.value).skill.title
 })
 
 const buttonText = computed(() => {
-  return props.id ? 'Update' : 'Add Project'
+  return props.userProject ? 'Update' : 'Add Project'
 })
 
-init(props.id)
+init(props.userProject?.project.id)
 </script>
 
 <style scoped lang="scss">

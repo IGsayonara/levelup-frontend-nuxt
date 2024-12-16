@@ -17,7 +17,7 @@
           >
             <AppCard
               :project="userProject.project"
-              @click="selectedProjectId = userProject.project.id"
+              @click="selectedProject = userProject"
             />
           </div>
         </div>
@@ -32,8 +32,8 @@
         </template>
       </AppModal>
       <AppModal
-        v-if="selectedProjectId"
-        @close="selectedProjectId = null"
+        v-if="selectedProject"
+        @close="selectedProject = null"
       >
         <template #header>
           <h2>
@@ -41,7 +41,7 @@
           </h2>
         </template>
         <template #default>
-          <EditProject :id="selectedProjectId" />
+          <EditProject :user-project="selectedProject" />
         </template>
       </AppModal>
     </div>
@@ -49,17 +49,17 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from '~/types/user'
+import type { User, UserProject } from '~/types/user'
 
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
-const selectedProjectId = ref(null)
+const selectedProject = ref<null | UserProject>(null)
 
 const isProjectModalOpen = ref(false)
 
 const selectedProjectTitle = computed(() => {
-  return user.value.userProjects.find(userProject => userProject.project.id === selectedProjectId.value).project.title
+  return user.value.userProjects.find(userProject => userProject.id === selectedProject.value.id).project.title
 })
 </script>
 

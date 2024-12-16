@@ -27,4 +27,9 @@ export class UserUtil extends ApiUtil {
     this.authorizeAxiosInstance()
     return await this.axiosInstance.put(`users/userProjectSkill/${userProjectSkill.id}`, userProjectSkill)
   }
+
+  public async addUserProjectSkill(userProjectSkill: CreateUserProjectSkill): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.post(`/users/userProjectSkill/add`, userProjectSkill)
+  }
 }
