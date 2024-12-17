@@ -1,9 +1,34 @@
 <template>
   <div>
     <div class="row">
-      <AppButton @click="isProjectModalOpen = true">
-        Add project
-      </AppButton>
+      <div class="col-12 col-md-6">
+        <AppButton @click="isProjectModalOpen = true">
+          Add project
+        </AppButton>
+        <AppModal
+          v-if="isProjectModalOpen"
+          @close="isProjectModalOpen = false"
+        >
+          <template #header />
+          <template #default>
+            <EditProject />
+          </template>
+        </AppModal>
+      </div>
+      <div class="col-12 col-md-6">
+        <AppButton @click="isSkillModalOpen = true">
+          Add skill
+        </AppButton>
+        <AppModal
+          v-if="isSkillModalOpen"
+          @close="isSkilllModalOpen = false"
+        >
+          <template #header />
+          <template #default>
+            <AddUserSkill />
+          </template>
+        </AppModal>
+      </div>
     </div>
     <div class="row">
       <div class="col">
@@ -22,15 +47,6 @@
           </div>
         </div>
       </div>
-      <AppModal
-        v-if="isProjectModalOpen"
-        @close="isProjectModalOpen = false"
-      >
-        <template #header />
-        <template #default>
-          <EditProject />
-        </template>
-      </AppModal>
       <AppModal
         v-if="selectedProject"
         @close="selectedProject = null"
@@ -57,6 +73,7 @@ const { user } = storeToRefs<{ user: User }>(userStore)
 const selectedProject = ref<null | UserProject>(null)
 
 const isProjectModalOpen = ref(false)
+const isSkillModalOpen = ref(false)
 
 const selectedProjectTitle = computed(() => {
   return user.value.userProjects.find(userProject => userProject.id === selectedProject.value.id).project.title

@@ -32,4 +32,9 @@ export class UserUtil extends ApiUtil {
     this.authorizeAxiosInstance()
     return await this.axiosInstance.post(`/users/userProjectSkill/add`, userProjectSkill)
   }
+
+  public async addUserSkill(skillId: string): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.post(`/users/userSkill/add/${skillId}`)
+  }
 }

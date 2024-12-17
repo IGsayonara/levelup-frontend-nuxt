@@ -12,8 +12,8 @@ export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () =>
     description: '',
   })
 
-  const init = (projectId: number, projectSkillId: number) => {
-    const userProjectSkills = user.value.userProjects.find(userProjectSkill => userProjectSkill.project.id === projectId)?.skills
+  const init = (userProjectId: number, projectSkillId: number) => {
+    const userProjectSkills = user.value.userProjects.find(userProjectSkill => userProjectSkill.id === userProjectId)?.skills
 
     const newProjectSkill = userProjectSkills.find(projectSkill => projectSkill.id === projectSkillId)
 

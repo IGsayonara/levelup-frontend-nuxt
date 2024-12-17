@@ -23,7 +23,7 @@ import { useEditUserProjectSkill } from '~/components/common/admin/editUserProje
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
 
 const props = defineProps<{
-  projectId: number
+  userProjectId: number
   projectSkillId: number
 }>()
 
@@ -33,7 +33,7 @@ const { init, update } = editUserProjectSkillStore
 const { description } = storeToRefs(editUserProjectSkillStore)
 
 watch(props, () => {
-  init(props.projectId, props.projectSkillId)
+  init(props.userProjectId, props.projectSkillId)
 }, { deep: true, immediate: true })
 </script>
 

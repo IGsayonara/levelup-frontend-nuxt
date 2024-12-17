@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-12">
         <AppInput
-          id="project_name"
+          id="skill_name"
           v-model="title"
           label="Project name"
         />
@@ -13,10 +13,10 @@
       <div class="col-12">
         <ClientOnly>
           <Froala
-            id="project_description"
+            id="skill_description"
             v-model:value="description"
             tag="textarea"
-            label="Project description"
+            label="Skill description"
             :config="config"
           />
         </ClientOnly>
@@ -58,7 +58,7 @@
         </template>
         <template #default>
           <EditUserProjectSkill
-            :user-project-id="userProject.id"
+            :project-id="userProject.id"
             :project-skill-id="+editProjectSkillId"
           />
         </template>
