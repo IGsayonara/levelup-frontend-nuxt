@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAddUserSkill } from '~/components/common/admin/AddUserSkill/addUserProjectSkill.composable'
+import { useAddUserSkill } from '~/components/common/admin/AddUserSkill/addUserSkill.composable'
 
 const skillsStore = useSkillsStore()
 const { loadSkills } = skillsStore

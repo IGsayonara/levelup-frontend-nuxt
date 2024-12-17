@@ -21,7 +21,7 @@
         </AppButton>
         <AppModal
           v-if="isSkillModalOpen"
-          @close="isSkilllModalOpen = false"
+          @close="isSkillModalOpen = false"
         >
           <template #header />
           <template #default>
@@ -61,16 +61,46 @@
         </template>
       </AppModal>
     </div>
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div
+            v-for="userSkill in user.userSkills"
+            :key="userSkill.id"
+            class="col-md-3 col-6"
+          >
+            <SkillCard
+              :skill="userSkill.skill"
+              @click="selectedSkill = userSkill"
+            />
+          </div>
+        </div>
+      </div>
+      <AppModal
+        v-if="selectedSkill"
+        @close="selectedSkill = null"
+      >
+        <template #header>
+          <h2>
+            title
+          </h2>
+        </template>
+        <template #default>
+          <EditSkill :user-skill="selectedSkill" />
+        </template>
+      </AppModal>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { User, UserProject } from '~/types/user'
+import type { User, UserProject, UserSkill } from '~/types/user'
 
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
 const selectedProject = ref<null | UserProject>(null)
+const selectedSkill = ref<null | UserSkill>(null)
 
 const isProjectModalOpen = ref(false)
 const isSkillModalOpen = ref(false)
