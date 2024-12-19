@@ -44,12 +44,12 @@
       >
         <SkillCard
           :skill="skill.skill"
-          @click="editProjectSkillId = skill.id"
+          @click="editUserProjectSkillId = skill.id"
         />
       </div>
       <AppModal
-        v-if="editProjectSkillId"
-        @close="editProjectSkillId = null"
+        v-if="editUserProjectSkillId"
+        @close="editUserProjectSkillId = null"
       >
         <template #header>
           <h2>
@@ -59,7 +59,7 @@
         <template #default>
           <EditUserProjectSkill
             :user-project-id="userProject.id"
-            :project-skill-id="+editProjectSkillId"
+            :project-skill-id="+editUserProjectSkillId"
           />
         </template>
       </AppModal>
@@ -74,7 +74,7 @@ import { useEditUserProjectStore } from '~/components/common/admin/EditUserProje
 
 const { config } = useDefaultFroalaConfig()
 
-const editProjectSkillId = ref<null | number>(null)
+const editUserProjectSkillId = ref<null | number>(null)
 
 const props = defineProps<{ userProject: UserProject }>()
 
@@ -85,10 +85,10 @@ const { init } = editUserProjectStore
 const isAddSkillModalOpen = ref(false)
 
 const editUserProjectSkillTitle = computed(() => {
-  return projectSkills.value.find(projectSkill => projectSkill.id === editProjectSkillId.value).skill.title
+  return skills.value.find(userProjectSkill => userProjectSkill.id === editUserProjectSkillId.value).skill.title
 })
 
-init(props.userProject?.project.id)
+init(+props.userProject?.id)
 </script>
 
 <style scoped lang="scss">

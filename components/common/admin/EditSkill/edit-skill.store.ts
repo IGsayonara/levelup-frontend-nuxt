@@ -13,7 +13,6 @@ export const useEditUserSkillStore = defineStore('editUserSkill', () => {
 
   const init = (userSkillId: number) => {
     const skillId = user.value.userSkills.find(userSkill => userSkill.id === userSkillId).skill.id
-    console.log(666)
     userProjects.value = user.value.userProjects
       .filter((userProject) => {
         return userProject.skills.findIndex(userProjectSkill => userProjectSkill.skill.id === skillId) >= 0

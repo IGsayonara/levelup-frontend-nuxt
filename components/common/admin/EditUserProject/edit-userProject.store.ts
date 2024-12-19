@@ -15,12 +15,12 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   })
 
   const update = async () => {
-    throw ('not implemented')
+    await projectUtil.updateUserProject(userProject)
   }
 
   const init = (userProjectId: number) => {
     const newUserProject = user.value.userProjects.find(userProject => userProject.id === userProjectId)
-
+    console.log(newUserProject)
     Object.assign(userProject, newUserProject)
   }
 

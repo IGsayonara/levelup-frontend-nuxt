@@ -24,4 +24,12 @@ export class ProjectUtil extends ApiUtil {
     this.authorizeAxiosInstance()
     return await this.axiosInstance.put(`/projects/edit/${project.id}`, project)
   }
+
+  public async updateUserProject(userProject: UpdateUserProjectDto): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.put(`/users/userProject/edit/${userProject.id}`, {
+      description: userProject.description,
+      role: userProject.role,
+    })
+  }
 }

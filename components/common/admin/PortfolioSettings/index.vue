@@ -133,10 +133,10 @@ import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
-const editUserProjectStore = useEditUserProjectStore
+const editUserProjectStore = useEditUserProjectStore()
 const { update: updateUserProject } = editUserProjectStore
 
-const editProjectStore = useEditProjectStore
+const editProjectStore = useEditProjectStore()
 const { update: updateProject } = editProjectStore
 
 const selectedProject = ref<null | UserProject>(null)

@@ -22,13 +22,6 @@
         </ClientOnly>
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <AppButton @click="update">
-          {{ buttonText }}
-        </AppButton>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -44,10 +37,6 @@ const props = defineProps<{ project: Project }>()
 const editProjectStore = useEditProjectStore()
 const { title, description } = storeToRefs(editProjectStore)
 const { update, init } = editProjectStore
-
-const buttonText = computed(() => {
-  return props.project ? 'Update' : 'Add Project'
-})
 
 init(props.project?.id)
 </script>
