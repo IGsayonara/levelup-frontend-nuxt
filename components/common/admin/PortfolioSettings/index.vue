@@ -57,7 +57,39 @@
           </h2>
         </template>
         <template #default>
-          <EditProject :user-project="selectedProject" />
+          <EditUserProject :user-project="selectedProject" />
+        </template>
+        <template #footer>
+          <div class="row">
+            <AppButton
+              class="col"
+              @click="updateUserProject"
+            >
+              Update
+            </AppButton>
+            <AppButton
+              class="col"
+              @click="isProjectMO = true"
+            >
+              Edit Project
+            </AppButton>
+          </div>
+        </template>
+      </AppModal>
+      <AppModal
+        v-if="isProjectMO"
+        @close="isProjectMO = false"
+      >
+        <template #header>
+          <h2>{{ selectedProjectTitle }}</h2>
+        </template>
+        <template #default>
+          <EditProject :project="selectedProject?.project" />
+        </template>
+        <template #footer>
+          <AppButton @click="updateProject">
+            Update
+          </AppButton>
         </template>
       </AppModal>
     </div>
@@ -95,14 +127,23 @@
 
 <script setup lang="ts">
 import type { User, UserProject, UserSkill } from '~/types/user'
+import { useEditUserProjectStore } from '~/components/common/admin/EditUserProject/edit-userProject.store'
+import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
 
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
-const selectedProject = ref<null | UserProject>(null)
-const selectedSkill = ref<null | UserSkill>(null)
+const editUserProjectStore = useEditUserProjectStore
+const { update: updateUserProject } = editUserProjectStore
 
+const editProjectStore = useEditProjectStore
+const { update: updateProject } = editProjectStore
+
+const selectedProject = ref<null | UserProject>(null)
 const isProjectModalOpen = ref(false)
+const isProjectMO = ref(false)
+
+const selectedSkill = ref<null | UserSkill>(null)
 const isSkillModalOpen = ref(false)
 
 const selectedProjectTitle = computed(() => {

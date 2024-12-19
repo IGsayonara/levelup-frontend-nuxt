@@ -1,5 +1,5 @@
 <template>
-  <ProjectSettings class="container" />
+  <PortfolioSettings class="container" />
 </template>
 
 <script setup lang="ts">

@@ -9,7 +9,6 @@ export const useEditProjectStore = defineStore('editProject', () => {
   const id = ref(null)
   const title = ref('')
   const description = ref('')
-  const projectSkills = ref<ProjectSkill[]>([])
 
   const update = async () => {
     if (!id.value) {
@@ -26,7 +25,6 @@ export const useEditProjectStore = defineStore('editProject', () => {
       id.value = null
       title.value = ''
       description.value = ''
-      projectSkills.value = []
 
       return
     }
@@ -38,14 +36,12 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
     title.value = project.title
     description.value = project.description
-    projectSkills.value = [...userProject.skills]
   }
 
   return {
     id,
     title,
     description,
-    projectSkills,
     update,
     init,
   }
