@@ -67,13 +67,13 @@
           <SectionTitle
             title="Skills"
             link-text="See more"
+            @link-click="$router.push('/skills')"
           />
         </div>
-        <div class="row">
+        <div class="skills">
           <div
             v-for="userSkill in skills"
             :key="userSkill"
-            class="col-12 col-sm-6 col-md-3 skill-card-col"
           >
             <SkillCard
               :skill="userSkill.skill"
@@ -112,7 +112,7 @@ const projects = computed<UserProject[]>(() => {
 })
 
 const skills = computed<UserSkill[]>(() => {
-  return user.value?.userSkills.slice(0, 8) || []
+  return user.value?.userSkills.slice(0, 16) || []
 })
 
 const onSkillClick = async (skill: UserSkill) => {
@@ -160,10 +160,10 @@ const onProjectClick = async (project: UserProject) => {
     }
   }
 }
-</style>
 
-<style lang="scss">
-  .user-info__bio {
-
-  }
+.skills{
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
 </style>

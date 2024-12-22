@@ -19,12 +19,11 @@
       <div class="container">
         <div
           v-if="searchedSkills.length"
-          class="row"
+          class="skills"
         >
           <div
             v-for="skill in searchedSkills"
             :key="skill.skill.id"
-            class="col-12 col-sm-6 col-xl-3 app-card-col"
           >
             <SkillCard
               :skill="skill.skill"
@@ -97,5 +96,11 @@ watch(
 
 .projects_search {
   margin-bottom: 3rem;
+}
+
+.skills {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 </style>

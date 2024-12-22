@@ -103,6 +103,7 @@ onBeforeUnmount(() => {
 .modal-content {
   display: flex;
   flex-direction: column;
+  max-height: 100vh;
   background: white;
   border: 1px solid #e5e5e5;
   border-radius: 1rem;

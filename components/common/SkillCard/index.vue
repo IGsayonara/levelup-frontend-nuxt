@@ -3,10 +3,6 @@
     <h4 class="skill-card__title">
       {{ skill.title }}
     </h4>
-    <img
-      class="skill-card__image"
-      :src="skill.imageUrl || '/img/404.jpg'"
-    >
   </div>
 </template>
 
@@ -41,11 +37,6 @@ defineProps<Props>()
     width: 100%;
     font-weight: 500;
     transition: all 0.3s ease-in;
-  }
-
-  &__image {
-    width: 4.5rem;
-    height: 4.5rem;
   }
 
   &:hover {
