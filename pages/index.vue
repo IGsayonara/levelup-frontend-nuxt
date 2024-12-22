@@ -149,13 +149,7 @@ const onProjectClick = async (project: UserProject) => {
   &__sidebar {
     &-image {
       & > img {
-        height: 300px;
-        width: 300px;
-        object-fit: cover;
-
-        @include media-breakpoint-down(md){
-          width: 100%
-        }
+        width: 100%;
       }
     }
   }

@@ -34,11 +34,10 @@
         <div class="section-title-wrapper">
           <SectionTitle :title="'Tech stack'" />
         </div>
-        <div class="row">
+        <div class="skills">
           <div
             v-for="skill in userProject.skills"
             :key="skill.id"
-            class="col-12 col-sm-6 col-md-3 skill-card-col mb-5"
           >
             <SkillCard
               v-if="skill"
@@ -112,3 +111,11 @@ onMounted(() => {
 
 })
 </script>
+
+<style>
+.skills {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+</style>

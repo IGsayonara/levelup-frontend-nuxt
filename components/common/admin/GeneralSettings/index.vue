@@ -92,6 +92,35 @@
               hidden
               @change="handleFileChange"
             >
+            <AppModal
+              v-if="isCropperModalShowing"
+              @close="isCropperModalShowing = false"
+            >
+              <template #header>
+                <h2>Edit image</h2>
+              </template>
+              <template #default>
+                <VuePictureCropper
+                  :box-style="{
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: '#f8f8f8',
+                    margin: 'auto',
+                  }"
+                  :img="profileImage"
+                  :options="{
+                    viewMode: 1,
+                    dragMode: 'crop',
+                    aspectRatio: 1,
+                  }"
+                />
+              </template>
+              <template #footer>
+                <AppButton @click="onUpdate">
+                  Update
+                </AppButton>
+              </template>
+            </AppModal>
           </div>
         </div>
       </div>
@@ -100,14 +129,24 @@
 </template>
 
 <script setup lang="ts">
+import VuePictureCropper, { cropper } from 'vue-picture-cropper'
+
 import { useGeneralSettings } from '~/components/common/admin/GeneralSettings/general-settings.composable'
 
 const { user, update, profileImage, updateProfileImage } = useGeneralSettings()
 const profileImageRef = ref<HTMLInputElement | null>(null)
+const isCropperModalShowing = ref(false)
 
 const triggerFileInput = () => {
   // Trigger file input click programmatically
   profileImageRef.value?.click()
+}
+
+const onUpdate = async () => {
+  const file = await cropper.getFile() as File
+  await updateProfileImage(file)
+  profileImage.value = URL.createObjectURL(file)
+  isCropperModalShowing.value = false
 }
 
 const handleFileChange = (event: Event) => {
@@ -116,8 +155,7 @@ const handleFileChange = (event: Event) => {
   if (file) {
     // Update the profile image or handle the file
     profileImage.value = URL.createObjectURL(file)
-    updateProfileImage(file)
-    console.log(profileImage.value)
+    isCropperModalShowing.value = true
   }
 }
 </script>
