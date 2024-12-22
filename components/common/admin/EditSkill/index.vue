@@ -2,15 +2,6 @@
   <div>
     <div class="row">
       <div class="col-12">
-        <AppInput
-          id="skill_name"
-          v-model="title"
-          label="Project name"
-        />
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-12">
         <ClientOnly>
           <Froala
             id="skill_description"
@@ -70,6 +61,11 @@
           Update
         </AppButton>
       </div>
+      <div class="col-12">
+        <AppButton @click="deleteUserSkill">
+          Delete
+        </AppButton>
+      </div>
     </div>
   </div>
 </template>
@@ -86,8 +82,8 @@ const editUserProjectId = ref<null | number>(null)
 const props = defineProps<{ userSkill: UserSkill }>()
 
 const editUserSkillStore = useEditUserSkillStore()
-const { title, description, userProjects } = storeToRefs(editUserSkillStore)
-const { update, init } = editUserSkillStore
+const { description, userProjects } = storeToRefs(editUserSkillStore)
+const { update, init, deleteUserSkill } = editUserSkillStore
 
 const isAddSkillModalOpen = ref(false)
 

@@ -14,6 +14,9 @@
       <AppButton @click="update">
         Update
       </AppButton>
+      <AppButton @click="deleteUserProjectSkill">
+        Delete
+      </AppButton>
     </div>
   </div>
 </template>
@@ -29,7 +32,7 @@ const props = defineProps<{
 
 const editUserProjectSkillStore = useEditUserProjectSkill()
 const { config } = useDefaultFroalaConfig()
-const { init, update } = editUserProjectSkillStore
+const { init, update, delete: deleteUserProjectSkill } = editUserProjectSkillStore
 const { description } = storeToRefs(editUserProjectSkillStore)
 
 watch(props, () => {

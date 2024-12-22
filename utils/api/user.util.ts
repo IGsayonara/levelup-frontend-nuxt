@@ -37,4 +37,14 @@ export class UserUtil extends ApiUtil {
     this.authorizeAxiosInstance()
     return await this.axiosInstance.post(`/users/userSkill/add/${skillId}`)
   }
+
+  public async deleteUserProjectSkill(userProjectSkillId: number) {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.delete(`/users/userProjectSkill/delete/${userProjectSkillId}`)
+  }
+
+  public async deleteUserSkill(userSkillId: number) {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.delete(`/users/userSkill/delete/${userSkillId}`)
+  }
 }

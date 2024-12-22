@@ -60,7 +60,7 @@
           <EditUserProject :user-project="selectedProject" />
         </template>
         <template #footer>
-          <div class="row">
+          <div>
             <AppButton
               class="col"
               @click="updateUserProject"
@@ -72,6 +72,9 @@
               @click="isProjectMO = true"
             >
               Edit Project
+            </AppButton>
+            <AppButton @click="deleteUserProject">
+              Delete project
             </AppButton>
           </div>
         </template>
@@ -95,11 +98,10 @@
     </div>
     <div class="row">
       <div class="col">
-        <div class="row">
+        <div class="skills">
           <div
             v-for="userSkill in user.userSkills"
             :key="userSkill.id"
-            class="col-md-3 col-6"
           >
             <SkillCard
               :skill="userSkill.skill"
@@ -134,7 +136,7 @@ const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
 const editUserProjectStore = useEditUserProjectStore()
-const { update: updateUserProject } = editUserProjectStore
+const { update: updateUserProject, delete: deleteUserProject } = editUserProjectStore
 
 const editProjectStore = useEditProjectStore()
 const { update: updateProject } = editProjectStore
@@ -154,5 +156,10 @@ const selectedProjectTitle = computed(() => {
 <style scoped lang="scss">
 .row {
   margin: 3rem 0;
+}
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 </style>

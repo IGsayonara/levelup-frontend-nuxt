@@ -32,4 +32,9 @@ export class ProjectUtil extends ApiUtil {
       role: userProject.role,
     })
   }
+
+  public async deleteUserProject(userProjectId: number): Promise<void> {
+    this.authorizeAxiosInstance()
+    return await this.axiosInstance.delete(`/users/userProject/delete/${userProjectId}`)
+  }
 }

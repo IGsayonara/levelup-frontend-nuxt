@@ -24,9 +24,14 @@ export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () =>
     return await userUtil.updateUserProjectSkill(userProjectSkill)
   }
 
+  const deleteUserProjectSkill = async (skillId: number) => {
+    return await userUtil.deleteUserProjectSkill(userProjectSkill.id)
+  }
+
   return {
     init,
     update,
+    delete: deleteUserProjectSkill,
     ...toRefs(userProjectSkill),
   }
 })

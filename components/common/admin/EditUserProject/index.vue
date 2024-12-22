@@ -36,11 +36,10 @@
         </template>
       </AppModal>
     </div>
-    <div class="row">
+    <div class="skills">
       <div
         v-for="skill in skills"
         :key="skill.id"
-        class="col-6 col-md-3"
       >
         <SkillCard
           :skill="skill.skill"
@@ -94,5 +93,11 @@ init(+props.userProject?.id)
 <style scoped lang="scss">
 .row {
   margin: 3rem 0;
+}
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 </style>

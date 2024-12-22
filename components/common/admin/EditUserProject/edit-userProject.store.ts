@@ -18,6 +18,10 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
     await projectUtil.updateUserProject(userProject)
   }
 
+  const deleteUserProject = async () => {
+    await projectUtil.deleteUserProject(userProject.id)
+  }
+
   const init = (userProjectId: number) => {
     const newUserProject = user.value.userProjects.find(userProject => userProject.id === userProjectId)
     console.log(newUserProject)
@@ -27,6 +31,7 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   return {
     init,
     update,
+    delete: deleteUserProject,
     ...toRefs(userProject),
   }
 })
