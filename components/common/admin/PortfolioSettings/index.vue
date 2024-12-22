@@ -13,6 +13,11 @@
           <template #default>
             <EditProject />
           </template>
+          <template #footer>
+            <AppButton @click="updateProject">
+              Add project
+            </AppButton>
+          </template>
         </AppModal>
       </div>
       <div class="col-12 col-md-6">
@@ -120,7 +125,7 @@
           </h2>
         </template>
         <template #default>
-          <EditSkill :user-skill="selectedSkill" />
+          <EditUserSkill :user-skill="selectedSkill" />
         </template>
       </AppModal>
     </div>

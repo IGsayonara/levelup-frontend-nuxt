@@ -15,7 +15,7 @@
     </div>
     <div class="row">
       <AppButton @click="isAddSkillModalOpen = true">
-        Add Skill
+        Connect to a project
       </AppButton>
       <AppModal
         v-if="isAddSkillModalOpen"
@@ -23,7 +23,7 @@
       >
         <template #header />
         <template #default>
-          <AddUserProjectSkill :user-project-id="userProject.id" />
+          <AddUserProjectToSkill :skill-id="userSkill.skill.id" />
         </template>
       </AppModal>
     </div>
@@ -31,7 +31,7 @@
       <div
         v-for="userProject in userProjects"
         :key="userProject.id"
-        class="col-12 col-md-6"
+        class="col-12 col-lg-6"
       >
         <AppCard
           :project="userProject.project"
@@ -73,7 +73,7 @@
 <script setup lang="ts">
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
 import type { UserSkill } from '~/types/user'
-import { useEditUserSkillStore } from '~/components/common/admin/EditSkill/edit-skill.store'
+import { useEditUserSkillStore } from '~/components/common/admin/EditUserSkill/edit-skill.store'
 
 const { config } = useDefaultFroalaConfig()
 

@@ -14,7 +14,7 @@ export const useEditUserSkillStore = defineStore('editUserSkill', () => {
   })
 
   const update = async () => {
-
+    await userUtil.updateUserSkill(userSkill)
   }
 
   const deleteUserSkill = async () => {

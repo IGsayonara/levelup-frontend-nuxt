@@ -32,7 +32,7 @@
       >
         <template #header />
         <template #default>
-          <AddUserProjectSkill :user-project-id="userProject.id" />
+          <AddSkillToUserProject :user-project-id="userProject.id" />
         </template>
       </AppModal>
     </div>
