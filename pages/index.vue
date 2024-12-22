@@ -42,25 +42,6 @@
       <div class="container">
         <div class="section-title-wrapper">
           <SectionTitle
-            title="Skills"
-            link-text="See more"
-          />
-        </div>
-        <div class="row">
-          <div
-            v-for="skill in skills"
-            :key="skill.id"
-            class="col-12 col-sm-6 col-md-3 skill-card-col"
-          >
-            <SkillCard :skill="skill" />
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="section-title-wrapper">
-          <SectionTitle
             title="Portfolio"
             link-text="See more"
             @link-click="$router.push('/projects')"
@@ -68,7 +49,7 @@
         </div>
         <div class="row">
           <div
-            v-for="project in projects.slice(0, 4)"
+            v-for="project in projects"
             :key="project.id"
             class="col-12 col-xl-6 app-card-col"
           >
@@ -80,12 +61,34 @@
         </div>
       </div>
     </section>
+    <section>
+      <div class="container">
+        <div class="section-title-wrapper">
+          <SectionTitle
+            title="Skills"
+            link-text="See more"
+          />
+        </div>
+        <div class="row">
+          <div
+            v-for="userSkill in skills"
+            :key="userSkill"
+            class="col-12 col-sm-6 col-md-3 skill-card-col"
+          >
+            <SkillCard
+              :skill="userSkill.skill"
+              @click="onSkillClick(userSkill)"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { Project } from '~/types/project'
-import type { User, UserProject } from '~/types/user'
+import type { User, UserProject, UserSkill } from '~/types/user'
 import type { Skill } from '~/types/skill'
 
 const router = useRouter()
@@ -105,14 +108,18 @@ const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
 const projects = computed<UserProject[]>(() => {
-  return user.value?.userProjects || []
+  return user.value?.userProjects.slice(0, 4) || []
 })
 
-const skills = computed<Skill[]>(() => {
-  return user.value?.userSkills.map(({ skill }) => skill) || []
+const skills = computed<UserSkill[]>(() => {
+  return user.value?.userSkills.slice(0, 8) || []
 })
 
-const onProjectClick = async (project: Project) => {
+const onSkillClick = async (skill: UserSkill) => {
+  await router.push('/skill/' + skill.id)
+}
+
+const onProjectClick = async (project: UserProject) => {
   await router.push('/project/' + project.id)
 }
 </script>

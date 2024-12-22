@@ -11,7 +11,6 @@
         <AppInput
           id="searchProjectInput"
           v-model="searchValue"
-          label="Search for skills"
           placeholder="Search"
         />
       </div>
@@ -75,7 +74,7 @@ const searchedSkills = computed(() => {
     return skills.value
   }
 
-  return skills.value.filter(({ title }) => title.includes(updatedSearchValue.value.trim()))
+  return skills.value.filter(({ skill }) => skill.title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
 })
 
 watch(

@@ -6,10 +6,10 @@
         v-if="userProject"
         class="container"
       >
-        <div class="section-title-wrapper">
-          <SectionTitle :title="userProject.project?.title" />
-        </div>
-        <FullAppCard :project="userProject.project" />
+        <!--        <div class="section-title-wrapper"> -->
+        <!--          <SectionTitle :title="userProject.project?.title" /> -->
+        <!--        </div> -->
+        <FullAppCard :user-project="userProject" />
       </div>
       <div
         v-else
@@ -19,12 +19,20 @@
       </div>
     </section>
     <section>
+      <div class="container">
+        <div class="section-title-wrapper">
+          <SectionTitle :title="'Achievements'" />
+        </div>
+        <div v-html="userProject.description" />
+      </div>
+    </section>
+    <section>
       <div
-        v-if="!isError && userProject && userProject.skills && userProject.skills.length"
+        v-if="userProject && userProject.skills && userProject.skills.length"
         class="container"
       >
         <div class="section-title-wrapper">
-          <SectionTitle :title="'Related Skills'" />
+          <SectionTitle :title="'Tech stack'" />
         </div>
         <div class="row">
           <div
@@ -49,7 +57,7 @@
         <h2>{{ selectedSkill.skill.title }}</h2>
       </template>
       <template #default>
-        <p>{{ selectedSkill.description }}</p>
+        <div v-html="selectedSkill.description" />
       </template>
       <template #footer>
         Footer

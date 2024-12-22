@@ -11,15 +11,10 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <ClientOnly>
-          <Froala
-            id="project_description"
-            v-model:value="description"
-            tag="textarea"
-            label="Project description"
-            :config="config"
-          />
-        </ClientOnly>
+        <AppInput
+          v-model="description"
+          label="Description"
+        />
       </div>
     </div>
   </div>
@@ -36,7 +31,7 @@ const props = defineProps<{ project: Project }>()
 
 const editProjectStore = useEditProjectStore()
 const { title, description } = storeToRefs(editProjectStore)
-const { update, init } = editProjectStore
+const { init } = editProjectStore
 
 init(props.project?.id)
 </script>
