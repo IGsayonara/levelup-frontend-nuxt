@@ -1,7 +1,4 @@
-import { ProjectUtil } from '~/utils/api/project.util'
-import type { ProjectSkill } from '~/types/project'
-
-const projectUtil = new ProjectUtil()
+import { userProjectUtil } from '~/utils/api'
 
 export const useEditUserProjectStore = defineStore('editUserProject', () => {
   const userStore = useUserStore()
@@ -15,16 +12,15 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   })
 
   const update = async () => {
-    await projectUtil.updateUserProject(userProject)
+    await userProjectUtil.updateUserProject(userProject)
   }
 
   const deleteUserProject = async () => {
-    await projectUtil.deleteUserProject(userProject.id)
+    await userProjectUtil.deleteUserProject(userProject.id)
   }
 
   const init = (userProjectId: number) => {
     const newUserProject = user.value.userProjects.find(userProject => userProject.id === userProjectId)
-    console.log(newUserProject)
     Object.assign(userProject, newUserProject)
   }
 

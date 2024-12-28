@@ -1,6 +1,4 @@
-import { UserUtil } from '~/utils/api/user.util'
-
-const userUtil = new UserUtil()
+import { userProjectSkillUtil } from '~/utils/api'
 
 export const useAddUserProjectSkill = () => {
   const userStore = useUserStore()
@@ -8,7 +6,7 @@ export const useAddUserProjectSkill = () => {
   const { fetchUser } = userStore
 
   const addSkillToUserProject = async (userProjectId: number, skillId: number) => {
-    await userUtil.addUserProjectSkill({ userProjectId, skillId })
+    await userProjectSkillUtil.addUserProjectSkill({ userProjectId, skillId })
     await fetchUser(user.value.username)
   }
 

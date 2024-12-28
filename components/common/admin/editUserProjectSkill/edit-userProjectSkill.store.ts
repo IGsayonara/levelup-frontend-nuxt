@@ -1,7 +1,7 @@
 import type { ProjectSkill } from '~/types/project'
 import { UserUtil } from '~/utils/api/user.util'
-
-const userUtil = new UserUtil()
+import { UserProjectSkillUtil } from '~/utils/api/user-project-skill.util'
+import { userProjectSkillUtil } from '~/utils/api'
 
 export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () => {
   const userStore = useUserStore()
@@ -21,11 +21,11 @@ export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () =>
   }
 
   const update = async () => {
-    return await userUtil.updateUserProjectSkill(userProjectSkill)
+    return await userProjectSkillUtil.updateUserProjectSkill(userProjectSkill)
   }
 
-  const deleteUserProjectSkill = async (skillId: number) => {
-    return await userUtil.deleteUserProjectSkill(userProjectSkill.id)
+  const deleteUserProjectSkill = async () => {
+    return await userProjectSkillUtil.deleteUserProjectSkill(userProjectSkill.id)
   }
 
   return {

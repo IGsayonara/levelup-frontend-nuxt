@@ -133,7 +133,7 @@
 </template>
 
 <script setup lang="ts">
-import type { User, UserProject, UserSkill } from '~/types/user'
+import type { User } from '~/types/user'
 import { useEditUserProjectStore } from '~/components/common/admin/EditUserProject/edit-userProject.store'
 import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
 

@@ -31,7 +31,10 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@nuxt/typescript": "^2.8.1",
+    "@nuxt/typescript-build": "^3.0.2",
     "@types/js-cookie": "^3.0.6",
-    "sass-embedded": "~1.64.2"
+    "sass-embedded": "~1.64.2",
+    "typescript": "^5.7.2"
   }
 }

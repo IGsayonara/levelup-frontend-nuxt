@@ -18,4 +18,16 @@ export class ApiUtil {
   public async get(url: string) {
     return await this.axiosInstance.get(url).then(r => r.data)
   }
+
+  public async post(url: string, data: unknown): Promise<unknown> {
+    return await this.axiosInstance.post(url, data).then(r => r.data)
+  }
+
+  public async put(url: string, data: unknown): Promise<unknown> {
+    return await this.axiosInstance.put(url, data).then(r => r.data)
+  }
+
+  public async delete(url: string): Promise<unknown> {
+    return await this.axiosInstance.delete(url, data).then(r => r.data)
+  }
 }

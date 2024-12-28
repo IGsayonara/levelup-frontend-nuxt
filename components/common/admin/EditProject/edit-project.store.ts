@@ -1,7 +1,6 @@
 import { ProjectUtil } from '~/utils/api/project.util'
 import type { ProjectSkill } from '~/types/project'
-
-const projectUtil = new ProjectUtil()
+import { projectUtil } from '~/utils/api'
 
 export const useEditProjectStore = defineStore('editProject', () => {
   const userStore = useUserStore()

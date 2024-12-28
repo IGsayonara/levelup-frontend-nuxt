@@ -73,7 +73,7 @@
 <script setup lang="ts">
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
 import type { UserSkill } from '~/types/user'
-import { useEditUserSkillStore } from '~/components/common/admin/EditUserSkill/edit-skill.store'
+import { useEditUserSkillStore } from '~/components/common/admin/EditUserSkill/edit-userSkill.store'
 
 const { config } = useDefaultFroalaConfig()
 

@@ -3,6 +3,6 @@ import type { Paginated } from '~/utils/api/types/api'
 
 export class SkillUtil extends ApiUtil {
   public async loadSkills(): Promise<SkillResponseDto[]> {
-    return await this.axiosInstance.get('/skills').then(r => r.data)
+    return await this.get('/skills').then(r => r.data)
   }
 }

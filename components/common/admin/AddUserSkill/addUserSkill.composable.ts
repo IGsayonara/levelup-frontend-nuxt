@@ -1,6 +1,4 @@
-import { UserUtil } from '~/utils/api/user.util'
-
-const userUtil = new UserUtil()
+import { userUtil } from '~/utils/api'
 
 export const useAddUserSkill = () => {
   const addUserSkill = async (skillId: number) => {
