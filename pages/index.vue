@@ -59,6 +59,7 @@
 <script setup lang="ts">
 import type { Project } from '~/types/project'
 import type { User, UserProject, UserSkill } from '~/types/user'
+
 import type { Skill } from '~/types/skill'
 
 const router = useRouter()

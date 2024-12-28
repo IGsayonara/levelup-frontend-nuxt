@@ -1,11 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from 'node:path'
+import checker from 'vite-plugin-checker'
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
+
   typescript: {
-    strict: true, // Enforces TypeScript checks during development
+    strict: true,
+    typeCheck: true,
+
+    // Enforces TypeScript checks during development
   },
 
   alias: {
@@ -18,6 +23,11 @@ export default defineNuxtConfig({
   ],
 
   vite: {
+    plugins: [
+      checker({
+        typescript: true,
+      }),
+    ],
     css: {
       preprocessorOptions: {
         scss: {

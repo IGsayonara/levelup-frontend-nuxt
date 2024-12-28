@@ -1,5 +1,6 @@
 import type { User } from '~/types/user'
 import { UserUtil } from '~/utils/api/user.util'
+
 import { userUtil } from '~/utils/api'
 
 export const useGeneralSettings = () => {

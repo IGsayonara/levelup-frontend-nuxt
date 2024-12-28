@@ -35,6 +35,8 @@
     "@nuxt/typescript-build": "^3.0.2",
     "@types/js-cookie": "^3.0.6",
     "sass-embedded": "~1.64.2",
-    "typescript": "^5.7.2"
+    "typescript": "^5.7.2",
+    "vite-plugin-checker": "^0.8.0",
+    "vue-tsc": "^2.1.10"
   }
 }
