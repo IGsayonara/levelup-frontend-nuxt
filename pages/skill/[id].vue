@@ -6,17 +6,14 @@
         v-if="userSkill"
         class="container"
       >
-        <!--        <div class="section-title-wrapper"> -->
-        <!--          <SectionTitle :title="userSkill.skill.title" /> -->
-        <!--        </div> -->
         <SkillCard :skill="userSkill.skill" />
       </div>
+    </section>
+    <section>
       <div
-        v-else
         class="container"
-      >
-        smth went wrong
-      </div>
+        v-html="userSkill.description"
+      />
     </section>
     <section>
       <div
@@ -48,7 +45,7 @@
         <h2>{{ selectedUserProject.project.title }}</h2>
       </template>
       <template #default>
-        <p>{{ userProjectSkill.description }}</p>
+        <p v-html="userProjectSkill.description" />
       </template>
       <template #footer>
         Footer

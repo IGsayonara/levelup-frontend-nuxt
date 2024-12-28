@@ -7,6 +7,7 @@ html {
 
 body {
   font-family: Roboto;
+  font-style: italic;
   font-size: 14px;
   overflow-y: scroll;
 }
@@ -38,4 +39,12 @@ section {
   @include media-breakpoint-down(sm) {
     width: calc(100% - 10px)
   }
+}
+
+strong {
+  font-weight: bold;
+}
+
+em {
+  font-style: italic;
 }

@@ -2,40 +2,7 @@
   <div>
     <section v-if="user">
       <div class="container">
-        <div class="user-info row row-reverse">
-          <div
-            class="col-12 col-sm-9"
-          >
-            <div class="user-info__headline">
-              <h2 class="user-info__headline-title">
-                {{ user.firstName + ' ' + user.lastName }}
-              </h2>
-              <span
-                class="user-info__headline-username"
-              >
-                @{{ user.username }}
-              </span>
-            </div>
-            <div class="user-info__bio">
-              <div v-html="user.bio" />
-            </div>
-          </div>
-          <div class="user-info__sidebar col-12 col-sm-3">
-            <div class="user-info__sidebar-image">
-              <NuxtImg
-                :src="user.profileImage"
-                :alt="user.firstName + ' ' + user.lastName"
-              />
-            </div>
-            <div class="user-info__sidebar-points">
-              <p>{{ user.phoneNumber }}</p>
-              <p>{{ user.email }}</p>
-              <p>5 years of experience</p>
-              <p>3 years of Vue FE experience</p>
-              <p>2 years of WordPress experience</p>
-            </div>
-          </div>
-        </div>
+        <UserCard :user="user" />
       </div>
     </section>
     <section>
@@ -49,14 +16,17 @@
         </div>
         <div class="row">
           <div
-            v-for="project in projects"
+            v-for="(project, index) in projects"
             :key="project.id"
             class="col-12 col-xl-6 app-card-col"
           >
-            <AppCard
-              :project="project.project"
-              @click="onProjectClick(project)"
-            />
+            <Transition name="fade">
+              <AppCard
+                class="app-card"
+                :project="project.project"
+                @click="onProjectClick(project, index)"
+              />
+            </Transition>
           </div>
         </div>
       </div>
@@ -107,6 +77,9 @@ definePageMeta({
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
 
+const cardLeavingIndex = ref<number | null>(null)
+const cardPrepareToLeaveIndex = ref<number | null>(null)
+
 const projects = computed<UserProject[]>(() => {
   return user.value?.userProjects.slice(0, 4) || []
 })
@@ -150,8 +123,17 @@ const onProjectClick = async (project: UserProject) => {
     &-image {
       & > img {
         width: 100%;
+        border: 1px solid #e5e5e5;
+        border-radius: 25%;
       }
     }
+  }
+
+  &__sidebar-points {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
   }
 }
 
