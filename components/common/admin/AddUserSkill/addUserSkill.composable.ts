@@ -1,8 +1,8 @@
-import { userUtil } from '~/utils/api'
+import { userSkillUtil } from '~/utils/api'
 
 export const useAddUserSkill = () => {
   const addUserSkill = async (skillId: number) => {
-    await userUtil.addUserSkill(skillId)
+    await userSkillUtil.addUserSkill(skillId)
   }
 
   return {

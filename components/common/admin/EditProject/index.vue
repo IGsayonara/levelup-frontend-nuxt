@@ -1,3 +1,19 @@
+<script setup lang="ts">
+import type { Project } from '~/types/project'
+import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
+import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
+
+const props = defineProps<{ project: Project }>()
+
+const { config } = useDefaultFroalaConfig()
+
+const editProjectStore = useEditProjectStore()
+const { title, description } = (editProjectStore)
+const { init } = editProjectStore
+
+init(props.project?.id)
+</script>
+
 <template>
   <div>
     <div class="row">
@@ -19,22 +35,6 @@
     </div>
   </div>
 </template>
-
-<script setup lang="ts">
-import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
-import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
-import type { Project } from '~/types/project'
-
-const { config } = useDefaultFroalaConfig()
-
-const props = defineProps<{ project: Project }>()
-
-const editProjectStore = useEditProjectStore()
-const { title, description } = storeToRefs(editProjectStore)
-const { init } = editProjectStore
-
-init(props.project?.id)
-</script>
 
 <style scoped lang="scss">
 .row {

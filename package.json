@@ -13,9 +13,9 @@
     "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/free-regular-svg-icons": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@nuxt/eslint": "^0.5.7",
     "@nuxt/image": "^1.8.0",
     "@pinia/nuxt": "^0.5.4",
+    "@typescript-eslint/parser": "^8.18.2",
     "@vesp/nuxt-fontawesome": "^1.1.0",
     "axios": "^1.7.7",
     "bootstrap-scss": "5.3.0",
@@ -31,12 +31,19 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@eslint/js": "^9.17.0",
+    "@nuxt/eslint": "^0.7.4",
     "@nuxt/typescript": "^2.8.1",
     "@nuxt/typescript-build": "^3.0.2",
     "@types/js-cookie": "^3.0.6",
+    "eslint": "^9.17.0",
+    "install": "^0.13.0",
+    "npm": "^11.0.0",
     "sass-embedded": "~1.64.2",
     "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.2",
     "vite-plugin-checker": "^0.8.0",
+    "vite-plugin-eslint": "^1.8.1",
     "vue-tsc": "^2.1.10"
   }
 }

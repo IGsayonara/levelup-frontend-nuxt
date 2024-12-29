@@ -30,7 +30,7 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
     id.value = projectId
 
-    const userProject = user.value.userProjects.find(userProject => userProject.project.id === projectId)
+    const userProject = user.value.userProjects.find(userProject => userProject.project.id === +projectId)
     const { project } = userProject
 
     title.value = project.title
