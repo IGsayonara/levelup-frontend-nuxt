@@ -1,4 +1,5 @@
 import { userProjectUtil } from '~/utils/api'
+import type { UserProjectSkill } from '~/types/user-project-skill'
 
 export const useEditUserProjectStore = defineStore('editUserProject', () => {
   const userStore = useUserStore()
@@ -7,7 +8,7 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   const userProject = reactive({
     id: 0,
     description: '',
-    skills: [],
+    skills: [] as UserProjectSkill[],
     role: '',
   })
 
@@ -20,7 +21,7 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   }
 
   const init = (userProjectId: number) => {
-    const newUserProject = user.value.userProjects.find(userProject => userProject.id === userProjectId)
+    const newUserProject = user.value?.userProjects.find(userProject => userProject.id === userProjectId)
     Object.assign(userProject, newUserProject)
   }
 

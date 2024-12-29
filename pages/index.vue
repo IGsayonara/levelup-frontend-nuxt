@@ -57,10 +57,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Project } from '~/types/project'
-import type { User, UserProject, UserSkill } from '~/types/user'
-
-import type { Skill } from '~/types/skill'
+import type { User } from '~/types/user'
 
 const router = useRouter()
 
@@ -77,9 +74,6 @@ definePageMeta({
 
 const userStore = useUserStore()
 const { user } = storeToRefs<{ user: User }>(userStore)
-
-const cardLeavingIndex = ref<number | null>(null)
-const cardPrepareToLeaveIndex = ref<number | null>(null)
 
 const projects = computed<UserProject[]>(() => {
   return user.value?.userProjects.slice(0, 4) || []

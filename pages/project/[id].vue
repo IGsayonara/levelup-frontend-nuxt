@@ -67,7 +67,6 @@
 
 <script setup lang="ts">
 import { definePageMeta } from '#imports'
-import type { UserProject } from '~/types/user'
 import type { Skill } from '~/types/skill'
 
 definePageMeta({

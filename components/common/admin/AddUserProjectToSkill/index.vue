@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12">
         <AppInput
+          id="search-skill"
           v-model="search"
           label="search"
         />
@@ -25,6 +26,7 @@
 
 <script setup lang="ts">
 import { useAddUserProjectSkill } from '~/components/common/admin/AddSkillToUserProject/addUserProjectSkill.composable'
+import type { UserProject } from '~/types/user-project'
 
 const { user } = storeToRefs(useUserStore())
 
@@ -34,13 +36,17 @@ const { addSkillToUserProject } = useAddUserProjectSkill()
 
 const search = ref('')
 
-const searchResults = computed(() => {
-  const filteredBySearch = search.value
-    ? user.value.userProjects
+const searchResults = computed<UserProject[]>(() => {
+  const filteredBySearch: UserProject[] | undefined = search.value
+    ? user.value?.userProjects
       .filter((userProject) => {
         return userProject.project.title.toLowerCase().includes(search.value.toLowerCase().trim())
       })
-    : user.value.userProjects
+    : user.value?.userProjects
+
+  if (!filteredBySearch || filteredBySearch.length === 0) {
+    return []
+  }
 
   return filteredBySearch.filter((userProject) => {
     return userProject.skills.findIndex((userProjectSkill) => {

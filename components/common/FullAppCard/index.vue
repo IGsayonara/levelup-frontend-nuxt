@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import type { UserProject } from '~/types/user'
+import type { UserProject } from '~/types/user-project'
 
 defineOptions({
   name: 'FullAppCard',

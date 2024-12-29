@@ -1,13 +1,11 @@
-import { ProjectUtil } from '~/utils/api/project.util'
-import type { ProjectSkill } from '~/types/project'
 import { projectUtil } from '~/utils/api'
 
 export const useEditProjectStore = defineStore('editProject', () => {
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
-  const id = ref(null)
+  const id = ref<number | null>(null)
   const title = ref('')
-  const description = ref('')
+  const description = ref<string>('')
 
   const update = async () => {
     if (!id.value) {
@@ -19,7 +17,7 @@ export const useEditProjectStore = defineStore('editProject', () => {
     return await projectUtil.updateProject({ id: id.value, title: title.value, description: description.value })
   }
 
-  const init = (projectId?: string) => {
+  const init = (projectId?: number) => {
     if (!projectId) {
       id.value = null
       title.value = ''
@@ -30,11 +28,16 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
     id.value = projectId
 
-    const userProject = user.value.userProjects.find(userProject => userProject.project.id === +projectId)
+    const userProject = user.value?.userProjects.find(userProject => userProject.project.id === +projectId)
+
+    if (!userProject) {
+      throw 'UserProject not found.'
+    }
+
     const { project } = userProject
 
     title.value = project.title
-    description.value = project.description
+    description.value = project.description || ''
   }
 
   return {

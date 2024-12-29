@@ -39,7 +39,7 @@
         />
       </div>
       <AppModal
-        v-if="editUserProjectId"
+        v-if="editUserProjectId && editUserProjectSkillId"
         @close="editUserProjectId = null"
       >
         <template #header>
@@ -49,8 +49,8 @@
         </template>
         <template #default>
           <EditUserProjectSkill
-            :user-project-id="+editUserProjectId"
-            :project-skill-id="+editUserProjectSkillId"
+            :user-project-id="editUserProjectId"
+            :project-skill-id="editUserProjectSkillId"
           />
         </template>
       </AppModal>
@@ -72,8 +72,8 @@
 
 <script setup lang="ts">
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
-import type { UserSkill } from '~/types/user'
 import { useEditUserSkillStore } from '~/components/common/admin/EditUserSkill/edit-userSkill.store'
+import type { UserSkill } from '~/types/user-skill'
 
 const { config } = useDefaultFroalaConfig()
 
@@ -89,7 +89,7 @@ const isAddSkillModalOpen = ref(false)
 
 const editUserProjectSkillId = computed(() => {
   const userProject = userProjects.value.find(userProject => editUserProjectId.value === userProject.id)
-  return userProject.skills.find(userProjectSkill => userProjectSkill.skill.id === props.userSkill.skill.id).id
+  return userProject?.skills?.find(userProjectSkill => userProjectSkill.skill.id === props.userSkill.skill.id)?.id
 })
 
 init(props.userSkill.id)

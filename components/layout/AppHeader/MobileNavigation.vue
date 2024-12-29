@@ -20,7 +20,6 @@
 <script setup>
 import { faBars } from '@fortawesome/free-solid-svg-icons'
 
-import GithubButton from '~/components/ui/AppButton/GithubButton.vue'
 import DefaultNavigation from '~/components/layout/AppHeader/DefaultNavigation.vue'
 
 defineOptions({

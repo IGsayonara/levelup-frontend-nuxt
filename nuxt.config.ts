@@ -1,7 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from 'node:path'
 import checker from 'vite-plugin-checker'
-import eslintPlugin from 'vite-plugin-eslint'
 
 export default defineNuxtConfig({
 

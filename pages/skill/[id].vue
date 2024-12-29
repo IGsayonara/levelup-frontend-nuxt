@@ -1,9 +1,8 @@
 <template>
-  <div>
+  <div v-if="userSkill">
     <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <section>
       <div
-        v-if="userSkill"
         class="container"
       >
         <SkillCard :skill="userSkill.skill" />
@@ -56,8 +55,8 @@
 
 <script setup lang="ts">
 import { definePageMeta } from '#imports'
-import type { User, UserProject, UserSkill } from '~/types/user'
-import type { Skill } from '~/types/skill'
+import type { UserSkill } from '~/types/user-skill'
+import type { UserProject } from '~/types/user-project'
 
 definePageMeta({
   middleware: 'fetch-user',
@@ -68,8 +67,8 @@ const route = useRoute()
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
 
-const userSkill = computed<UserSkill>(() => {
-  return user.value?.userSkills?.find(userSkill => userSkill.id == route.params.id)
+const userSkill = computed<UserSkill | undefined>(() => {
+  return user.value?.userSkills?.find(userSkill => userSkill.id === +route.params.id)
 })
 
 const breadcrumbs = ref([
@@ -83,18 +82,17 @@ const breadcrumbs = ref([
   },
   {
     to: '/skill',
-    text: userSkill.value.skill.title,
+    text: userSkill.value?.skill.title || 'Not found',
   },
 ])
 
 const skillUserProjects = computed(() => {
-  const userProjects = user.value.userProjects
-  return userProjects
-    .filter((userProject) => {
-      return userProject.skills.findIndex((userProjectSkill) => {
-        return userProjectSkill.skill.id === userSkill.value.skill.id
-      }) >= 0
-    })
+  const userProjects = user.value?.userProjects
+  return userProjects?.filter((userProject) => {
+    return userProject.skills.findIndex((userProjectSkill) => {
+      return userProjectSkill.skill.id === userSkill.value.skill.id
+    }) >= 0
+  })
 })
 
 const selectedUserProjectId = ref<number | null>(null)
@@ -103,7 +101,8 @@ const selectedUserProject = computed<UserProject | null>(() => {
   if (!selectedUserProjectId.value) {
     return null
   }
-  return user.value.userProjects.find(userProject => userProject.id == selectedUserProjectId.value)
+
+  return user.value?.userProjects.find(userProject => userProject.id == selectedUserProjectId.value) || null
 })
 
 const userProjectSkill = computed(() => {

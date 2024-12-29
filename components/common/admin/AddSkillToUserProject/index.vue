@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-12">
         <AppInput
+          id="search-skill"
           v-model="search"
           label="search"
         />

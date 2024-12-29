@@ -1,6 +1,6 @@
 import type { AxiosInstance } from 'axios'
 import { AuthUtil } from '~/utils/api/auth.util'
-import { AxiosUtil } from '~/utils/api/axios.util'
+import { axiosFactory } from '~/utils/api/axios.util'
 
 export class ApiUtil {
   private axiosInstance: AxiosInstance
@@ -8,7 +8,7 @@ export class ApiUtil {
 
   constructor() {
     this.authUtil = new AuthUtil()
-    this.axiosInstance = AxiosUtil.axiosFactory()
+    this.axiosInstance = axiosFactory()
   }
 
   protected authorizeAxiosInstance() {
@@ -16,7 +16,9 @@ export class ApiUtil {
   }
 
   public async get(url: string) {
-    return await this.axiosInstance.get(url).then(r => r.data)
+    const response = await this.axiosInstance.get(url).then(r => r.data)
+    console.log(response, 666)
+    return response
   }
 
   public async post(url: string, data: unknown): Promise<unknown> {

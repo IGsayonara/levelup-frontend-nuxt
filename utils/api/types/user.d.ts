@@ -8,7 +8,6 @@ export type UserResponseDto = {
 }
 
 export type UpdateUserGeneralInfoDto = {
-  username: string
   address: string
   bio: string
 }

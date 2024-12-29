@@ -2,7 +2,7 @@ import { AuthUtil } from '~/utils/api/auth.util'
 
 const authUtil = new AuthUtil()
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async (to) => {
   if (import.meta.env.SSR) {
     return
   }
@@ -12,7 +12,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
   try {
     if (!authUtil.getAccessToken()) {
-      console.log('No access token')
       if (to.name !== 'login') {
         return '/login'
       }

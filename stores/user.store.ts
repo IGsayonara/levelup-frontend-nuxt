@@ -1,7 +1,5 @@
 import type { User } from '~/types/user'
-import { UserUtil } from '~/utils/api/user.util'
-
-const userUtil = new UserUtil()
+import { userUtil } from '~/utils/api'
 
 export const useUserStore = defineStore('UserStore', () => {
   const user = ref<User | null>(null)

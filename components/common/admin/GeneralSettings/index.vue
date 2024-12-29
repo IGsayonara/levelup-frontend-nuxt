@@ -143,7 +143,7 @@ const triggerFileInput = () => {
 }
 
 const onUpdate = async () => {
-  const file = await cropper.getFile() as File
+  const file = await cropper?.getFile() as File
   await updateProfileImage(file)
   profileImage.value = URL.createObjectURL(file)
   isCropperModalShowing.value = false

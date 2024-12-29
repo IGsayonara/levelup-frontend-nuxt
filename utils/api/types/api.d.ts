@@ -4,8 +4,8 @@ export type Paginated<T> = {
     totalItems: number
     currentPage: number
     totalPages: number
-    // sortBy: SortBy<T>;
-    // searchBy: Column<T>[];
+    sortBy: SortBy<T>
+    searchBy: Column<T>[]
     search: string
     filter?: {
       [column: string]: string | string[]

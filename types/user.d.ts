@@ -4,8 +4,8 @@ import type { UserSkill } from '~/types/user-skill'
 export type User = {
   id: number
   username: string
-  userProjects?: UserProject[]
-  userSkills?: UserSkill[]
+  userProjects: UserProject[]
+  userSkills: UserSkill[]
   firstName?: string
   lastName?: string
   email?: string

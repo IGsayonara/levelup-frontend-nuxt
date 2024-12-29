@@ -4,15 +4,15 @@ import type { UpdateUserGeneralInfoDto, UserResponseDto } from '~/utils/api/type
 
 export class UserUtil extends ApiUtil {
   public async fetchUser(username: string): Promise<UserResponseDto> {
-    return await this.axiosInstance.get(`/users/${username}`).then(r => r.data)
+    return await this.get(`/users/${username}`).then(r => r.data)
   }
 
-  public async updateUser(user: UpdateUserGeneralInfoDto): Promise<void> {
+  public async updateUser(user: UpdateUserGeneralInfoDto): Promise<unknown> {
     this.authorizeAxiosInstance()
-    return await this.axiosInstance.put(`/users/me/general`, user)
+    return await this.put(`/users/me/general`, user)
   }
 
-  public async updateProfileImage(file): Promise<void> {
+  public async updateProfileImage(file: File): Promise<unknown> {
     this.authorizeAxiosInstance()
     const formData = new FormData()
     formData.append('file', file)

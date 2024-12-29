@@ -10,7 +10,7 @@ export type Project = {
 
 export type ProjectSkill = {
   id: number
-  project?: Project
-  skill?: Skill
+  project: Project
+  skill: Skill
   description: string
 }

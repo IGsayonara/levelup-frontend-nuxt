@@ -68,8 +68,8 @@
 
 <script setup lang="ts">
 import { useDefaultFroalaConfig } from '~/composables/froala/froala-config.composable'
-import type { UserProject } from '~/types/user'
 import { useEditUserProjectStore } from '~/components/common/admin/EditUserProject/edit-userProject.store'
+import type { UserProject } from '~/types/user-project'
 
 const { config } = useDefaultFroalaConfig()
 
@@ -78,13 +78,15 @@ const editUserProjectSkillId = ref<null | number>(null)
 const props = defineProps<{ userProject: UserProject }>()
 
 const editUserProjectStore = useEditUserProjectStore()
-const { id, description, role, skills } = storeToRefs(editUserProjectStore)
+const { description, role, skills } = storeToRefs(editUserProjectStore)
 const { init } = editUserProjectStore
 
 const isAddSkillModalOpen = ref(false)
 
 const editUserProjectSkillTitle = computed(() => {
-  return skills.value.find(userProjectSkill => userProjectSkill.id === editUserProjectSkillId.value).skill.title
+  return skills.value?.find((userProjectSkill) => {
+    return userProjectSkill.id === editUserProjectSkillId.value
+  })?.skill.title
 })
 
 init(+props.userProject?.id)

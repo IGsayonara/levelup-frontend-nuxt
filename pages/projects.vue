@@ -52,7 +52,7 @@ import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppCard from '~/components/common/AppCard/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
 import type { Project } from '~/types/project'
-import type { UserProject } from '~/types/user'
+import type { UserProject } from '~/types/user-project'
 
 definePageMeta({
   middleware: 'fetch-user',

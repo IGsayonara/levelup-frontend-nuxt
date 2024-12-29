@@ -4,7 +4,6 @@
 
 <script setup>
 import DefaultNavigation from '~/components/layout/AppHeader/DefaultNavigation.vue'
-import GithubButton from '~/components/ui/AppButton/GithubButton.vue'
 
 defineOptions({
   name: 'DesktopNavigation',
