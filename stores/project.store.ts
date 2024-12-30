@@ -1,5 +1,5 @@
 import { ProjectUtil } from '~/utils/api/project.util'
-import type { UserProject } from '~/types/user'
+import type { UserProject } from '~/types/user-project'
 
 const projectUtil = new ProjectUtil()
 

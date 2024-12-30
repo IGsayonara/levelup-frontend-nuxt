@@ -14,14 +14,14 @@ export class AuthUtil {
     this.axiosInstance = axiosFactory()
   }
 
-  public setAccessToken(accessToken: string): void {
+  public setAccessToken(accessToken?: string): void {
     this.accessToken = accessToken
-    Cookies.set('accessToken', accessToken)
+    Cookies.set('accessToken', accessToken || '')
   }
 
-  public setRefreshToken(refreshToken: string): void {
+  public setRefreshToken(refreshToken?: string): void {
     this.refreshToken = refreshToken
-    Cookies.set('refreshToken', refreshToken)
+    Cookies.set('refreshToken', refreshToken || '')
   }
 
   public getAccessToken(): string | undefined {

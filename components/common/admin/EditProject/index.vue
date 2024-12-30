@@ -25,7 +25,7 @@
 import type { Project } from '~/types/project'
 import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
 
-const props = defineProps<{ project: Project }>()
+const props = defineProps<{ project?: Project }>()
 
 const editProjectStore = useEditProjectStore()
 const { title, description } = storeToRefs(editProjectStore)

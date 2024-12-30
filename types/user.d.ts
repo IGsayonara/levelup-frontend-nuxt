@@ -13,5 +13,5 @@ export type User = {
   bio?: string
   phoneNumber?: string
   address?: string
-  dateOfBirth?: Date
+  dateOfBirth?: string
 }

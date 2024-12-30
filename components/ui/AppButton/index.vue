@@ -7,7 +7,6 @@
       <FontAwesome
         class="burger-button"
         :icon="faSpinner"
-        @click="open"
       />
     </span>
     <slot v-else>

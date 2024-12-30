@@ -37,7 +37,7 @@
       </div>
     </section>
     <AppModal
-      v-if="selectedUserProjectId"
+      v-if="selectedUserProjectId && selectedUserProject && userProjectSkill"
       @close="selectedUserProjectId = null"
     >
       <template #header>
@@ -90,7 +90,7 @@ const skillUserProjects = computed(() => {
   const userProjects = user.value?.userProjects
   return userProjects?.filter((userProject) => {
     return userProject.skills.findIndex((userProjectSkill) => {
-      return userProjectSkill.skill.id === userSkill.value.skill.id
+      return userProjectSkill.skill.id === userSkill.value?.skill.id
     }) >= 0
   })
 })
@@ -106,7 +106,7 @@ const selectedUserProject = computed<UserProject | null>(() => {
 })
 
 const userProjectSkill = computed(() => {
-  return selectedUserProject.value?.skills.find(skill => skill.skill.id === userSkill.value.skill.id)
+  return selectedUserProject.value?.skills.find(skill => skill.skill.id === userSkill.value?.skill.id)
 })
 
 onMounted(() => {

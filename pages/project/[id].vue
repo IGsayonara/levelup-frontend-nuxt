@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="userProject">
     <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <section>
       <div
@@ -49,7 +49,7 @@
       </div>
     </section>
     <AppModal
-      v-if="selectedSkillId"
+      v-if="selectedSkillId && selectedSkill"
       @close="selectedSkillId = null"
     >
       <template #header>
@@ -67,7 +67,8 @@
 
 <script setup lang="ts">
 import { definePageMeta } from '#imports'
-import type { Skill } from '~/types/skill'
+import type { UserProject } from '~/types/user-project'
+import type { UserProjectSkill } from '~/types/user-project-skill'
 
 definePageMeta({
   middleware: 'fetch-user',
@@ -78,8 +79,8 @@ const route = useRoute()
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
 
-const userProject = computed<UserProject>(() => {
-  return user.value?.userProjects?.find(project => project.id == route.params.id)
+const userProject = computed<UserProject | undefined>(() => {
+  return user.value?.userProjects?.find(project => project.id === +route.params.id)
 })
 
 const breadcrumbs = ref([
@@ -93,21 +94,17 @@ const breadcrumbs = ref([
   },
   {
     to: '/project',
-    text: userProject.value.project.title,
+    text: userProject.value?.project.title || 'Not found',
   },
 ])
 
 const selectedSkillId = ref<number | null>(null)
 
-const selectedSkill = computed<Skill | null>(() => {
+const selectedSkill = computed<UserProjectSkill | undefined>(() => {
   if (!selectedSkillId.value) {
-    return null
+    return
   }
-  return userProject.value.skills.find(skill => skill.id === selectedSkillId.value)
-})
-
-onMounted(() => {
-
+  return userProject.value?.skills.find(skill => skill.id === selectedSkillId.value)
 })
 </script>
 

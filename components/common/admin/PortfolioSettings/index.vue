@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="user">
     <div class="row">
       <div class="col-12 col-md-6">
         <AppButton @click="isProjectModalOpen = true">
@@ -133,12 +133,13 @@
 </template>
 
 <script setup lang="ts">
-import type { User } from '~/types/user'
 import { useEditUserProjectStore } from '~/components/common/admin/EditUserProject/edit-userProject.store'
 import { useEditProjectStore } from '~/components/common/admin/EditProject/edit-project.store'
+import type { UserProject } from '~/types/user-project'
+import type { UserSkill } from '~/types/user-skill'
 
 const userStore = useUserStore()
-const { user } = storeToRefs<{ user: User }>(userStore)
+const { user } = storeToRefs(userStore)
 
 const editUserProjectStore = useEditUserProjectStore()
 const { update: updateUserProject, delete: deleteUserProject } = editUserProjectStore
@@ -153,8 +154,8 @@ const isProjectMO = ref(false)
 const selectedSkill = ref<null | UserSkill>(null)
 const isSkillModalOpen = ref(false)
 
-const selectedProjectTitle = computed(() => {
-  return user.value.userProjects.find(userProject => userProject.id === selectedProject.value.id).project.title
+const selectedProjectTitle = computed<string | undefined>(() => {
+  return user.value?.userProjects.find(userProject => userProject.id === selectedProject.value?.id)?.project.title
 })
 </script>
 

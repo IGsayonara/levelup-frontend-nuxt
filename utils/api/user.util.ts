@@ -4,7 +4,7 @@ import type { UpdateUserGeneralInfoDto, UserResponseDto } from '~/utils/api/type
 
 export class UserUtil extends ApiUtil {
   public async fetchUser(username: string): Promise<UserResponseDto> {
-    return await this.get(`/users/${username}`).then(r => r.data)
+    return await this.get(`/users/${username}`)
   }
 
   public async updateUser(user: UpdateUserGeneralInfoDto): Promise<unknown> {

@@ -9,7 +9,7 @@ export const useAuthStore = defineStore('AuthStore', () => {
 
   const authUtil = new AuthUtil()
 
-  const getSession = async (): User => {
+  const getSession = async (): Promise<void> => {
     try {
       isLoading.value = true
       user.value = await authUtil.fetchSession()

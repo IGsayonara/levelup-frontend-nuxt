@@ -51,7 +51,6 @@ import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppCard from '~/components/common/AppCard/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
-import type { Project } from '~/types/project'
 import type { UserProject } from '~/types/user-project'
 
 definePageMeta({
@@ -90,7 +89,7 @@ watch(
   }, 300),
 )
 
-const onProjectClick = async (project: Project) => {
+const onProjectClick = async (project: UserProject) => {
   await router.push('/project/' + project.id)
 }
 </script>

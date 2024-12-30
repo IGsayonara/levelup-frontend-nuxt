@@ -16,9 +16,7 @@ export class ApiUtil {
   }
 
   public async get(url: string) {
-    const response = await this.axiosInstance.get(url).then(r => r.data)
-    console.log(response, 666)
-    return response
+    return await this.axiosInstance.get(url).then(r => r.data)
   }
 
   public async post(url: string, data: unknown): Promise<unknown> {
@@ -30,6 +28,6 @@ export class ApiUtil {
   }
 
   public async delete(url: string): Promise<unknown> {
-    return await this.axiosInstance.delete(url, data).then(r => r.data)
+    return await this.axiosInstance.delete(url).then(r => r.data)
   }
 }

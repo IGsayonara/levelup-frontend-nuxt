@@ -6,12 +6,12 @@ export class UserSkillUtil extends ApiUtil {
     return await this.delete(`/users/userSkill/delete/${userSkillId}`)
   }
 
-  public async addUserSkill(skillId: number): Promise<void> {
+  public async addUserSkill(skillId: number): Promise<unknown> {
     this.authorizeAxiosInstance()
     return await this.post(`/users/userSkill/add/${skillId}`)
   }
 
-  public async updateUserSkill(userSkill: updateUserSkill) {
+  public async updateUserSkill(userSkill: any) {
     this.authorizeAxiosInstance()
     return await this.put(`/users/userSkill/edit/${userSkill.id}`, {
       description: userSkill.description,

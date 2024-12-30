@@ -24,7 +24,7 @@
               <AppCard
                 class="app-card"
                 :project="project.project"
-                @click="onProjectClick(project, index)"
+                @click="onProjectClick(project)"
               />
             </Transition>
           </div>
@@ -43,7 +43,7 @@
         <div class="skills">
           <div
             v-for="userSkill in skills"
-            :key="userSkill"
+            :key="userSkill.id"
           >
             <SkillCard
               :skill="userSkill.skill"
@@ -58,6 +58,8 @@
 
 <script setup lang="ts">
 import type { User } from '~/types/user'
+import type { UserProject } from '~/types/user-project'
+import type { UserSkill } from '~/types/user-skill'
 
 const router = useRouter()
 
@@ -73,7 +75,7 @@ definePageMeta({
 })
 
 const userStore = useUserStore()
-const { user } = storeToRefs<{ user: User }>(userStore)
+const { user } = storeToRefs(userStore)
 
 const projects = computed<UserProject[]>(() => {
   return user.value?.userProjects.slice(0, 4) || []
