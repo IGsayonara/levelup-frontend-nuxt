@@ -1,8 +1,4 @@
 export default defineNuxtRouteMiddleware(async (to) => {
-  if (import.meta.env.SSR) {
-    return
-  }
-
   const authStore = useAuthStore()
   const { getSession, refreshTokens, accessToken } = authStore
 

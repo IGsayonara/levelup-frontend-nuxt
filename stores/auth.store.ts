@@ -1,30 +1,33 @@
 import { defineStore } from 'pinia'
-import Cookies from 'js-cookie'
-import { useNuxtApp } from '#app'
+import { ref } from 'vue'
+import { useNuxtApp, useRequestHeaders, useCookie } from '#app'
 import type { User } from '~/types/user'
 
 export const useAuthStore = defineStore('AuthStore', () => {
-  const { $api } = useNuxtApp() // Get the `api` instance from the plugin
-  const user = ref<User | null>(null) // User state
-  const isLoading = ref(false) // Loading state for async actions
-  const accessToken = ref<string | undefined>(Cookies.get('accessToken')) // Access token from cookies
-  const refreshToken = ref<string | undefined>(Cookies.get('refreshToken')) // Refresh token from cookies
-  const isAuthenticated = computed(() => !!user.value) // Check if the user is authenticated
+  const { $api } = useNuxtApp()
+  const headers = import.meta.server ? useRequestHeaders() : null
 
-  // Set access token in state and cookies
+  // Use `useCookie` for reactive cookie handling
+  const accessToken = import.meta.server
+    ? ref(headers?.cookie?.split('; ').find(c => c.startsWith('accessToken='))?.split('=')[1])
+    : useCookie('accessToken')
+  const refreshToken = import.meta.server
+    ? ref(headers?.cookie?.split('; ').find(c => c.startsWith('refreshToken='))?.split('=')[1])
+    : useCookie('refreshToken')
+
+  const user = ref<User | null>(null)
+  const isLoading = ref(false)
+  const isAuthenticated = computed(() => !!user.value)
+
   const setAccessToken = (token?: string) => {
-    accessToken.value = token
-    Cookies.set('accessToken', token || '')
+    accessToken.value = token || ''
     $api.setSecurityData({ token }) // Update the API instance with the token
   }
 
-  // Set refresh token in state and cookies
   const setRefreshToken = (token?: string) => {
-    refreshToken.value = token
-    Cookies.set('refreshToken', token || '')
+    refreshToken.value = token || ''
   }
 
-  // Login function to authenticate user
   const login = async (username: string, password: string) => {
     try {
       isLoading.value = true
@@ -33,9 +36,9 @@ export const useAuthStore = defineStore('AuthStore', () => {
         password,
       }).then(r => r.data)
 
-      setAccessToken(newAccessToken) // Set the new access token
-      setRefreshToken(newRefreshToken) // Set the new refresh token
-      await getSession() // Fetch session details after login
+      setAccessToken(newAccessToken)
+      setRefreshToken(newRefreshToken)
+      await getSession()
     }
     catch (error) {
       console.error('Login failed:', error)
@@ -46,17 +49,16 @@ export const useAuthStore = defineStore('AuthStore', () => {
     }
   }
 
-  // Refresh the access and refresh tokens
   const refreshTokens = async () => {
     try {
       isLoading.value = true
-      $api.setSecurityData({ token: refreshToken.value }) // Set the refresh token in the API
+      $api.setSecurityData({ token: refreshToken.value })
 
       const { accessToken: newAccessToken, refreshToken: newRefreshToken } = await $api.auth.authControllerRefreshTokens()
         .then(r => r.data)
 
-      setAccessToken(newAccessToken) // Set the new access token
-      setRefreshToken(newRefreshToken) // Set the new refresh token
+      setAccessToken(newAccessToken)
+      setRefreshToken(newRefreshToken)
     }
     catch (error) {
       console.error('Token refresh failed:', error)
@@ -67,7 +69,6 @@ export const useAuthStore = defineStore('AuthStore', () => {
     }
   }
 
-  // Fetch the current user's session
   const getSession = async () => {
     try {
       isLoading.value = true
@@ -82,14 +83,12 @@ export const useAuthStore = defineStore('AuthStore', () => {
     }
   }
 
-  // Logout the user and clear tokens
   const logout = async () => {
-    setAccessToken(undefined) // Clear the access token
-    setRefreshToken(undefined) // Clear the refresh token
-    user.value = null // Clear the user state
+    setAccessToken(undefined)
+    setRefreshToken(undefined)
+    user.value = null
   }
 
-  // Set the user state manually
   const setUser = (newUser: User | null) => {
     user.value = newUser
   }

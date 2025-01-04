@@ -2,7 +2,7 @@ import { defineNuxtPlugin, useRuntimeConfig } from '#app'
 import { Api } from '~/generated-api/Api'
 
 export type BearerTokenSecurity = {
-  token?: string
+  token?: string | null
 }
 
 export default defineNuxtPlugin(() => {
