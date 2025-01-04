@@ -1,4 +1,7 @@
+import { useNuxtApp } from '#app'
+
 export const useEditProjectStore = defineStore('editProject', () => {
+  const { $api } = useNuxtApp()
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
   const id = ref<number | null>(null)
@@ -7,12 +10,10 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
   const update = async () => {
     if (!id.value) {
-      return await projectUtil.addProject({
-        title: title.value, description: description.value,
-      })
+      throw 'Not Implemented'
     }
 
-    return await projectUtil.updateProject({ id: id.value, title: title.value, description: description.value })
+    return await $api.projects.projectControllerUpdateOne(id.value, { title: title.value, description: description.value })
   }
 
   const init = (projectId?: number) => {
