@@ -13,11 +13,11 @@ export const useEditUserSkillStore = defineStore('editUserSkill', () => {
   })
 
   const update = async () => {
-    await $api.userSkill.userSkillControllerEditUserSkill(userSkill.id, { description: userSkill.description })
+    await $api.userSkill.userSkillControllerUpdateOne(userSkill.id, { description: userSkill.description })
   }
 
   const deleteUserSkill = async () => {
-    await $api.userSkill.userSkillControllerDeleteUserSkill(userSkill.id)
+    await $api.userSkill.userSkillControllerDeleteOne(userSkill.id)
 
     if (!user.value) {
       throw new Error('User does not exist')

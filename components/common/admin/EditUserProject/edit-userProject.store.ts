@@ -21,7 +21,7 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   }
 
   const deleteUserProject = async () => {
-    await $api.userProject.userProjectControllerDeleteUserProject(userProject.id)
+    await $api.userProject.userProjectControllerDeleteOne(userProject.id)
   }
 
   const init = (userProjectId: number) => {

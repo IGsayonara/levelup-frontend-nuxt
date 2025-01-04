@@ -20,11 +20,11 @@ export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () =>
   }
 
   const update = async () => {
-    return await $api.userProjectSkill.userProjectSkillControllerUpdateUserProjectSkill(userProjectSkill.id, userProjectSkill)
+    return await $api.userProjectSkill.userProjectSkillControllerUpdateOne(userProjectSkill.id, userProjectSkill)
   }
 
   const deleteUserProjectSkill = async () => {
-    return await $api.userProjectSkill.userProjectSkillControllerDeleteUserProjectSkill(userProjectSkill.id)
+    return await $api.userProjectSkill.userProjectSkillControllerDeleteOne(userProjectSkill.id)
   }
 
   return {

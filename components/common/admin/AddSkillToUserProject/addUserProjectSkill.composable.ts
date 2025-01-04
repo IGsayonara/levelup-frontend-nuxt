@@ -6,7 +6,7 @@ export const useAddUserProjectSkill = () => {
   const { fetchUser, user } = userStore
 
   const addSkillToUserProject = async (userProjectId: number, skillId: number) => {
-    await $api.userProjectSkill.userProjectSkillControllerAddUserProjectSkill({
+    await $api.userProjectSkill.userProjectSkillControllerAddOne({
       userProjectId,
       skillId,
     })

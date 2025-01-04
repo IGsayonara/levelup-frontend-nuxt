@@ -4,7 +4,7 @@ export const useAddUserSkill = () => {
   const { $api } = useNuxtApp()
 
   const addUserSkill = async (skillId: number) => {
-    await $api.userSkill.userSkillControllerAddUserSkill(skillId)
+    await $api.userSkill.userSkillControllerAddOne(skillId)
   }
 
   return {
