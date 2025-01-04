@@ -1,55 +1,67 @@
 <template>
-  <div v-if="userSkill">
+  <div>
     <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
-    <section>
-      <div
-        class="container"
-      >
-        <SkillCard :skill="userSkill.skill" />
-      </div>
-    </section>
-    <section>
-      <div
-        class="container"
-        v-html="userSkill.description"
-      />
-    </section>
-    <section>
-      <div
-        v-if="skillUserProjects && skillUserProjects.length"
-        class="container"
-      >
-        <div class="section-title-wrapper">
-          <SectionTitle :title="'Related Projects'" />
-        </div>
-        <div class="row">
+    <div v-if="userSkill">
+      <section>
+        <div class="container">
+          <div class="section-title-wrapper">
+            <SectionTitle :title="userSkill.skill.title" />
+          </div>
           <div
-            v-for="userProject in skillUserProjects"
-            :key="userProject.id"
-            class="col-12 col-md-6 skill-card-col mb-5"
-          >
-            <AppCard
-              :project="userProject.project"
-              @click="selectedUserProjectId = userProject.id"
-            />
+            class="container"
+            v-html="userSkill.description"
+          />
+        </div>
+      </section>
+      <section>
+        <div
+          v-if="skillUserProjects && skillUserProjects.length"
+          class="container"
+        >
+          <div class="section-title-wrapper">
+            <SectionTitle :title="'Related Projects'" />
+          </div>
+          <div class="row">
+            <div
+              v-for="userProject in skillUserProjects"
+              :key="userProject.id"
+              class="col-12 col-md-6 skill-card-col mb-5"
+            >
+              <AppCard
+                :project="userProject.project"
+                @click="selectedUserProjectId = userProject.id"
+              />
+            </div>
           </div>
         </div>
+      </section>
+      <AppModal
+        v-if="selectedUserProjectId && selectedUserProject && userProjectSkill"
+        @close="selectedUserProjectId = null"
+      >
+        <template #header>
+          <h2>{{ selectedUserProject.project.title }}</h2>
+        </template>
+        <template #default>
+          <p v-html="userProjectSkill.description" />
+        </template>
+        <template #footer>
+          <AppButton @click="$router.push(`/project/${selectedUserProjectId}`)">
+            Go to project
+          </AppButton>
+        </template>
+      </AppModal>
+    </div>
+    <div v-else>
+      <div class="container">
+        <div class="not_found_image">
+          <img
+            src="/img/404.jpg"
+            alt="Not found any project"
+          >
+        </div>
       </div>
-    </section>
-    <AppModal
-      v-if="selectedUserProjectId && selectedUserProject && userProjectSkill"
-      @close="selectedUserProjectId = null"
-    >
-      <template #header>
-        <h2>{{ selectedUserProject.project.title }}</h2>
-      </template>
-      <template #default>
-        <p v-html="userProjectSkill.description" />
-      </template>
-      <template #footer>
-        Footer
-      </template>
-    </AppModal>
+    </div>
   </div>
 </template>
 

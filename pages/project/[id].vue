@@ -1,67 +1,76 @@
 <template>
-  <div v-if="userProject">
+  <div>
     <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
-    <section>
-      <div
-        v-if="userProject"
-        class="container"
-      >
-        <!--        <div class="section-title-wrapper"> -->
-        <!--          <SectionTitle :title="userProject.project?.title" /> -->
-        <!--        </div> -->
-        <FullAppCard :user-project="userProject" />
-      </div>
-      <div
-        v-else
-        class="container"
-      >
-        smth went wrong
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="section-title-wrapper">
-          <SectionTitle :title="'Achievements'" />
+    <div v-if="userProject">
+      <section>
+        <div
+          v-if="userProject"
+          class="container"
+        >
+          <!--        <div class="section-title-wrapper"> -->
+          <!--          <SectionTitle :title="userProject.project?.title" /> -->
+          <!--        </div> -->
+          <FullAppCard :user-project="userProject" />
         </div>
-        <div v-html="userProject.description" />
-      </div>
-    </section>
-    <section>
-      <div
-        v-if="userProject && userProject.skills && userProject.skills.length"
-        class="container"
-      >
-        <div class="section-title-wrapper">
-          <SectionTitle :title="'Tech stack'" />
+      </section>
+      <section>
+        <div class="container">
+          <div class="section-title-wrapper">
+            <SectionTitle :title="'Achievements'" />
+          </div>
+          <div v-html="userProject.description" />
         </div>
-        <div class="skills">
-          <div
-            v-for="skill in userProject.skills"
-            :key="skill.id"
-          >
-            <SkillCard
-              v-if="skill"
-              :skill="skill.skill"
-              @click="selectedSkillId = skill.id"
-            />
+      </section>
+      <section>
+        <div
+          v-if="userProject && userProject.skills && userProject.skills.length"
+          class="container"
+        >
+          <div class="section-title-wrapper">
+            <SectionTitle :title="'Tech stack'" />
+          </div>
+          <div class="skills">
+            <div
+              v-for="skill in userProject.skills"
+              :key="skill.id"
+            >
+              <SkillCard
+                v-if="skill"
+                :skill="skill.skill"
+                @click="selectedSkillId = skill.id"
+              />
+            </div>
           </div>
         </div>
+      </section>
+      <AppModal
+        v-if="selectedSkillId && selectedSkill"
+        @close="selectedSkillId = null"
+      >
+        <template #header>
+          <h2>{{ selectedSkill.skill.title }}</h2>
+        </template>
+        <template #default>
+          <div v-html="selectedSkill.description" />
+        </template>
+        <template #footer>
+          <AppButton @click="$router.push(`/skill/${selectedSkillId}`)">
+            Go to skill
+          </AppButton>
+        </template>
+      </AppModal>
+    </div>
+
+    <div v-else>
+      <div class="container">
+        <div class="not_found_image">
+          <img
+            src="/img/404.jpg"
+            alt="Not found any project"
+          >
+        </div>
       </div>
-    </section>
-    <AppModal
-      v-if="selectedSkillId && selectedSkill"
-      @close="selectedSkillId = null"
-    >
-      <template #header>
-        <h2>{{ selectedSkill.skill.title }}</h2>
-      </template>
-      <template #default>
-        <div v-html="selectedSkill.description" />
-      </template>
-      <template #footer>
-        Footer
-      </template>
-    </AppModal>
+    </div>
   </div>
 </template>
 
@@ -113,5 +122,9 @@ const selectedSkill = computed<UserProjectSkill | undefined>(() => {
   display: flex;
   gap: 2rem;
   flex-wrap: wrap;
+}
+.not_found_image {
+  display: flex;
+  justify-content: center;
 }
 </style>
