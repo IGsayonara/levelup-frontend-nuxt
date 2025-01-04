@@ -107,7 +107,7 @@
                     backgroundColor: '#f8f8f8',
                     margin: 'auto',
                   }"
-                  :img="profileImage"
+                  :img="cropperImage"
                   :options="{
                     viewMode: 1,
                     dragMode: 'crop',
@@ -134,6 +134,9 @@ import VuePictureCropper, { cropper } from 'vue-picture-cropper'
 import { useGeneralSettings } from '~/components/common/admin/GeneralSettings/general-settings.composable'
 
 const { user, update, profileImage, updateProfileImage } = useGeneralSettings()
+
+const cropperImage = ref()
+
 const profileImageRef = ref<HTMLInputElement | null>(null)
 const isCropperModalShowing = ref(false)
 
@@ -143,10 +146,12 @@ const triggerFileInput = () => {
 }
 
 const onUpdate = async () => {
-  const file = await cropper?.getFile() as File
-  await updateProfileImage(file)
-  profileImage.value = URL.createObjectURL(file)
-  isCropperModalShowing.value = false
+  const file = await cropper?.getFile()
+  if (file) {
+    await updateProfileImage(file)
+    profileImage.value = cropper?.getDataURL()
+    isCropperModalShowing.value = false
+  }
 }
 
 const handleFileChange = (event: Event) => {
@@ -154,7 +159,7 @@ const handleFileChange = (event: Event) => {
   const file = input.files ? input.files[0] : null
   if (file) {
     // Update the profile image or handle the file
-    profileImage.value = URL.createObjectURL(file)
+    cropperImage.value = URL.createObjectURL(file)
     isCropperModalShowing.value = true
   }
 }

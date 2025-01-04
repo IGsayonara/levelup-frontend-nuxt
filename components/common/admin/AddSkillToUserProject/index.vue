@@ -13,7 +13,7 @@
           v-for="skill in searchResults"
           :key="skill.id"
           class="col skill-button"
-          @click="addSkillToUserProject(userProjectId, skill.id)"
+          @click="addSkillToUserProject(userProjectId, +skill.id)"
         >
           {{ skill.title }}
         </AppButton>

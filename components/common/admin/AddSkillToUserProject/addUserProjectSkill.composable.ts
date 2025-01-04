@@ -11,7 +11,9 @@ export const useAddUserProjectSkill = () => {
       skillId,
     })
 
-    await fetchUser(user?.username as string)
+    if (user) {
+      await fetchUser(user.username)
+    }
   }
 
   return {

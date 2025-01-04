@@ -15,7 +15,7 @@ export const useSkillsStore = defineStore('skillsStore', () => {
       isLoading.value = true
       skills.value = await $api.skills.skillControllerFindAll().then(r => r.data)
     }
-    catch (error) {
+    catch {
       isError.value = true
     }
     finally {
