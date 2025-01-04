@@ -118,7 +118,6 @@ export interface UpdateUserProfileDto {
   firstName: string;
   lastName: string;
   email: string;
-  profileImage: string;
   bio: string;
   phoneNumber: string;
   address: string;
