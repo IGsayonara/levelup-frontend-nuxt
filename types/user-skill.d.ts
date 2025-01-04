@@ -1,10 +1,9 @@
 import type { Skill } from '~/types/skill'
-import type { User } from '~/types/user'
 
 export type UserSkill = {
   id: number
-  user?: User
+  // user: User
   skill: Skill
-  learnedAt: Date
+  learnedAt: string
   description: string
 }
