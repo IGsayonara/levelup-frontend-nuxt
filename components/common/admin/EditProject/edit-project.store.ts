@@ -1,5 +1,3 @@
-import { projectUtil } from '~/utils/api'
-
 export const useEditProjectStore = defineStore('editProject', () => {
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)

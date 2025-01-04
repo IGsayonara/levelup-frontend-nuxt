@@ -24,6 +24,13 @@ export default defineNuxtConfig({
     'froala-editor/css/froala_style.min.css',
   ],
 
+  runtimeConfig: {
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+    },
+  },
+
   alias: {
     cookie: resolve(__dirname, 'node_modules/cookie'),
   },

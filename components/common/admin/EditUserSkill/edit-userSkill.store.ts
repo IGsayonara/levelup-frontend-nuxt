@@ -1,7 +1,8 @@
-import { userSkillUtil } from '~/utils/api'
 import type { UserProject } from '~/types/user-project'
+import { useNuxtApp } from '#app'
 
 export const useEditUserSkillStore = defineStore('editUserSkill', () => {
+  const { $api } = useNuxtApp()
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
   const { fetchUser } = userStore
@@ -12,11 +13,11 @@ export const useEditUserSkillStore = defineStore('editUserSkill', () => {
   })
 
   const update = async () => {
-    await userSkillUtil.updateUserSkill(userSkill)
+    await $api.userSkill.userSkillControllerEditUserSkill(userSkill.id, { description: userSkill.description })
   }
 
   const deleteUserSkill = async () => {
-    await userSkillUtil.deleteUserSkill(userSkill.id)
+    await $api.userSkill.userSkillControllerDeleteUserSkill(userSkill.id)
 
     if (!user.value) {
       throw new Error('User does not exist')

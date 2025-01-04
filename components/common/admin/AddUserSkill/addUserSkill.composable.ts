@@ -1,8 +1,10 @@
-import { userSkillUtil } from '~/utils/api'
+import { useNuxtApp } from '#app'
 
 export const useAddUserSkill = () => {
+  const { $api } = useNuxtApp()
+
   const addUserSkill = async (skillId: number) => {
-    await userSkillUtil.addUserSkill(skillId)
+    await $api.userSkill.userSkillControllerAddUserSkill(skillId)
   }
 
   return {

@@ -1,8 +1,8 @@
-import type { ProjectSkill } from '~/types/project'
-import { userProjectSkillUtil } from '~/utils/api'
 import type { UserProjectSkill } from '~/types/user-project-skill'
+import { useNuxtApp } from '#app'
 
 export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () => {
+  const { $api } = useNuxtApp()
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
 
@@ -20,11 +20,11 @@ export const useEditUserProjectSkill = defineStore('editUserProjectSkill', () =>
   }
 
   const update = async () => {
-    return await userProjectSkillUtil.updateUserProjectSkill(userProjectSkill)
+    return await $api.userProjectSkill.userProjectSkillControllerUpdateUserProjectSkill(userProjectSkill.id, userProjectSkill)
   }
 
   const deleteUserProjectSkill = async () => {
-    return await userProjectSkillUtil.deleteUserProjectSkill(userProjectSkill.id)
+    return await $api.userProjectSkill.userProjectSkillControllerDeleteUserProjectSkill(userProjectSkill.id)
   }
 
   return {

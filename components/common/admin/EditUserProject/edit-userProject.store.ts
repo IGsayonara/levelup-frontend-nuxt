@@ -1,7 +1,7 @@
-import { userProjectUtil } from '~/utils/api'
 import type { UserProjectSkill } from '~/types/user-project-skill'
 
 export const useEditUserProjectStore = defineStore('editUserProject', () => {
+  const { $api } = useNuxtApp()
   const userStore = useUserStore()
   const { user } = storeToRefs(userStore)
 
@@ -13,11 +13,15 @@ export const useEditUserProjectStore = defineStore('editUserProject', () => {
   })
 
   const update = async () => {
-    await userProjectUtil.updateUserProject(userProject)
+    await $api.userProject.userProjectControllerUpdateOne(userProject.id, {
+      role: userProject.role,
+      description: userProject.description,
+      shortDescription: userProject.description,
+    })
   }
 
   const deleteUserProject = async () => {
-    await userProjectUtil.deleteUserProject(userProject.id)
+    await $api.userProject.userProjectControllerDeleteUserProject(userProject.id)
   }
 
   const init = (userProjectId: number) => {
