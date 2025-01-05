@@ -37,24 +37,24 @@
               <SkillCard
                 v-if="skill"
                 :skill="skill.skill"
-                @click="selectedSkillId = skill.id"
+                @click="selectedUserProjectSkillId = skill.id"
               />
             </div>
           </div>
         </div>
       </section>
       <AppModal
-        v-if="selectedSkillId && selectedSkill"
-        @close="selectedSkillId = null"
+        v-if="selectedUserProjectSkillId && selectedUserProjectSkill"
+        @close="selectedUserProjectSkillId = null"
       >
         <template #header>
-          <h2>{{ selectedSkill.skill.title }}</h2>
+          <h2>{{ selectedUserProjectSkill.skill.title }}</h2>
         </template>
         <template #default>
-          <div v-html="selectedSkill.description" />
+          <div v-html="selectedUserProjectSkill.description" />
         </template>
         <template #footer>
-          <AppButton @click="$router.push(`/skill/${selectedSkillId}`)">
+          <AppButton @click="$router.push(`/skill/${relatedUserSkill?.id}`)">
             Go to skill
           </AppButton>
         </template>
@@ -107,13 +107,20 @@ const breadcrumbs = ref([
   },
 ])
 
-const selectedSkillId = ref<number | null>(null)
+const selectedUserProjectSkillId = ref<number | null>(null)
 
-const selectedSkill = computed<UserProjectSkill | undefined>(() => {
-  if (!selectedSkillId.value) {
+const selectedUserProjectSkill = computed<UserProjectSkill | undefined>(() => {
+  if (!selectedUserProjectSkillId.value) {
     return
   }
-  return userProject.value?.skills.find(skill => skill.id === selectedSkillId.value)
+  return userProject.value?.skills.find(skill => skill.id === selectedUserProjectSkillId.value)
+})
+
+const relatedUserSkill = computed(() => {
+  if (selectedUserProjectSkillId.value) {
+    return user.value?.userSkills.find(userSkill => +userSkill.skill.id === +selectedUserProjectSkill.value?.skill.id)
+  }
+  return null
 })
 </script>
 
