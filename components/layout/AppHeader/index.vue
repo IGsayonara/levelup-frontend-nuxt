@@ -11,10 +11,9 @@
             alt="Level UP"
           />
         </div>
-        <ClientOnly>
-          <DesktopNavigation v-if="!isMobileNavigation" />
-          <MobileNavigation v-if="isMobileNavigation" />
-        </ClientOnly>
+
+        <DesktopNavigation class="desktopNavigation" />
+        <MobileNavigation class="mobileNavigation" />
       </div>
     </div>
   </header>
@@ -22,7 +21,6 @@
 
 <script setup>
 import { computed } from 'vue'
-import { useViewpoint } from '~/composables/viewpoint-composable/index.ts'
 import DesktopNavigation from '~/components/layout/AppHeader/DesktopNavigation.vue'
 import MobileNavigation from '~/components/layout/AppHeader/MobileNavigation.vue'
 
@@ -30,10 +28,10 @@ defineOptions({
   name: 'AppHeader',
 })
 
-const { currentBreakpoint } = useViewpoint()
-const isMobileNavigation = computed(() => {
-  return ['xs', 'sm'].includes(currentBreakpoint.value)
-})
+// const { currentBreakpoint } = useViewpoint()
+// const isMobileNavigation = computed(() => {
+//   return ['xs', 'sm'].includes(currentBreakpoint.value)
+// })
 
 const { isDark } = useTheme()
 const logoUrl = computed(() => {
@@ -63,6 +61,18 @@ const logoUrl = computed(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+
+  @include media-breakpoint-down(md){
+    .desktopNavigation {
+      display: none !important;
+    }
+  }
+
+  @include media-breakpoint-up(md){
+    .mobileNavigation {
+      display: none !important;
+    }
   }
 }
 </style>

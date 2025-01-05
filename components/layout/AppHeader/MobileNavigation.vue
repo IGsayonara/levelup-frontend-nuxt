@@ -1,20 +1,22 @@
 <template>
-  <AppModal
-    v-if="isOpen"
-    @close="close"
-  >
-    <template #header />
-    <template #default>
-      <div class="mobile__navigation-wrapper">
-        <DefaultNavigation class="mobile__navigation" />
-      </div>
-    </template>
-  </AppModal>
-  <FontAwesome
-    class="burger-button"
-    :icon="faBars"
-    @click="open"
-  />
+  <div>
+    <AppModal
+      v-if="isOpen"
+      @close="close"
+    >
+      <template #header />
+      <template #default>
+        <div class="mobile__navigation-wrapper">
+          <DefaultNavigation class="mobile__navigation" />
+        </div>
+      </template>
+    </AppModal>
+    <FontAwesome
+      class="burger-button"
+      :icon="faBars"
+      @click="open"
+    />
+  </div>
 </template>
 
 <script setup>
