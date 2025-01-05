@@ -15,6 +15,7 @@
     >
       Profile
     </nuxt-link>
+    <ThemeSwitcher />
   </nav>
 </template>
 
@@ -32,7 +33,7 @@ const config = useRuntimeConfig()
 .navigation {
   a {
     position: relative;
-    color: $strong;
+    color: var(--strong);
     font-weight: 500;
     text-transform: uppercase;
     text-decoration: none;
@@ -49,7 +50,7 @@ const config = useRuntimeConfig()
       width: 0;
       left: 0;
       height: 2px;
-      background-color: $highlight;
+      background-color: var(--highlight);
       transition: all 0.3s ease-in;
     }
 

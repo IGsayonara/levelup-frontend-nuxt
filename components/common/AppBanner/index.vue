@@ -42,7 +42,7 @@ withDefaults(defineProps<Props>(), {
   align-items: center;
 
   &__text-wrapper {
-    color: $body;
+    color: var(--body);
 
     .title {
       font-size: 6rem;

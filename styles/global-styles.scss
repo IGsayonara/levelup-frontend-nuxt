@@ -9,22 +9,22 @@ body {
   font-family: Roboto;
   font-size: 14px;
   overflow-y: scroll;
-  background-color: $body;
-  color: $text;
+  background-color: var(--body);
+  color: var(--text);
 }
 
 a {
-  color: $highlight;
+  color: var(--highlight);
   text-decoration: none;
   transition: all 0.15s linear;
 
   &:hover {
-    border-bottom: 1px solid $highlight;
+    border-bottom: 1px solid var(--highlight);
   }
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: $strong
+  color: var(--strong)
 }
 
 h2 {
@@ -49,7 +49,7 @@ section {
 
 strong {
   font-weight: bold;
-  color: $strong;
+  color: var(--strong);
 }
 
 em {

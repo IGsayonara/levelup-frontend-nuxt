@@ -57,7 +57,7 @@ withDefaults(defineProps<Props>(), {
   justify-content: center;
 
   &:hover {
-    color: $body;
+    color: var(--body);
     background-color: v-bind(primaryColor);
   }
 

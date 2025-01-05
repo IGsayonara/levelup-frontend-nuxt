@@ -56,9 +56,9 @@ const imageUrl = computed(() => {
   display: flex;
   flex-direction: column;
   padding: 3rem;
-  border: 1px solid $border;
+  border: 1px solid var(--border);
   border-radius: 4rem;
-  background-color: $body;
+  background-color: var(--body);
   transition: all 0.3s ease-in;
 
   &__header {
@@ -75,7 +75,7 @@ const imageUrl = computed(() => {
       width: 100%;
       height: 100%;
       min-width: 15rem;
-      border: 1px solid $border;
+      border: 1px solid var(--border);
       border-radius: 25%;
       transition: all 0.3s ease-in;
     }
@@ -100,7 +100,7 @@ const imageUrl = computed(() => {
     }
 
     .role {
-      color: $strong;
+      color: var(--strong);
       font-weight: bold;
       font-size: 2rem;
     }
@@ -110,21 +110,21 @@ const imageUrl = computed(() => {
   }
 
   &:hover {
-    border-color: $highlight;
-    filter: drop-shadow(1px 1px 6px $highlight);
+    border-color: var(--highlight);
+    filter: drop-shadow(1px 1px 6px var(--highlight));
   }
 
   &:hover & {
     &__text-wrapper {
       .title {
-        //color: $highlight;
+        //color: var(--highlight);
       }
     }
 
     &__image-wrapper {
       .image {
-        border-color: $highlight;
-        filter: drop-shadow(1px 1px 6px $highlight);
+        border-color: var(--highlight);
+        filter: drop-shadow(1px 1px 6px var(--highlight));
       }
     }
   }

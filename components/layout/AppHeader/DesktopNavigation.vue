@@ -13,8 +13,10 @@ defineOptions({
 <style scoped lang="scss">
 .desktop {
   &__navigation:deep {
+    display: flex;
+    align-items: center;
     margin-left: auto;
-    a {
+    & > * {
       margin-left: 3.5rem;
     }
   }
