@@ -2,12 +2,12 @@
   <div v-if="user">
     <div class="row">
       <div class="col-12 col-md-6">
-        <AppButton @click="isProjectModalOpen = true">
+        <AppButton @click="isUserProjectModalOpen = true">
           Add project
         </AppButton>
         <AppModal
-          v-if="isProjectModalOpen"
-          @close="isProjectModalOpen = false"
+          v-if="isUserProjectModalOpen"
+          @close="isUserProjectModalOpen = false"
         >
           <template #header />
           <template #default>
@@ -65,28 +65,30 @@
           <EditUserProject :user-project="selectedProject" />
         </template>
         <template #footer>
-          <div>
+          <div class="edit-user_project__footer">
             <AppButton
-              class="col"
               @click="updateUserProject"
             >
               Update
             </AppButton>
             <AppButton
-              class="col"
-              @click="isProjectMO = true"
+              @click="isProjectModalOpen = true"
             >
               Edit Project
             </AppButton>
-            <AppButton @click="deleteUserProject">
+            <AppButton
+              primary-color="red"
+              style="margin-left: auto"
+              @click="deleteUserProject"
+            >
               Delete project
             </AppButton>
           </div>
         </template>
       </AppModal>
       <AppModal
-        v-if="isProjectMO"
-        @close="isProjectMO = false"
+        v-if="isProjectModalOpen"
+        @close="isProjectModalOpen = false"
       >
         <template #header>
           <h2>{{ selectedProjectTitle }}</h2>
@@ -148,8 +150,8 @@ const editProjectStore = useEditProjectStore()
 const { update: updateProject } = editProjectStore
 
 const selectedProject = ref<null | UserProject>(null)
+const isUserProjectModalOpen = ref(false)
 const isProjectModalOpen = ref(false)
-const isProjectMO = ref(false)
 
 const selectedSkill = ref<null | UserSkill>(null)
 const isSkillModalOpen = ref(false)
@@ -167,5 +169,10 @@ const selectedProjectTitle = computed<string | undefined>(() => {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
+}
+
+.edit-user_project__footer {
+  display: flex;
+  gap: 1em;
 }
 </style>

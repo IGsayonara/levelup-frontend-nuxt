@@ -27,7 +27,7 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
     id.value = projectId
 
-    const userProject = user.value?.userProjects.find(userProject => userProject.project.id === +projectId)
+    const userProject = user.value?.userProjects.find(userProject => +userProject.project.id === +projectId)
 
     if (!userProject) {
       throw 'UserProject not found.'
@@ -39,11 +39,18 @@ export const useEditProjectStore = defineStore('editProject', () => {
     description.value = project.description || ''
   }
 
+  const updateProjectImage = async (file: File) => {
+    if (id.value) {
+      await $api.projects.projectControllerUpdateProjectImage(id.value, { file })
+    }
+  }
+
   return {
     id,
     title,
     description,
     update,
+    updateProjectImage,
     init,
   }
 })

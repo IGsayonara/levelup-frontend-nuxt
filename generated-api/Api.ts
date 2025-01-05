@@ -58,6 +58,7 @@ export interface ProjectResponseDto {
   createdAt: string;
   /** @format date-time */
   updatedAt: string;
+  image: string;
 }
 
 export interface UserProjectSkillResponseDto {
@@ -463,6 +464,31 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         secure: true,
         type: ContentType.Json,
         format: "json",
+        ...params,
+      }),
+
+    /**
+     * No description
+     *
+     * @tags Projects
+     * @name ProjectControllerUpdateProjectImage
+     * @request PUT:/projects/{id}/image
+     * @secure
+     */
+    projectControllerUpdateProjectImage: (
+      id: number,
+      data: {
+        /** @format binary */
+        file?: File;
+      },
+      params: RequestParams = {},
+    ) =>
+      this.request<void, any>({
+        path: `/projects/${id}/image`,
+        method: "PUT",
+        body: data,
+        secure: true,
+        type: ContentType.FormData,
         ...params,
       }),
   };

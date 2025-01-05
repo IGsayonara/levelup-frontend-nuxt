@@ -4,7 +4,7 @@ export type Project = {
   id: number
   title: string
   description: string
-  // imageUrl: string
+  image: string
   projectSkills: ProjectSkill[]
   createdAt: string
   updatedAt: string

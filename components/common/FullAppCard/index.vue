@@ -47,7 +47,7 @@ const project = computed(() => {
 })
 
 const imageUrl = computed(() => {
-  return '/img/404.jpg'
+  return project.value.image || '/img/404.jpg'
 })
 </script>
 
