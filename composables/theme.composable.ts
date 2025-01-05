@@ -1,4 +1,4 @@
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useState, useCookie } from '#app'
 
 export enum Theme {
@@ -10,13 +10,12 @@ export function useTheme() {
   const theme = useState<Theme>('theme', () => {
     // Initialize theme from cookies or fallback to light
     const themeCookie = useCookie<Theme>('theme')
+    useHead({
+      htmlAttrs: {
+        'data-theme': themeCookie.value || Theme.light,
+      },
+    })
     return themeCookie.value || Theme.light
-  })
-
-  useHead({
-    htmlAttrs: {
-      'data-theme': theme.value,
-    },
   })
 
   const isDark = computed(() => theme.value === Theme.dark)
@@ -36,11 +35,6 @@ export function useTheme() {
     const themeCookie = useCookie<Theme>('theme')
     themeCookie.value = newTheme
   }
-
-  // Set the theme attribute when the component is mounted
-  onMounted(() => {
-    const savedTheme = theme.value
-  })
 
   return {
     theme,
