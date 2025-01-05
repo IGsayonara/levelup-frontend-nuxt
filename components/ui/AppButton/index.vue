@@ -30,8 +30,8 @@ interface Props {
 }
 
 withDefaults(defineProps<Props>(), {
-  primaryColor: '#ff8c00',
-  secondaryColor: 'white',
+  primaryColor: 'rgb(94 234 212)',
+  secondaryColor: 'transparent',
 })
 </script>
 
@@ -49,20 +49,15 @@ withDefaults(defineProps<Props>(), {
   padding: 1em;
   font-weight: 500;
   border-radius: 4rem;
-  border: 1px solid $orange;
   border: 1px solid v-bind(primaryColor);
-  color: $orange;
   color: v-bind(primaryColor);
-  background-color: white;
   background-color: v-bind(secondaryColor);
   transition: all 0.3s ease-in;
   display: flex;
   justify-content: center;
 
   &:hover {
-    color: white;
-    color: v-bind(secondaryColor);
-    background-color: $orange;
+    color: $body;
     background-color: v-bind(primaryColor);
   }
 

@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     // Keys within public, will be also exposed to the client-side
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+      development: process.env.NUXT_PUBLIC_DEVELOPMENT,
     },
   },
 

@@ -104,8 +104,8 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   max-height: 100vh;
-  background: white;
-  border: 1px solid #e5e5e5;
+  background: $body;;
+  border: 1px solid $border;
   border-radius: 1rem;
   @include media-breakpoint-down(md) {
     width: 100%;
@@ -114,7 +114,7 @@ onBeforeUnmount(() => {
   }
   header {
     display: flex;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid $border;
     .close-button {
       margin-left: auto;
       cursor: pointer;
@@ -125,7 +125,7 @@ onBeforeUnmount(() => {
     overflow-y: auto;
   }
   footer {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid $border;
   }
   .app-modal_content,
   header,

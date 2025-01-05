@@ -11,14 +11,56 @@
         >
       </div>
       <div class="user-card__contact-info">
-        <p>
-          <a :href="`mailto:${user.email}`">
-            {{ user.email }}
-          </a>
-        </p>
-        <p>
+        <p />
+        <p />
+        <p class="user-card__social-links">
           <a :href="`tel:${user.phoneNumber}`">
-            {{ user.phoneNumber }}
+            <FontAwesome
+              class="burger-button"
+              :icon="faPhone"
+            />
+          </a>
+          <a :href="`mailto:${user.email}`">
+            <FontAwesome
+              class="burger-button"
+              :icon="faEnvelope"
+            />
+          </a>
+          <a
+            :href="`https://www.linkedin.com/in/ihor-didunik/`"
+            target="_blank"
+          >
+            <FontAwesome
+              class="burger-button"
+              :icon="faLinkedin"
+            />
+          </a>
+          <a
+            :href="`https://github.com/IGsayonara`"
+            target="_blank"
+          >
+            <FontAwesome
+              class="burger-button"
+              :icon="faGithub"
+            />
+          </a>
+          <a
+            :href="`https://www.instagram.com/ijsayonara/`"
+            target="_blank"
+          >
+            <FontAwesome
+              class="burger-button"
+              :icon="faInstagram"
+            />
+          </a>
+          <a
+            :href="`https://wa.me/${user.phoneNumber}`"
+            target="_blank"
+          >
+            <FontAwesome
+              class="burger-button"
+              :icon="faWhatsapp"
+            />
           </a>
         </p>
       </div>
@@ -29,7 +71,7 @@
           {{ user.firstName + ' ' + user.lastName }}
         </h3>
         <div class="role">
-          @{{ user.username }}
+          Front End Developer in OstNetwork
         </div>
       </div>
       <div
@@ -41,6 +83,8 @@
 </template>
 
 <script setup lang="ts">
+import { faLinkedin, faGithub, faInstagram, faWhatsapp } from '@fortawesome/free-brands-svg-icons'
+import { faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons'
 import type { User } from '~/types/user'
 
 defineOptions({
@@ -63,9 +107,9 @@ const imageUrl = computed(() => {
   display: flex;
   flex-direction: row;
   padding: 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $border;
   border-radius: 4rem;
-  background-color: white;
+  background-color: $body;;
   transition: all 0.3s ease-in;
 
   &__left-bar {
@@ -82,6 +126,22 @@ const imageUrl = computed(() => {
     }
   }
 
+  &__social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    font-size: 2rem;
+
+    a {
+      color: $text;
+    }
+
+    a:hover {
+      color: $highlight;
+      border-bottom: none;
+    }
+  }
+
   &__header {
     display: flex;
     margin-bottom: 3rem;
@@ -95,7 +155,7 @@ const imageUrl = computed(() => {
       width: 100%;
       height: 100%;
       min-width: 15rem;
-      border: 1px solid #e5e5e5;
+      border: 1px solid $border;
       border-radius: 25%;
       transition: all 0.3s ease-in;
     }
@@ -130,24 +190,24 @@ const imageUrl = computed(() => {
     //color: #808080;
   }
 
-  //&:hover {
-  //  border-color: $orange;
-  //  filter: drop-shadow(1px 1px 6px $orange);
-  //}
+  &:hover {
+    border-color: $highlight;
+    filter: drop-shadow(1px 1px 6px $highlight);
+  }
 
-  //&:hover & {
-  //  &__text-wrapper {
-  //    .title {
-  //      color: $orange;
-  //    }
-  //  }
-  //
-  //  &__image-wrapper {
-  //    .image {
-  //      border-color: $orange;
-  //      filter: drop-shadow(1px 1px 6px $orange);
-  //    }
-  //  }
-  //}
+  &:hover & {
+    &__text-wrapper {
+      .title {
+        //color: $highlight;
+      }
+    }
+
+    &__image-wrapper {
+      .image {
+        border-color: $highlight;
+        filter: drop-shadow(1px 1px 6px $highlight);
+      }
+    }
+  }
 }
 </style>

@@ -120,7 +120,7 @@ const onProjectClick = async (project: UserProject) => {
     &-image {
       & > img {
         width: 100%;
-        border: 1px solid #e5e5e5;
+        border: 1px solid $border;
         border-radius: 25%;
       }
     }

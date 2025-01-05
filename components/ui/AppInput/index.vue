@@ -34,8 +34,9 @@ input {
   width: 100%;
   height: 14px;
   padding: 3rem 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $border;
   border-radius: 2rem;
-  color: #808080;
+  color: $text;
+  background-color: lighten($body, 10%);
 }
 </style>

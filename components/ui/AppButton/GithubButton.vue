@@ -1,8 +1,8 @@
 <template>
   <AppButton
-    primary-color="black"
+    primary-color="$strong"
     class="github-button"
-    secondary-color="white"
+    secondary-color="$body;"
     @click="redirectToGithub"
   >
     View on Github

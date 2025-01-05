@@ -36,7 +36,7 @@ withDefaults(defineProps<{ breadcrumbs: Breadcrumb[] }>(), { breadcrumbs: () => 
       margin: 0 10px;
     }
     .separator {
-      color: $green;
+      color: $highlight;
     }
     &:first-child a {
       margin-left: 0;

@@ -56,9 +56,9 @@ const imageUrl = computed(() => {
   display: flex;
   flex-direction: column;
   padding: 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $border;
   border-radius: 4rem;
-  background-color: white;
+  background-color: $body;
   transition: all 0.3s ease-in;
 
   &__header {
@@ -75,7 +75,7 @@ const imageUrl = computed(() => {
       width: 100%;
       height: 100%;
       min-width: 15rem;
-      border: 1px solid #e5e5e5;
+      border: 1px solid $border;
       border-radius: 25%;
       transition: all 0.3s ease-in;
     }
@@ -100,34 +100,33 @@ const imageUrl = computed(() => {
     }
 
     .role {
-      color: black;
+      color: $strong;
       font-weight: bold;
       font-size: 2rem;
     }
 
   }
   .description {
-    color: #808080;
   }
 
-  //&:hover {
-  //  border-color: $orange;
-  //  filter: drop-shadow(1px 1px 6px $orange);
-  //}
+  &:hover {
+    border-color: $highlight;
+    filter: drop-shadow(1px 1px 6px $highlight);
+  }
 
-  //&:hover & {
-  //  &__text-wrapper {
-  //    .title {
-  //      color: $orange;
-  //    }
-  //  }
-  //
-  //  &__image-wrapper {
-  //    .image {
-  //      border-color: $orange;
-  //      filter: drop-shadow(1px 1px 6px $orange);
-  //    }
-  //  }
-  //}
+  &:hover & {
+    &__text-wrapper {
+      .title {
+        //color: $highlight;
+      }
+    }
+
+    &__image-wrapper {
+      .image {
+        border-color: $highlight;
+        filter: drop-shadow(1px 1px 6px $highlight);
+      }
+    }
+  }
 }
 </style>

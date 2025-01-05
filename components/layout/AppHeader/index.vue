@@ -7,7 +7,7 @@
           @click="$router.push('/')"
         >
           <NuxtImg
-            src="/img/logo.png"
+            src="/img/logo-dark.png"
             alt="Level UP"
           />
         </div>
@@ -41,8 +41,8 @@ const isMobileNavigation = computed(() => {
 .app-header {
   padding: 1rem 0;
   border-bottom: 1px solid;
-  background-color: white;
-  filter: drop-shadow(2px 2px 6px black);
+  background-color: $body;;
+  filter: drop-shadow(2px 2px 6px $strong);
 
   .logo {
     cursor: pointer;

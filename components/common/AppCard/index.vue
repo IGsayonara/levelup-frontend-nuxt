@@ -44,9 +44,9 @@ const imageUrl = computed(() => {
 .app-card {
   display: flex;
   padding: 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $border;
   border-radius: 4rem;
-  background-color: white;
+  background-color: $body;;
   cursor: pointer;
   transition: all 0.3s ease-in;
   height: 170px;
@@ -64,7 +64,7 @@ const imageUrl = computed(() => {
       width: 100%;
       height: 100%;
       min-width: 15rem;
-      border: 1px solid #e5e5e5;
+      border: 1px solid $border;
       border-radius: 25%;
       transition: all 0.3s ease-in;
     }
@@ -84,7 +84,6 @@ const imageUrl = computed(() => {
     }
 
     .description {
-      color: #808080;
       margin-bottom: auto;
       display: -webkit-box;
       -webkit-line-clamp: 3;
@@ -95,21 +94,21 @@ const imageUrl = computed(() => {
   }
 
   &:hover {
-    border-color: $orange;
-    filter: drop-shadow(1px 1px 6px $orange);
+    border-color: $highlight;
+    filter: drop-shadow(1px 1px 6px $highlight);
   }
 
   &:hover & {
     &__text-wrapper {
       .title {
-        color: $orange;
+        //color: $highlight;
       }
     }
 
     &__image-wrapper {
       .image {
-        border-color: $orange;
-        filter: drop-shadow(1px 1px 6px $orange);
+        border-color: $highlight;
+        filter: drop-shadow(1px 1px 6px $highlight);
       }
     }
   }

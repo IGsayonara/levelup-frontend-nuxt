@@ -27,9 +27,9 @@ defineProps<Props>()
   align-items: center;
   height: 7rem;
   padding: 2em 1.5em;
-  border: 1px solid #e5e5e5;
+  border: 1px solid $border;
   border-radius: 4rem;
-  background-color: white;
+  background-color: $body;;
   transition: all 0.3s ease-in;
   cursor: pointer;
 
@@ -40,12 +40,12 @@ defineProps<Props>()
   }
 
   &:hover {
-    border-color: $orange;
-    filter: drop-shadow(1px 1px 6px $orange);
+    border-color: $highlight;
+    filter: drop-shadow(1px 1px 6px $highlight);
   }
   &:hover & {
     &__title {
-      color: $orange;
+      //color: $highlight;
     }
   }
 }
