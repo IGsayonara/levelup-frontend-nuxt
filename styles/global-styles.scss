@@ -9,15 +9,22 @@ body {
   font-family: Roboto;
   font-size: 14px;
   overflow-y: scroll;
+  background-color: var(--body);
+  color: var(--text);
 }
 
 a {
-  color: $green;
+  color: var(--highlight);
   text-decoration: none;
+  transition: all 0.15s linear;
 
   &:hover {
-    border-bottom: 1px solid $green;
+    border-bottom: 1px solid var(--highlight);
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--strong)
 }
 
 h2 {
@@ -38,4 +45,13 @@ section {
   @include media-breakpoint-down(sm) {
     width: calc(100% - 10px)
   }
+}
+
+strong {
+  font-weight: bold;
+  color: var(--strong);
+}
+
+em {
+  font-style: italic;
 }

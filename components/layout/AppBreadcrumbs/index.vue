@@ -6,7 +6,7 @@
     <div class="container">
       <span
         v-for="crumb in breadcrumbs"
-        :key="crumb.text"
+        :key="crumb.to"
         class="crumb"
       >
         <NuxtLink :to="{ path: crumb.to }">{{ crumb.text }}</NuxtLink>
@@ -23,7 +23,7 @@ defineOptions({
   name: 'AppBreadcrumbs',
 })
 
-withDefaults(defineProps<{ breadcrumbs: Breadcrumb[] }>(), { breadcrumbs: [] as Breadcrumb[] })
+withDefaults(defineProps<{ breadcrumbs: Breadcrumb[] }>(), { breadcrumbs: () => [] })
 </script>
 
 <style scoped lang="scss">
@@ -36,7 +36,7 @@ withDefaults(defineProps<{ breadcrumbs: Breadcrumb[] }>(), { breadcrumbs: [] as 
       margin: 0 10px;
     }
     .separator {
-      color: $green;
+      color: var(--highlight);
     }
     &:first-child a {
       margin-left: 0;

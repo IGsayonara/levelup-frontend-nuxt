@@ -1,11 +1,12 @@
 <template>
   <div>
+    <label :for="$props.id">{{ $props.label }}</label>
     <input
       :id="$props.id"
       type="text"
       :value="reactiveModelValue"
       v-bind="$attrs"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', ($event.target as any).value)"
     >
   </div>
 </template>
@@ -19,7 +20,7 @@ defineOptions({
 
 interface Props {
   id: string
-  label: string
+  label?: string
   modelValue: string
 }
 const props = defineProps<Props>()
@@ -33,8 +34,9 @@ input {
   width: 100%;
   height: 14px;
   padding: 3rem 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
   border-radius: 2rem;
-  color: #808080;
+  color: var(--text);
+  background-color: var(--body-light);
 }
 </style>

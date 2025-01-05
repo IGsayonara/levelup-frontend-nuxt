@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import type { Skill } from '~/types/skill'
-import { SkillUtil } from '~/utils/api/skill.util'
-
-const skillUtil = new SkillUtil()
+import { useNuxtApp } from '#app'
 
 export const useSkillsStore = defineStore('skillsStore', () => {
+  const { $api } = useNuxtApp()
+
   const skills = ref<Skill[]>([])
   const isLoading = ref<boolean>(false)
   const isError = ref<boolean>(false)
@@ -13,10 +13,9 @@ export const useSkillsStore = defineStore('skillsStore', () => {
   const loadSkills = async () => {
     try {
       isLoading.value = true
-      skills.value = await skillUtil.loadSkills()
+      skills.value = await $api.skills.skillControllerFindAll().then(r => r.data)
     }
-    catch (error) {
-      console.log(error)
+    catch {
       isError.value = true
     }
     finally {

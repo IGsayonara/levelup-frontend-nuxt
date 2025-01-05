@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="container">
       <div class="section-title-wrapper">
         <SectionTitle title="Search for skills" />
@@ -11,7 +12,6 @@
           id="searchProjectInput"
           v-model="searchValue"
           placeholder="Search"
-          label="kek"
         />
       </div>
     </div>
@@ -19,12 +19,11 @@
       <div class="container">
         <div
           v-if="searchedSkills.length"
-          class="row"
+          class="skills"
         >
           <div
             v-for="skill in searchedSkills"
             :key="skill.skill.id"
-            class="col-12 col-sm-6 col-xl-3 app-card-col"
           >
             <SkillCard
               :skill="skill.skill"
@@ -46,24 +45,18 @@
 </template>
 
 <script setup lang="ts">
-import { watch } from 'vue'
 import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
 
 definePageMeta({
   middleware: 'fetch-user',
-  breadCrumbs: [
-    {
-      to: '/', // hyperlink
-      text: 'Home', // crumb text
-    },
-    {
-      to: '/skills', // hyperlink
-      text: 'Skills', // crumb text
-    },
-  ],
 })
+
+const breadcrumbs = ref([
+  { to: '/', text: 'Home' },
+  { to: '/skills', text: 'Skills' },
+])
 
 const userStore = useUserStore()
 const { user } = storeToRefs(userStore)
@@ -80,7 +73,7 @@ const searchedSkills = computed(() => {
     return skills.value
   }
 
-  return skills.value.filter(({ title }) => title.includes(updatedSearchValue.value.trim()))
+  return skills.value.filter(({ skill }) => skill.title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
 })
 
 watch(
@@ -103,5 +96,11 @@ watch(
 
 .projects_search {
   margin-bottom: 3rem;
+}
+
+.skills {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 </style>

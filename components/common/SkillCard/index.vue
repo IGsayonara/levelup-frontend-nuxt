@@ -3,10 +3,6 @@
     <h4 class="skill-card__title">
       {{ skill.title }}
     </h4>
-    <img
-      class="skill-card__image"
-      :src="skill.imageUrl || '/img/404.jpg'"
-    >
   </div>
 </template>
 
@@ -31,9 +27,9 @@ defineProps<Props>()
   align-items: center;
   height: 7rem;
   padding: 2em 1.5em;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
   border-radius: 4rem;
-  background-color: white;
+  background-color: var(--body);;
   transition: all 0.3s ease-in;
   cursor: pointer;
 
@@ -43,18 +39,13 @@ defineProps<Props>()
     transition: all 0.3s ease-in;
   }
 
-  &__image {
-    width: 4.5rem;
-    height: 4.5rem;
-  }
-
   &:hover {
-    border-color: $orange;
-    filter: drop-shadow(1px 1px 6px $orange);
+    border-color: var(--highlight);
+    filter: drop-shadow(1px 1px 6px var(--highlight));
   }
   &:hover & {
     &__title {
-      color: $orange;
+      //color: var(--highlight);
     }
   }
 }

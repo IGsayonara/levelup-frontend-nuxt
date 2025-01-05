@@ -103,8 +103,9 @@ onBeforeUnmount(() => {
 .modal-content {
   display: flex;
   flex-direction: column;
-  background: white;
-  border: 1px solid #e5e5e5;
+  max-height: 100vh;
+  background: var(--body);;
+  border: 1px solid var(--border);
   border-radius: 1rem;
   @include media-breakpoint-down(md) {
     width: 100%;
@@ -113,7 +114,7 @@ onBeforeUnmount(() => {
   }
   header {
     display: flex;
-    border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid var(--border);
     .close-button {
       margin-left: auto;
       cursor: pointer;
@@ -124,7 +125,7 @@ onBeforeUnmount(() => {
     overflow-y: auto;
   }
   footer {
-    border-top: 1px solid #e5e5e5;
+    border-top: 1px solid var(--border);
   }
   .app-modal_content,
   header,

@@ -12,7 +12,6 @@
           id="searchProjectInput"
           v-model="searchValue"
           placeholder="Search"
-          label="kek"
         />
       </div>
     </div>
@@ -28,7 +27,7 @@
             class="col-12 col-xl-6 app-card-col"
           >
             <AppCard
-              :project="project"
+              :project="project.project"
               @click="onProjectClick(project)"
             />
           </div>
@@ -52,7 +51,7 @@ import debounce from 'lodash.debounce'
 import SectionTitle from '~/components/common/SectionTitle/index.vue'
 import AppCard from '~/components/common/AppCard/index.vue'
 import AppInput from '~/components/ui/AppInput/index.vue'
-import type { Project } from '~/types/project'
+import type { UserProject } from '~/types/user-project'
 
 definePageMeta({
   middleware: 'fetch-user',
@@ -71,8 +70,8 @@ const router = useRouter()
 const searchValue = ref('')
 const updatedSearchValue = ref('')
 
-const projects = computed<Project[]>(() => {
-  return user.value?.userProjects.map(({ project }) => project) || []
+const projects = computed<UserProject[]>(() => {
+  return user.value?.userProjects || []
 })
 
 const searchedProjects = computed(() => {
@@ -80,7 +79,7 @@ const searchedProjects = computed(() => {
     return projects.value
   }
 
-  return projects.value.filter(({ title }) => title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
+  return projects.value.filter(({ project }) => project.title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
 })
 
 watch(
@@ -90,7 +89,7 @@ watch(
   }, 300),
 )
 
-const onProjectClick = async (project: Project) => {
+const onProjectClick = async (project: UserProject) => {
   await router.push('/project/' + project.id)
 }
 </script>

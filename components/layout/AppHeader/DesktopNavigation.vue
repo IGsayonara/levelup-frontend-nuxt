@@ -4,7 +4,6 @@
 
 <script setup>
 import DefaultNavigation from '~/components/layout/AppHeader/DefaultNavigation.vue'
-import GithubButton from '~/components/ui/AppButton/GithubButton.vue'
 
 defineOptions({
   name: 'DesktopNavigation',
@@ -14,8 +13,10 @@ defineOptions({
 <style scoped lang="scss">
 .desktop {
   &__navigation:deep {
+    display: flex;
+    align-items: center;
     margin-left: auto;
-    a {
+    & > * {
       margin-left: 3.5rem;
     }
   }

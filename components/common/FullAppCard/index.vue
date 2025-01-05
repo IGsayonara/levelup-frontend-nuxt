@@ -11,37 +11,43 @@
         >
       </div>
       <div class="app-card__text-wrapper">
-        <h3 class="title">
-          {{ project.title }}
-        </h3>
-        <div class="authors">
-          Done by @NoFfIrl
+        <div class="title-wrapper">
+          <h3 class="title">
+            {{ project.title }}
+          </h3>
+          <div class="role">
+            {{ userProject.role }}
+          </div>
+        </div>
+        <div class="description">
+          {{ project.description }}
         </div>
       </div>
-    </div>
-    <div class="description">
-      {{ project.description }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { Project } from '~/types/project'
+import type { UserProject } from '~/types/user-project'
 
 defineOptions({
   name: 'FullAppCard',
 })
 
 interface Props {
-  project: Project
+  userProject: UserProject
 }
 
 const props = defineProps<Props>()
 
-const project = toRef(props, 'project')
+const userProject = toRef(props, 'userProject')
+
+const project = computed(() => {
+  return userProject.value.project
+})
 
 const imageUrl = computed(() => {
-  return project.value.imageUrl || '/img/404.jpg'
+  return project.value.image || '/img/404.jpg'
 })
 </script>
 
@@ -50,10 +56,9 @@ const imageUrl = computed(() => {
   display: flex;
   flex-direction: column;
   padding: 3rem;
-  border: 1px solid #e5e5e5;
+  border: 1px solid var(--border);
   border-radius: 4rem;
-  background-color: white;
-  cursor: pointer;
+  background-color: var(--body);
   transition: all 0.3s ease-in;
 
   &__header {
@@ -70,7 +75,7 @@ const imageUrl = computed(() => {
       width: 100%;
       height: 100%;
       min-width: 15rem;
-      border: 1px solid #e5e5e5;
+      border: 1px solid var(--border);
       border-radius: 25%;
       transition: all 0.3s ease-in;
     }
@@ -80,41 +85,46 @@ const imageUrl = computed(() => {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+    width: 100%;
+
+    .title-wrapper{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+    }
 
     .title {
-      width: 100%;
       font-size: 3rem;
       font-weight: bold;
-      margin-bottom: 3rem;
       transition: all 0.3s ease-in;
     }
 
-    .authors {
-      color: black;
-      margin-top: auto;
+    .role {
+      color: var(--strong);
+      font-weight: bold;
+      font-size: 2rem;
     }
 
   }
   .description {
-    color: #808080;
   }
 
   &:hover {
-    border-color: $orange;
-    filter: drop-shadow(1px 1px 6px $orange);
+    border-color: var(--highlight);
+    filter: drop-shadow(1px 1px 6px var(--highlight));
   }
 
   &:hover & {
     &__text-wrapper {
       .title {
-        color: $orange;
+        //color: var(--highlight);
       }
     }
 
     &__image-wrapper {
       .image {
-        border-color: $orange;
-        filter: drop-shadow(1px 1px 6px $orange);
+        border-color: var(--highlight);
+        filter: drop-shadow(1px 1px 6px var(--highlight));
       }
     }
   }

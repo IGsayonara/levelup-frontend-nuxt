@@ -1,15 +1,52 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { resolve } from 'node:path'
+import checker from 'vite-plugin-checker'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+
+  modules: [
+    '@vesp/nuxt-fontawesome',
+    '@pinia/nuxt',
+    '@nuxt/eslint',
+    '@nuxt/image',
+  ],
+
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
   devtools: { enabled: true },
+
+  css: [
+    'froala-editor/css/froala_editor.pkgd.min.css',
+    'froala-editor/css/froala_style.min.css',
+  ],
+
+  runtimeConfig: {
+    // Keys within public, will be also exposed to the client-side
+    public: {
+      apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+      development: process.env.NUXT_PUBLIC_DEVELOPMENT,
+    },
+  },
 
   alias: {
     cookie: resolve(__dirname, 'node_modules/cookie'),
   },
 
+  devServer: {
+    port: 8080,
+  }, compatibilityDate: '2024-04-03',
+
   vite: {
+    plugins: [
+      checker({
+        // typescript: true,
+        vueTsc: true,
+      }),
+    ],
     css: {
       preprocessorOptions: {
         scss: {
@@ -25,32 +62,22 @@ export default defineNuxtConfig({
     },
   },
 
-  devServer: {
-    port: 8080,
-  },
+  typescript: {
+    strict: true,
+    typeCheck: true,
 
-  components: [
-    {
-      path: '~/components',
-      pathPrefix: false,
-    },
-  ],
-
-  modules: [
-    '@vesp/nuxt-fontawesome',
-    '@pinia/nuxt',
-    '@nuxt/eslint',
-    '@nuxt/image',
-  ],
-
-  pinia: {
-    storesDirs: ['./stores/**/*.ts'],
+    // Enforces TypeScript checks during development
   },
 
   eslint: {
     config: {
       stylistic: true,
     },
+    checker: true,
+  },
+
+  pinia: {
+    storesDirs: ['./stores/**/*.ts'],
   },
 
 })

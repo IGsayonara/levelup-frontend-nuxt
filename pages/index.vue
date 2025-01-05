@@ -2,59 +2,7 @@
   <div>
     <section v-if="user">
       <div class="container">
-        <div class="user-info row row-reverse">
-          <div
-            class="user-info__bio col-12 col-sm-9"
-          >
-            <div class="user-info__headline">
-              <h2 class="user-info__headline-title">
-                {{ user.firstName + ' ' + user.lastName }}
-              </h2>
-              <span
-                class="user-info__headline-username"
-              >
-                @{{ user.username }}
-              </span>
-            </div>
-            <div class="user-info__bio">
-              {{ user.bio }}
-            </div>
-          </div>
-          <div class="user-info__sidebar col-12 col-sm-3">
-            <div class="user-info__sidebar-image">
-              <NuxtImg
-                :src="user.profileImage"
-                :alt="user.firstName + ' ' + user.lastName"
-              />
-            </div>
-            <div class="user-info__sidebar-points">
-              <p>{{ user.phoneNumber }}</p>
-              <p>{{ user.email }}</p>
-              <p>5 years of experience</p>
-              <p>3 years of Vue FE experience</p>
-              <p>2 years of WordPress experience</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section>
-      <div class="container">
-        <div class="section-title-wrapper">
-          <SectionTitle
-            title="Skills"
-            link-text="See more"
-          />
-        </div>
-        <div class="row">
-          <div
-            v-for="skill in skills"
-            :key="skill.id"
-            class="col-12 col-sm-6 col-md-3 skill-card-col"
-          >
-            <SkillCard :skill="skill" />
-          </div>
-        </div>
+        <UserCard :user="user" />
       </div>
     </section>
     <section>
@@ -68,13 +16,38 @@
         </div>
         <div class="row">
           <div
-            v-for="project in projects"
+            v-for="(project, index) in projects"
             :key="project.id"
             class="col-12 col-xl-6 app-card-col"
           >
-            <AppCard
-              :project="project.project"
-              @click="onProjectClick(project)"
+            <Transition name="fade">
+              <AppCard
+                class="app-card"
+                :project="project.project"
+                @click="onProjectClick(project)"
+              />
+            </Transition>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="container">
+        <div class="section-title-wrapper">
+          <SectionTitle
+            title="Skills"
+            link-text="See more"
+            @link-click="$router.push('/skills')"
+          />
+        </div>
+        <div class="skills">
+          <div
+            v-for="userSkill in skills"
+            :key="userSkill.id"
+          >
+            <SkillCard
+              :skill="userSkill.skill"
+              @click="onSkillClick(userSkill)"
             />
           </div>
         </div>
@@ -84,9 +57,9 @@
 </template>
 
 <script setup lang="ts">
-import type { Project } from '~/types/project'
-import type { User, UserProject } from '~/types/user'
-import type { Skill } from '~/types/skill'
+import type { User } from '~/types/user'
+import type { UserProject } from '~/types/user-project'
+import type { UserSkill } from '~/types/user-skill'
 
 const router = useRouter()
 
@@ -102,17 +75,21 @@ definePageMeta({
 })
 
 const userStore = useUserStore()
-const { user } = storeToRefs<{ user: User }>(userStore)
+const { user } = storeToRefs(userStore)
 
 const projects = computed<UserProject[]>(() => {
-  return user.value?.userProjects || []
+  return user.value?.userProjects.slice(0, 4) || []
 })
 
-const skills = computed<Skill[]>(() => {
-  return user.value?.userSkills.map(({ skill }) => skill) || []
+const skills = computed<UserSkill[]>(() => {
+  return user.value?.userSkills.slice(0, 16) || []
 })
 
-const onProjectClick = async (project: Project) => {
+const onSkillClick = async (skill: UserSkill) => {
+  await router.push('/skill/' + skill.id)
+}
+
+const onProjectClick = async (project: UserProject) => {
   await router.push('/project/' + project.id)
 }
 </script>
@@ -143,8 +120,23 @@ const onProjectClick = async (project: Project) => {
     &-image {
       & > img {
         width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 25%;
       }
     }
   }
+
+  &__sidebar-points {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem
+  }
+}
+
+.skills{
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
 }
 </style>

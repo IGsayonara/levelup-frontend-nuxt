@@ -1,18 +1,9 @@
-import { AuthUtil } from '~/utils/api/auth.util'
-
-const authUtil = new AuthUtil()
-
-export default defineNuxtRouteMiddleware(async (to, from) => {
-  if (import.meta.env.SSR) {
-    return
-  }
-
+export default defineNuxtRouteMiddleware(async (to) => {
   const authStore = useAuthStore()
-  const { getSession, refreshTokens } = authStore
+  const { getSession, refreshTokens, accessToken } = authStore
 
   try {
-    if (!authUtil.getAccessToken()) {
-      console.log('No access token')
+    if (!accessToken) {
       if (to.name !== 'login') {
         return '/login'
       }

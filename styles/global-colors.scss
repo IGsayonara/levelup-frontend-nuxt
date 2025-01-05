@@ -1,2 +1,36 @@
-$orange: #ff8c00;
-$green: #008000;
+//$highlight: orange;
+//$body: white;
+//$strong: black;
+//$text: #808080;
+//$border: #e5e5e5;
+
+$highlight: rgb(20, 184, 166); // A vivid teal for emphasis
+$body: rgb(255, 255, 255); // Pure white for a bright and clean look
+$strong: rgb(30, 41, 59); // A darker slate for headers and bold text
+$text: rgb(75, 85, 99); // A darker gray for better readability
+$border: rgb(229, 231, 235); // Neutral light gray for minimal separation
+
+$highlight-dark: rgb(94 234 212);
+$body-dark: rgb(15 23 42);
+$strong-dark: white;
+$text-dark: rgb(156, 163, 175);
+$border-dark: #e5e5e5;
+
+:root {
+  --highlight: #{$highlight};
+  --body: #{$body};
+  --strong: #{$strong};
+  --text: #{$text};
+  --border: #{$border};
+  --body-light: darken(#{$body}, 10%);
+}
+
+[data-theme="dark"] {
+  --highlight: #{$highlight-dark};
+  --body: #{$body-dark};
+  --strong: #{$strong-dark};
+  --text: #{$text-dark};
+  --border: #{$border-dark};
+  --body-light: lighten(#{$body-dark}, 10%);
+}
+

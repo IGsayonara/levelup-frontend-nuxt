@@ -62,7 +62,7 @@ defineEmits(['linkClick'])
       position: absolute;
       width: 100%;
       height: 1px;
-      background-color: $green;
+      background-color: var(--highlight);
     }
   }
 }
