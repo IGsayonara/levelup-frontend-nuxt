@@ -17,7 +17,7 @@ export default defineNuxtPlugin(() => {
         },
       }
     },
-    baseURL: config.public.apiBaseUrl,
+    baseURL: config.apiBaseUrl || config.public.apiBaseUrl,
   })
 
   return {

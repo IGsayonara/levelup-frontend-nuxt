@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  nuxt-ssr:
+    container_name: levelup-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile  # Dockerfile for SSR
+    ports:
+      - "3000:3000"  # Port mapping for SSR
+    environment:
+      NODE_ENV: production
+      NUXT_SERVER_API_BASE_URL: 'levelup-backend:4000'
+    networks:
+      - levelup-network
+networks:
+  levelup-network:
+    external: true
