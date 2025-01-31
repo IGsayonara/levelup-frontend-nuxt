@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  nuxt-ssr:
+    container_name: levelup-frontend-dev
+    build:
+      context: .
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /app/
+          ignore:
+            - node_modules/
+            - .nuxt/
+            - .output/
+            - dist/
+        - action: rebuild
+          path: ./package.json
+          target: /app/package.json
+    ports:
+      - "3000:3000"  # Expose port 3000 for SSR in dev environment
+    environment:
+      NODE_ENV: development
+      NUXT_SERVER_API_BASE_URL: 'http://levelup-backend:4000'  # Backend container name
+      CHOKIDAR_USEPOLLING: 'true'  # Enable polling for file changes (required for hot reload)
+    command: npm run dev  # Command to run Nuxt in development mode
+    networks:
+      - levelup-network
+networks:
+  levelup-network:
+    external: true  # Use the existing external network shared with the backend

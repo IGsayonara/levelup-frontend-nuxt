@@ -48,8 +48,6 @@ const { user, isLoading } = storeToRefs(authStore)
 const username = ref('')
 const password = ref('')
 
-console.log(!!user.value)
-
 const unwatch = watch(() => !!user.value, () => {
   if (user.value) {
     router.push('/')
