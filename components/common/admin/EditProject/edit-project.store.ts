@@ -10,7 +10,7 @@ export const useEditProjectStore = defineStore('editProject', () => {
 
   const update = async () => {
     if (!id.value) {
-      throw 'Not Implemented'
+      return await $api.userProject.userProjectControllerAddOne({ title: title.value, description: description.value })
     }
 
     return await $api.projects.projectControllerUpdateOne(id.value, { title: title.value, description: description.value })

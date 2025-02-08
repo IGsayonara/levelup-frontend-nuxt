@@ -7,7 +7,13 @@
           @click="$router.push('/')"
         >
           <NuxtImg
-            :src="logoUrl"
+            v-show="isDark"
+            :src="'/img/logo-dark.png'"
+            alt="Level UP"
+          />
+          <NuxtImg
+            v-show="!isDark"
+            :src="'/img/logo.png'"
             alt="Level UP"
           />
         </div>
@@ -34,9 +40,6 @@ defineOptions({
 // })
 
 const { isDark } = useTheme()
-const logoUrl = computed(() => {
-  return isDark.value ? '/img/logo-dark.png' : '/img/logo.png'
-})
 </script>
 
 <style scoped lang="scss">

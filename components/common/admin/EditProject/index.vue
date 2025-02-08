@@ -1,5 +1,5 @@
 <template>
-  <div v-if="project">
+  <div>
     <div class="row">
       <div class="col-12">
         <AppInput
@@ -18,8 +18,13 @@
         />
       </div>
     </div>
-    <div class="row">
-      <div class="col-12">
+    <div
+      v-if="project"
+      class="row"
+    >
+      <div
+        class="col-12"
+      >
         <ImageCropper
           :image-url="project.image"
           :crop-callback="updateProjectImage"

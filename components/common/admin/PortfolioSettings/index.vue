@@ -9,7 +9,9 @@
           v-if="isUserProjectModalOpen"
           @close="isUserProjectModalOpen = false"
         >
-          <template #header />
+          <template #header>
+            <h2>New project</h2>
+          </template>
           <template #default>
             <EditProject />
           </template>
