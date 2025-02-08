@@ -31,7 +31,7 @@
         </div>
       </div>
     </section>
-    <section>
+    <section v-if="skills.length">
       <div class="container">
         <div class="section-title-wrapper">
           <SectionTitle

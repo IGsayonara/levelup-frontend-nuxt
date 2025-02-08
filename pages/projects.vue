@@ -3,7 +3,7 @@
     <AppBreadcrumbs :breadcrumbs="breadcrumbs" />
     <div class="container">
       <div class="section-title-wrapper">
-        <SectionTitle title="Search for projects" />
+        <SectionTitle title="Portfolio" />
       </div>
     </div>
     <div class="projects_search">
@@ -11,7 +11,7 @@
         <AppInput
           id="searchProjectInput"
           v-model="searchValue"
-          placeholder="Search"
+          placeholder="Project or skill"
         />
       </div>
     </div>
@@ -79,7 +79,7 @@ const searchedProjects = computed(() => {
     return projects.value
   }
 
-  return projects.value.filter(({ project }) => project.title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
+  return projects.value.filter(({ project }) => project.title.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()) || project.description.toLowerCase().includes(updatedSearchValue.value.trim().toLowerCase()))
 })
 
 watch(
